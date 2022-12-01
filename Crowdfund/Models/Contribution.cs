@@ -5,11 +5,11 @@
         public int Id { get; set; }
         public decimal? Amount { get; set; }
 
-        Backer? _backer;
+        Backer? Backer { get; set; }
  
-        Project? _project;
+        Project? Project { get; set; }
 
-        //public List<Project> Projects { get; set; }
-        //public List<Backer>? Backers { get; set; }
-    }
+    //public List<Project> Projects { get; set; }
+    //public List<Backer>? Backers { get; set; }
+}
 }

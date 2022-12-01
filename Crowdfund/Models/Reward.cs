@@ -6,7 +6,7 @@
         public string? Title { get; set; }
         public string? Description { get; set; }
 
-        Project? _project;
+        Project? Project { get; set; }
 
         //public List<Backer>? Backers { get; set; }
         //public List<Project> Projects { get; set; }
