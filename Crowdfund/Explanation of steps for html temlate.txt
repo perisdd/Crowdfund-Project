@@ -1,0 +1,10 @@
+﻿Added the html template functionality in both _MyLayout and _MyOldLayout (that is the original _MyLayout) by changing inside 
+the <head> the href paths.
+
+Added the folder Content and its subfolders in the root directory which is the wwwroot in order for them to be traceable. 
+
+A second way you could do this would be passing everything you had in the Content folder to the existing css, js and images 
+folders inside the wwwroot. After that you should change the href paths inside the <head>.
+
+It works in both of the Layout pages. If you want to view the _MyOldLayout as an html page in browser through the specific 
+localhost you change both names in the current _MyLayout and the _MyOldLayout name into _MyLayout.
