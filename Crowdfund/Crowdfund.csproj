@@ -18,4 +18,76 @@
     <Folder Include="Views\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Content\assets\css\animate.css" />
+    <None Include="wwwroot\Content\assets\css\flex-slider.css" />
+    <None Include="wwwroot\Content\assets\css\fontawesome.css" />
+    <None Include="wwwroot\Content\assets\css\owl.css" />
+    <None Include="wwwroot\Content\assets\css\templatemo-cyborg-gaming.css" />
+    <None Include="wwwroot\Content\assets\images\avatar-01.jpg" />
+    <None Include="wwwroot\Content\assets\images\avatar-02.jpg" />
+    <None Include="wwwroot\Content\assets\images\avatar-03.jpg" />
+    <None Include="wwwroot\Content\assets\images\avatar-04.jpg" />
+    <None Include="wwwroot\Content\assets\images\banner-bg.jpg" />
+    <None Include="wwwroot\Content\assets\images\clip-01.jpg" />
+    <None Include="wwwroot\Content\assets\images\clip-02.jpg" />
+    <None Include="wwwroot\Content\assets\images\clip-03.jpg" />
+    <None Include="wwwroot\Content\assets\images\clip-04.jpg" />
+    <None Include="wwwroot\Content\assets\images\details-01.jpg" />
+    <None Include="wwwroot\Content\assets\images\details-02.jpg" />
+    <None Include="wwwroot\Content\assets\images\details-03.jpg" />
+    <None Include="wwwroot\Content\assets\images\feature-left.jpg" />
+    <None Include="wwwroot\Content\assets\images\feature-right.jpg" />
+    <None Include="wwwroot\Content\assets\images\featured-01.jpg" />
+    <None Include="wwwroot\Content\assets\images\featured-02.jpg" />
+    <None Include="wwwroot\Content\assets\images\featured-03.jpg" />
+    <None Include="wwwroot\Content\assets\images\game-01.jpg" />
+    <None Include="wwwroot\Content\assets\images\game-02.jpg" />
+    <None Include="wwwroot\Content\assets\images\game-03.jpg" />
+    <None Include="wwwroot\Content\assets\images\logo.png" />
+    <None Include="wwwroot\Content\assets\images\popular-01.jpg" />
+    <None Include="wwwroot\Content\assets\images\popular-02.jpg" />
+    <None Include="wwwroot\Content\assets\images\popular-03.jpg" />
+    <None Include="wwwroot\Content\assets\images\popular-04.jpg" />
+    <None Include="wwwroot\Content\assets\images\popular-05.jpg" />
+    <None Include="wwwroot\Content\assets\images\popular-06.jpg" />
+    <None Include="wwwroot\Content\assets\images\popular-07.jpg" />
+    <None Include="wwwroot\Content\assets\images\popular-08.jpg" />
+    <None Include="wwwroot\Content\assets\images\profile-header.jpg" />
+    <None Include="wwwroot\Content\assets\images\profile.jpg" />
+    <None Include="wwwroot\Content\assets\images\service-01.jpg" />
+    <None Include="wwwroot\Content\assets\images\service-02.jpg" />
+    <None Include="wwwroot\Content\assets\images\service-03.jpg" />
+    <None Include="wwwroot\Content\assets\images\stream-01.jpg" />
+    <None Include="wwwroot\Content\assets\images\stream-02.jpg" />
+    <None Include="wwwroot\Content\assets\images\stream-03.jpg" />
+    <None Include="wwwroot\Content\assets\images\stream-04.jpg" />
+    <None Include="wwwroot\Content\assets\images\stream-05.jpg" />
+    <None Include="wwwroot\Content\assets\images\stream-06.jpg" />
+    <None Include="wwwroot\Content\assets\images\stream-07.jpg" />
+    <None Include="wwwroot\Content\assets\images\stream-08.jpg" />
+    <None Include="wwwroot\Content\assets\js\custom.js" />
+    <None Include="wwwroot\Content\assets\js\isotope.js" />
+    <None Include="wwwroot\Content\assets\js\isotope.min.js" />
+    <None Include="wwwroot\Content\assets\js\owl-carousel.js" />
+    <None Include="wwwroot\Content\assets\js\popup.js" />
+    <None Include="wwwroot\Content\assets\js\tabs.js" />
+    <None Include="wwwroot\Content\assets\webfonts\fa-brands-400.ttf" />
+    <None Include="wwwroot\Content\assets\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\Content\assets\webfonts\fa-regular-400.ttf" />
+    <None Include="wwwroot\Content\assets\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\Content\assets\webfonts\fa-solid-900.ttf" />
+    <None Include="wwwroot\Content\assets\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\Content\assets\webfonts\fa-v4compatibility.ttf" />
+    <None Include="wwwroot\Content\assets\webfonts\fa-v4compatibility.woff2" />
+    <None Include="wwwroot\vendor\bootstrap\css\bootstrap.min.css" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\vendor\jquery\jquery.js" />
+    <None Include="wwwroot\vendor\jquery\jquery.min.js" />
+    <None Include="wwwroot\vendor\jquery\jquery.min.map" />
+    <None Include="wwwroot\vendor\jquery\jquery.slim.js" />
+    <None Include="wwwroot\vendor\jquery\jquery.slim.min.js" />
+    <None Include="wwwroot\vendor\jquery\jquery.slim.min.map" />
+  </ItemGroup>
+
 </Project>
