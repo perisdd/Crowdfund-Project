@@ -1,25 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Tsontarw_Razor.Data;
-using Tsontarw_Razor.Domain;
+using Crowdfund.DB;
+using Crowdfund.Models;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Tsontarw_Razor.Pages.Users
+namespace Crowdfund.Pages.Backers
 {
     public class IndexModel : PageModel
     {
-        private ProjectsDbContext Context { get; }
-        public List<User> Users { get; set; }
+        private FundDbContext Context { get; }
+        public List<Backer> Backers { get; set; }
 
-        public IndexModel(ProjectsDbContext context)
+        public IndexModel(FundDbContext context)
         {
             Context = context;
         }
 
         public async Task OnGet()
         {
-            Users = await Context.Users.ToListAsync();
+            Backers = await Context.Backers.ToListAsync();
         }
     }
 }

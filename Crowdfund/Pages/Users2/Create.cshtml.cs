@@ -1,30 +1,30 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Tsontarw_Razor.Domain;
-using Tsontarw_Razor.Data;
+using Crowdfund.Models;
+using Crowdfund.DB;
 using Microsoft.EntityFrameworkCore;
 
-namespace Tsontarw_Razor.Pages.Users
+namespace Crowdfund.Pages.Users
 {
     public class CreateModel : PageModel
     {
-        private ProjectsDbContext Context { get; }
+        private FundDbContext Context { get; }
         public int UserCount { get; set; }
-        [BindProperty] public User User { get; set; }
+        [BindProperty] public Backer Backer { get; set; }
 
-        public CreateModel(ProjectsDbContext context)
+        public CreateModel(FundDbContext context)
         {
             Context = context;
         }
 
         public void OnGet()
         {
-            UserCount = Context.Users.Count();
+            UserCount = Context.Backers.Count();
         }
 
         public async Task<ActionResult> OnPost()
         {
-            Context.Users.Add(User);
+            Context.Backers.Add(Backer);
             await Context.SaveChangesAsync();
             return RedirectToPage("/Index");
         }

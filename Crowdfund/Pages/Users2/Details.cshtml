@@ -1,11 +1,11 @@
 ﻿@page "{id}"
-@model Tsontarw_Razor.Pages.Users.DetailsModel
+@model Crowdfund.Pages.Users2.Pages_Users2_Details
 @{
     ViewData["Title"] = "User Details";
 }
 
-<h1>@Model.User.FirstName @Model.User.LastName</h1>
-
+@*<h1>@Model.Backer.FirstName @Model.Backer.LastName</h1>
+*@
 <h2>Projects with User</h2>
 <table class="table">
     <thead>
@@ -16,8 +16,8 @@
             <th>Creator</th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var project in Model.UserProjects)
+@*    <tbody>
+        @foreach (var project in Model.BackerProjects)
         {
             <tr>
                 <td>@project.Title</td>
@@ -26,5 +26,5 @@
                 <td>@project.Creator</td>
             </tr>
         }
-    </tbody>
+    </tbody>*@
 </table>

@@ -1,6 +1,6 @@
 ﻿@page
-@using Tsontarw_Razor.Domain;
-@model Tsontarw_Razor.Pages.Users.IndexModel
+@using Crowdfund.DB;
+@model Crowdfund.Pages.Users2.Pages_Users2_Index
 @{
     ViewData["Title"] = "Users";
 }
@@ -13,8 +13,8 @@
     <th>Last Name</th>
     <th>Details</th>
     </thead>
-    <tbody>
-        @foreach (User user in Model.Users)
+@*    <tbody>
+        @foreach (User user in Model.Backers)
         {
             <tr>
                 <td>@user.FirstName</td>
@@ -22,5 +22,5 @@
                 <td><a asp-page="Details" asp-route-Id="@user.Id">Details</a></td>
             </tr>
         }
-    </tbody>
+    </tbody>*@
 </table>

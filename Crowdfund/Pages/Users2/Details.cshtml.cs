@@ -1,28 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Tsontarw_Razor.Domain;
+using Crowdfund.DB;
 using Microsoft.EntityFrameworkCore;
-using Tsontarw_Razor.Data;
+using Crowdfund.Models;
 
 namespace Tsontarw_Razor.Pages.Users
 {
     public class DetailsModel : PageModel
     {
        
-            private ProjectsDbContext Context { get; }
+            private FundDbContext Context { get; }
             public User? User { get; set; }
             public List<Project> UserProjects { get; set; }
 
-            public DetailsModel(ProjectsDbContext context)
+            public DetailsModel(FundDbContext context)
             {
                 Context = context;
             }
 
             public async Task<ActionResult> OnGet(int id)
             {
-                User = await Context.Users.SingleOrDefaultAsync(a => a.Id == id);
+                User = await Context.Backers.SingleOrDefaultAsync(a => a.Id == id);
                 if (User is null) return BadRequest();
-                UserProjects = await Context.Projects.Where(m => m.Users.Contains(User)).ToListAsync();
+                UserProjects = await Context.Projects.Where(m => m.Backers.Contains(User)).ToListAsync();
                 return Page();
             }
 

@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Runtime.InteropServices;
-using Tsontarw_Razor.Domain;
-using Tsontarw_Razor.Data;
+using Crowdfund.Models;
+using Crowdfund.DB;
 
 
 
-namespace Tsontarw_Razor.Pages.Projects
+namespace Crowdfund.Pages.Projects
 {
     public class CreateModel : PageModel
     {
@@ -16,15 +16,15 @@ namespace Tsontarw_Razor.Pages.Projects
         [BindProperty] public Project Project { get; set; }
         [BindProperty] public List<int> UserIds { get; set; }
         public List<SelectListItem> UserSelectList { get; set; }
-        private ProjectsDbContext Context { get; }
-        public CreateModel(ProjectsDbContext context)
+        private FundDbContext Context { get; }
+        public CreateModel(FundDbContext context)
         {
             Context = context;
         }
 
         public async Task OnGet()
         {
-            UserSelectList = await Context.Users.Select
+            UserSelectList = await Context.Backers.Select
                 (a => new SelectListItem
                 {
                     Value = a.Id.ToString(),
@@ -34,7 +34,7 @@ namespace Tsontarw_Razor.Pages.Projects
 
         public async Task<IActionResult> OnPost()
         {
-            Project.Users = await Context.Users.Where(a => UserIds.Contains(a.Id)).ToListAsync();
+            Project.Backers = await Context.Backers.Where(a => UserIds.Contains(a.Id)).ToListAsync();
 
             Context.Projects.Add(Project);
             await Context.SaveChangesAsync();
