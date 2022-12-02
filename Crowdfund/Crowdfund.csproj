@@ -7,17 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Creators\**" />
+    <Content Remove="Pages\Creators\**" />
+    <EmbeddedResource Remove="Pages\Creators\**" />
+    <None Remove="Pages\Creators\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\Creators\" />
-    <Folder Include="Pages\Projects\" />
-    <Folder Include="Views\" />
   </ItemGroup>
 
   <ItemGroup>
