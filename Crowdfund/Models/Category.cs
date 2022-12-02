@@ -1,6 +1,14 @@
 ﻿namespace Crowdfund.Models
 {
-    public class Category
-    {
-    }
+
+       public enum Category
+        {
+            Arts,
+            Environment,
+            Film,
+            Games,
+            Music,
+            Technology
+        }
+    
 }
