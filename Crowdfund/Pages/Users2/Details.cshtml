@@ -1,0 +1,30 @@
+﻿@page "{id}"
+@model Tsontarw_Razor.Pages.Users.DetailsModel
+@{
+    ViewData["Title"] = "User Details";
+}
+
+<h1>@Model.User.FirstName @Model.User.LastName</h1>
+
+<h2>Projects with User</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Creator</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var project in Model.UserProjects)
+        {
+            <tr>
+                <td>@project.Title</td>
+                <td>@project.Description</td>
+                <td>@project.Category</td>
+                <td>@project.Creator</td>
+            </tr>
+        }
+    </tbody>
+</table>

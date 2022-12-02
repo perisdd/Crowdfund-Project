@@ -25,15 +25,7 @@
         public List<Backer> Backers { get; set; } = new List<Backer>();
 
         public List<string> StatusUpdates { get; set; } = new List<string>();
-
-        public enum Category
-        {
-            Arts,
-            Environment,
-            Film,
-            Games,
-            Music,
-            Technology
         }
-    }
+
+    
 }
