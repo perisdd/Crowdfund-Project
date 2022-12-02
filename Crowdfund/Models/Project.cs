@@ -16,6 +16,10 @@
 
 		public decimal Goal { get; set; } = 0.00m;
 
+        public bool Active { get; set; }
+
+        public DateTime CreationDate { get; set; }
+
         public List<Reward> Rewards { get; set; } = new List<Reward>();
 
         public List<Backer> Backers { get; set; } = new List<Backer>();
