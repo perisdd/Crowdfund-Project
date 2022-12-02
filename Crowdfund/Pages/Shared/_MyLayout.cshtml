@@ -70,10 +70,16 @@
                             <!-- ***** Search End ***** -->
                             <!-- ***** Menu Start ***** -->
                             <ul class="nav">
-                                <li><a href="index.html" class="active">Home</a></li>
+                               @* <li><a href="index.html" class="active">Home</a></li>*@
+
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Index">Home</a></li>
+
                                 <li><a href="browse.html">Browse</a></li>
                                 <li><a href="details.html">Members</a></li>
                                 <li><a href="streams.html">About</a></li>
+
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a> </li>
+
                                 <li><a href="profile.html">Profile <img src=@Url.Content("~/Content/assets/images/profile-header.jpg") alt=""></a></li>
                             </ul>
                             <a class='menu-trigger'>
