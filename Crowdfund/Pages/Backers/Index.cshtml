@@ -1,0 +1,31 @@
+﻿@page
+@using Crowdfund.Models;
+@model Crowdfund.Pages.Backers.IndexModel
+@{
+	ViewData["Title"] = "Backers";
+}
+
+<h1>Backers</h1>
+
+@* show projects / categories *@
+
+<div>
+	<h2>All Projects</h2>
+
+    <table class="table">
+        <thead>
+            <th>Title</th>
+            <th>Description</th>
+        </thead>
+        <tbody>
+                @foreach (Project project in Model.Projects)
+                {
+                    <tr>
+                        <td>@project.Title</td>
+                        <td>@project.Description</td>
+                        <td>asdasdas</td>
+                    </tr>
+                }
+        </tbody>
+    </table>
+</div>
