@@ -1,27 +1,27 @@
 ﻿@page
-@using Crowdfund.DB;
-@using Crowdfund.Models
-@model Crowdfund.Pages.Creators.CreatorsModel
+@using Crowdfund.Models;
+@model Crowdfund.Pages.Creators.IndexModel
 @{
     ViewData["Title"] = "Creators";
 }
-<h1>Users</h1>
-<a class="btn btn-primary" asp-page="Create">Add New</a>
+
+<h1>Creators</h1>
 
 <table class="table">
     <thead>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Details</th>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Details</th>
+        </tr>
     </thead>
     <tbody>
         @foreach (Creator creator in Model.Creators)
         {
-            <tr>
-                <td>@creator.FirstName</td>
-                <td>@creator.LastName</td>
-                <td><a asp-page="Details" asp-route-Id="@creator.Id">Details</a></td>
-            </tr>
+                <tr>
+                    <td>@creator.FirstName</td>
+                    <td>@creator.LastName</td>
+                </tr>
         }
     </tbody>
 </table>

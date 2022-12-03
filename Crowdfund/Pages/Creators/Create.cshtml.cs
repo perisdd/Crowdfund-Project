@@ -2,13 +2,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Crowdfund.Models;
 using Crowdfund.DB;
-using Microsoft.EntityFrameworkCore;
 
-namespace Crowdfund.Pages.Users
+namespace Crowdfund.Pages.Creators
 {
     public class CreateModel : PageModel
     {
         private FundDbContext Context { get; }
+
+
         public int UserCount { get; set; }
         [BindProperty] public Backer Backer { get; set; }
 
@@ -29,4 +30,4 @@ namespace Crowdfund.Pages.Users
             return RedirectToPage("/Index");
         }
     }
- }   
+}

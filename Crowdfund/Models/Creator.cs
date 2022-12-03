@@ -1,9 +1,8 @@
 ﻿namespace Crowdfund.Models
 {
-    public class Creator: User
+    public class Creator : User
     {
-        public User? _creator { get; set; }
-        List<Project>? projectsCreated { get; set; }
+        public List<Project>? projectsCreated { get; set; }
 
         public void CreateProject() { }
         public void AddProjectTitle() { }

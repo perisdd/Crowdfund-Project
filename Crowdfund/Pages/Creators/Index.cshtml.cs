@@ -1,25 +1,23 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Crowdfund.DB;
 using Crowdfund.Models;
-using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Crowdfund.Pages.Creators
 {
-    public class CreatorsModel : PageModel
+    public class IndexModel : PageModel
     {
         private FundDbContext Context { get; }
-        public List<Creator> Creators { get; set; } = null!;
 
-        public CreatorsModel(FundDbContext context)
+        public List<Creator> Creators { get; set; }
+
+        public IndexModel(FundDbContext context)
         {
             Context = context;
         }
 
-        public async Task OnGet()
+        public void OnGet()
         {
-            Creators = await Context.Creators.ToListAsync();
+            Creators = Context.Creators.ToList();
         }
     }
 }
