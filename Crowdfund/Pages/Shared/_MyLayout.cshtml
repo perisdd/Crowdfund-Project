@@ -10,7 +10,7 @@
 
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-        <title>Cyborg - Awesome HTML5 Template</title>
+        <title>CrowdFund</title>
 
         <!-- Bootstrap core CSS -->
         <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -55,7 +55,7 @@
                     <div class="col-12">
                         <nav class="main-nav">
                             <!-- ***** Logo Start ***** -->
-                            <a href="index.html" class="logo">
+                            <a href="/Index" class="logo">
                                 <!-- Changed the Url in order to bring the logo in html-->
                                 <img src="~/Content/assets/images/Tsontarw-Logo-cut.png" alt="">
                             </a>
@@ -70,16 +70,14 @@
                             <!-- ***** Search End ***** -->
                             <!-- ***** Menu Start ***** -->
                             <ul class="nav">
-                               @* <li><a href="index.html" class="active">Home</a></li>*@
+
 
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Index">Home</a></li>
-
-                                <li><a href="browse.html">Browse</a></li>
-                                <li><a href="details.html">Members</a></li>
-                                <li><a href="streams.html">About</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Projects2/Create">Create Project</a> </li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/About">About2</a> </li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a> </li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Backers/Index">Backers Index</a> </li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Projects/Create">Create Project</a> </li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Movies/Create">Create Movie</a> </li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/About">About</a> </li>
+                       @*     <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a> </li>*@
 
                                 <li><a href="profile.html">Profile <img src=@Url.Content("~/Content/assets/images/profile-header.jpg") alt=""></a></li>
                             </ul>

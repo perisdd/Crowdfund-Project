@@ -22,6 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\Actors\Create.cshtml" />
+    <None Include="Pages\Actors\Details.cshtml" />
+    <None Include="Pages\Actors\Index.cshtml" />
+    <None Include="Pages\Movies\Create.cshtml" />
     <None Include="wwwroot\Content\assets\css\animate.css" />
     <None Include="wwwroot\Content\assets\css\flex-slider.css" />
     <None Include="wwwroot\Content\assets\css\fontawesome.css" />

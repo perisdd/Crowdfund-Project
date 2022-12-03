@@ -1,0 +1,29 @@
+﻿@page
+@using Crowdfund.Domain;
+@model Crowdfund.Pages.Actors.IndexModel
+@{
+    ViewData["Title"] = "Actors";
+}
+
+<h1>Actors</h1>
+<a class="btn btn-primary" asp-page="Create">Add New</a>
+
+<table class="table">
+    <thead>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Details</th>
+    </thead>
+    <tbody>
+        @foreach (Actor actor in Model.Actors)
+        {
+            <tr>
+                <td>@actor.FirstName</td>
+                <td>@actor.LastName</td>
+                <td><a asp-page="Details" asp-route-Id="@actor.Id">Details</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
