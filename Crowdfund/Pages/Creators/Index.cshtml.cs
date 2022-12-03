@@ -5,21 +5,21 @@ using Crowdfund.Models;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Crowdfund.Pages.Backers
+namespace Crowdfund.Pages.Creators
 {
-    public class IndexModel : PageModel
+    public class CreatorsModel : PageModel
     {
         private FundDbContext Context { get; }
-        public List<Backer> Backers { get; set; }
+        public List<Creator> Creators { get; set; } = null!;
 
-        public IndexModel(FundDbContext context)
+        public CreatorsModel(FundDbContext context)
         {
             Context = context;
         }
 
         public async Task OnGet()
         {
-            Backers = await Context.Backers.ToListAsync();
+            Creators = await Context.Creators.ToListAsync();
         }
     }
 }

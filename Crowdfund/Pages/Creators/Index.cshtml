@@ -1,8 +1,9 @@
 ﻿@page
 @using Crowdfund.DB;
-@model Crowdfund.Pages.Users2.Pages_Users2_Index
+@using Crowdfund.Models
+@model Crowdfund.Pages.Creators.CreatorsModel
 @{
-    ViewData["Title"] = "Users";
+    ViewData["Title"] = "Creators";
 }
 <h1>Users</h1>
 <a class="btn btn-primary" asp-page="Create">Add New</a>
@@ -13,14 +14,14 @@
     <th>Last Name</th>
     <th>Details</th>
     </thead>
-@*    <tbody>
-        @foreach (User user in Model.Backers)
+    <tbody>
+        @foreach (Creator creator in Model.Creators)
         {
             <tr>
-                <td>@user.FirstName</td>
-                <td>@user.LastName</td>
-                <td><a asp-page="Details" asp-route-Id="@user.Id">Details</a></td>
+                <td>@creator.FirstName</td>
+                <td>@creator.LastName</td>
+                <td><a asp-page="Details" asp-route-Id="@creator.Id">Details</a></td>
             </tr>
         }
-    </tbody>*@
+    </tbody>
 </table>
