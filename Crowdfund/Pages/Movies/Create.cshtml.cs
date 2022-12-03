@@ -1,12 +1,12 @@
-using CTDay6.Data;
+using Crowdfund.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using CTDay6.Domain;
+using Crowdfund.Domain;
 using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace CTDay6.Pages.Movies
+namespace Crowdfund.Pages.Movies
 {
     public class CreateModel : PageModel
     {

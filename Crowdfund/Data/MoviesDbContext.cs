@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Crowdfund.Domain;
 
-namespace CTDay6.Data
+namespace Crowdfund.Data
 {
     public class MoviesDbContext : DbContext
     {

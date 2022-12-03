@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Crowdfund.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace CTDay6.Pages.Actors
+namespace Crowdfund.Pages.Actors
 {
     public class DetailsModel : PageModel
     {
