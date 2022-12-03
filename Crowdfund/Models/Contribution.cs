@@ -5,9 +5,9 @@
         public int Id { get; set; }
         public decimal? Amount { get; set; }
 
-        Backer? Backer { get; set; }
+        public Backer? Backer { get; set; }
  
-        Project? Project { get; set; }
+        public Project? Project { get; set; }
 
     //public List<Project> Projects { get; set; }
     //public List<Backer>? Backers { get; set; }

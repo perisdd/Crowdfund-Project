@@ -1,0 +1,50 @@
+﻿@page
+@using Crowdfund.Models;
+@model Crowdfund.Pages.Backers.DetailsModel
+@{
+    ViewData["Title"] = Model.Backer.FirstName;
+}
+
+<h1>@Model.Backer.FirstName + " " + Model.Backer.LastName</h1>
+
+<h3>My Projects</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Total Contributions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Project project in Model.Projects)
+        {
+            <tr>
+                <td>@project.Title</td>
+                <td>@project.Description</td>
+                <td>@project.Contributions</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>My Contributions</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Contribution contribution in Model.Contributions)
+        {
+            <tr>
+                <td>@contribution.Project.Title</td>
+                <td>@contribution.Amount</td>
+            </tr>
+        }
+    </tbody>
+</table>
