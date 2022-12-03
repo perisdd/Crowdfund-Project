@@ -9,9 +9,7 @@ namespace Crowdfund.Pages.Creators
     {
         private FundDbContext Context { get; }
 
-
-        public int UserCount { get; set; }
-        [BindProperty] public Backer Backer { get; set; }
+        [BindProperty] public Creator Creator { get; set; }
 
         public CreateModel(FundDbContext context)
         {
@@ -19,15 +17,13 @@ namespace Crowdfund.Pages.Creators
         }
 
         public void OnGet()
-        {
-            UserCount = Context.Backers.Count();
-        }
+        { }
 
         public async Task<ActionResult> OnPost()
         {
-            Context.Backers.Add(Backer);
+            Context.Creators.Add(Creator);
             await Context.SaveChangesAsync();
-            return RedirectToPage("/Index");
+            return RedirectToPage("Index");
         }
     }
 }
