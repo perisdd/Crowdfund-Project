@@ -9,7 +9,7 @@ namespace Crowdfund.Pages.Backers
     {
         private FundDbContext Context { get; }
 
-        public Backer Backer { get; set; }
+        public Backer? Backer { get; set; }
 
         public List<Project> Projects { get; set; }
 

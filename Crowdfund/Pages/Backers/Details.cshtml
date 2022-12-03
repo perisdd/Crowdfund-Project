@@ -2,18 +2,20 @@
 @using Crowdfund.Models;
 @model Crowdfund.Pages.Backers.DetailsModel
 @{
-    ViewData["Title"] = Model.Backer.FirstName;
+    ViewData["Title"] = "Backer Details";
 }
 
-<h1>@Model.Backer.FirstName + " " + Model.Backer.LastName</h1>
+<h1>@Model.Backer.FirstName + " " + @Model.Backer.LastName</h1>
 
 <h3>My Projects</h3>
 
+<div></div>
 <table class="table">
     <thead>
         <tr>
             <th>Title</th>
             <th>Description</th>
+            <th>Project Goal</th>
             <th>Total Contributions</th>
         </tr>
     </thead>
@@ -23,6 +25,7 @@
             <tr>
                 <td>@project.Title</td>
                 <td>@project.Description</td>
+                <td>@project.Goal</td>
                 <td>@project.Contributions</td>
             </tr>
         }

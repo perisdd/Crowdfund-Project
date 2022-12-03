@@ -2,30 +2,34 @@
 @using Crowdfund.Models;
 @model Crowdfund.Pages.Backers.IndexModel
 @{
-	ViewData["Title"] = "Backers";
+    ViewData["Title"] = "Backers";
 }
 
-<h1>Backers</h1>
+<h1>My Backer JOB</h1>
 
 @* show projects / categories *@
 
+<a class="btn btn-primary" asp-page="Create">Create Backer</a>
 <div>
-	<h2>All Projects</h2>
+    <h2>All Projects</h2>
 
     <table class="table">
         <thead>
-            <th>Title</th>
-            <th>Description</th>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Project Creation date</th>
+            </tr>
         </thead>
         <tbody>
-                @foreach (Project project in Model.Projects)
-                {
-                    <tr>
-                        <td>@project.Title</td>
-                        <td>@project.Description</td>
-                        <td>asdasdas</td>
-                    </tr>
-                }
+            @foreach (Project project in Model.Projects)
+            {
+                <tr>
+                    <td>@project.Title</td>
+                    <td>@project.Description</td>
+                    <td>@project.CreationDate</td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
