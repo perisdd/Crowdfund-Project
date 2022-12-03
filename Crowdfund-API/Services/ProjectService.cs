@@ -2,6 +2,7 @@
 using Crowdfund_API.DB;
 using Crowdfund_API.DTOs;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace Crowdfund_API.Services
 {
@@ -40,6 +41,7 @@ namespace Crowdfund_API.Services
             return project.Convert();
         }
 
+
         public async Task<List<ProjectDTO>> GetAllProjects()
         {
             return await _context.Projects.Include(c => c.Creator).Select(p => p.Convert()).ToListAsync();
@@ -53,5 +55,98 @@ namespace Crowdfund_API.Services
 
             return project.Convert();
         }
+
+        
+        public async Task<ProjectDTO?> UpdateProject(int projectId, ProjectDTO projectDTO)
+        {
+                Project? project = await _context.Projects.Include(creat => creat.Creator).SingleOrDefaultAsync();
+
+                if (project is null) return null;
+
+                if (projectDTO.Title != null) project.Title = projectDTO.Title;
+                if (projectDTO.CreatorId != null) project.Creator = _context.Creators.Find(projectDTO.CreatorId);
+   
+                return new ProjectDTO()
+                {
+                        Id = project.Id,
+                        Title = project.Title,
+                        Description = project.Description,
+                        CreatorId = project.Creator.Id,
+                        CreatorFirstName = project.Creator.FirstName,
+                        CreatorLastName = project.Creator.LastName
+
+                 };
+        }
+
+        // needs thought
+        public Task<ProjectDTO?> AddRewards(int projectId, RewardDTO rewardDTO)
+        {
+            throw new NotImplementedException();
+            /*
+            Project? project = await _context.Projects.Include(creat => creat.Creator).SingleOrDefaultAsync();
+
+            if (project is null) return null;
+
+            ProjectDTO projectDTO. _context.Projects.Where(rewardDTO.ProjectId) == projectId)
+
+            if (rewardDTO.Title != null && rewardDTO.Description != null) 
+
+            return new RewardDTO()
+            {
+                Id = project.Id,
+                Title = project.Title,
+                Description = project.Description,
+                CreatorId = project.Creator.Id,
+                CreatorFirstName = project.Creator.FirstName,
+                CreatorLastName = project.Creator.LastName
+
+            };*/
+        }
+        
+
+        public async Task<List<ProjectDTO?>> SearchByName(string? title, string? creatorFirst, string? creatorLast)
+        {
+            IQueryable<Project> result = _context.Projects.Include(creat => creat.Creator);
+            
+            if (title is not null) result = result.Where(proj => proj.Title!.ToLower() == title.ToLower());
+            if (creatorFirst is not null) result = result.Where(cre => cre.Creator.FirstName!.ToLower() == creatorFirst.ToLower());
+            if (creatorLast is not null) result = result.Where(crea => crea.Creator.LastName!.ToLower() == creatorLast.ToLower());
+
+            List<Project> projects = await result.ToListAsync();
+            List<ProjectDTO> projectDTOs = new List<ProjectDTO>();
+
+            foreach (var project in projects)
+            {
+                projectDTOs.Add(new ProjectDTO()
+                {
+                    Id = project.Id,
+                    Title = project.Title,
+                    Description = project.Description,
+                    CreatorId = project.Creator.Id,
+                    CreatorFirstName = project.Creator.FirstName,
+                    CreatorLastName = project.Creator.LastName
+
+                });                
+            }
+
+            
+            return projectDTOs;
+        }
+
+        
+        public async Task<bool> DeleteProject(int projectId)
+        {
+            var project = _context.Projects.SingleOrDefault(proj => proj.Id == projectId);
+
+            if (project == null) return false;
+
+            _context.Projects.Remove(project);
+
+            await _context.SaveChangesAsync();
+            
+            return true;
+        }
+
+
     }
 }
