@@ -14,6 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Pages\Creators\Create.cshtml.cs" />
+    <Compile Include="Pages\Creators\Details.cshtml.cs" />
+    <Compile Include="Pages\Creators\Index.cshtml.cs" />
     <Compile Include="Pages\Creators\test.cs" />
   </ItemGroup>
 
@@ -29,6 +32,9 @@
     <None Include="Pages\Actors\Create.cshtml" />
     <None Include="Pages\Actors\Details.cshtml" />
     <None Include="Pages\Actors\Index.cshtml" />
+    <None Include="Pages\Creators\Create.cshtml" />
+    <None Include="Pages\Creators\Details.cshtml" />
+    <None Include="Pages\Creators\Index.cshtml" />
     <None Include="Pages\Movies\Create.cshtml" />
     <None Include="wwwroot\Content\assets\css\animate.css" />
     <None Include="wwwroot\Content\assets\css\flex-slider.css" />
