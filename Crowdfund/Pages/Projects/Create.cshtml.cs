@@ -1,19 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Runtime.InteropServices;
 using Crowdfund.Models;
 using Crowdfund.DB;
-
-
-
 
 namespace Crowdfund.Pages.Projects
 {
     public class CreateModel : PageModel
     {
-
         [BindProperty] public Project Project { get; set; }
         [BindProperty] public List<int> BackerIds { get; set; }
         public List<SelectListItem> BackerSelectList { get; set; }

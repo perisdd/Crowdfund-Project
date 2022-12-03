@@ -4,39 +4,58 @@
 @{
     ViewData["Title"] = "Create Project";
 }
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Project.Title" class="control-label"></label>
-                <input asp-for="Project.Title" class="form-control" />
-                <span asp-validation-for="Project.Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Project.Description" class="control-label"></label>
-                <input asp-for="Project.Description" class="form-control" />
-                <span asp-validation-for="Project.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Project.Creator" class="control-label"></label>
-                <input asp-for="Project.Creator" class="form-control" />
-                <span asp-validation-for="Project.Creator" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Project.Backers" class="control-label"></label>
-                <select asp-for="BackerIds" asp-items="Model.BackerSelectList" class="form-control"></select>
-                <span asp-validation-for="Project.Backers" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Project.ProjectCategory" class="control-label"></label>
-                <select asp-for="Project.ProjectCategory" asp-items="Html.GetEnumSelectList<Category>()"></select>
-                <span asp-validation-for="Project.ProjectCategory" class="text-danger"></span>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-content">
+                <div class="main-banner">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="header-text">
+                                <h6>Create a Project Here</h6>
+                                <h4>if you have done <em>migration</em> for the SQL database</h4>
+                                
+                              @********************************************FORM START HERE***************************@
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <form method="post">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <div class="form-group">
+                                                <label asp-for="Project.Title" class="control-label"></label>
+                                                <input asp-for="Project.Title" class="form-control" />
+                                                <span asp-validation-for="Project.Title" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Project.Description" class="control-label"></label>
+                                                <input asp-for="Project.Description" class="form-control" />
+                                                <span asp-validation-for="Project.Description" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Project.Creator" class="control-label"></label>
+                                                <input asp-for="Project.Creator" class="form-control" />
+                                                <span asp-validation-for="Project.Creator" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Project.Backers" class="control-label"></label>
+                                                <select asp-for="BackerIds" asp-items="Model.BackerSelectList" class="form-control"></select>
+                                                <span asp-validation-for="Project.Backers" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Project.ProjectCategory" class="control-label"></label>
+                                                <select asp-for="Project.ProjectCategory" asp-items="Html.GetEnumSelectList<Category>()"></select>
+                                                <span asp-validation-for="Project.ProjectCategory" class="text-danger"></span>
+                                            </div>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                                            <div class="form-group">
+                                                <input type="submit" value="Create" class="btn btn-primary" />
+                                            </div>
+                                        </form>
+                                    </div>
+                                    @********************************************FORM END HERE***************************@
+                                </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </form>
-    </div>
+                                    
 </div>
