@@ -17,7 +17,6 @@
     <Compile Include="Pages\Creators\Create.cshtml.cs" />
     <Compile Include="Pages\Creators\Details.cshtml.cs" />
     <Compile Include="Pages\Creators\Index.cshtml.cs" />
-    <Compile Include="Pages\Creators\test.cs" />
   </ItemGroup>
 
   <ItemGroup>
