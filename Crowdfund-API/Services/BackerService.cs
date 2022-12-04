@@ -18,17 +18,13 @@ namespace Crowdfund_API.Services
 
 		public async Task<BackerDTO> GetBacker(int id)
 		{
-			var query = _context.Backers.Where(b => b.Id == id);
-			var backer = await query.SingleOrDefaultAsync();
-
+			var backer = await _context.Backers.SingleOrDefaultAsync(b => b.Id == id);
 			return backer.Convert();
 		}
 
 		public async Task<List<BackerDTO>> GetAllBackers()
 		{
-			IQueryable<Backer> query = _context.Backers;
-
-			return await query.Select(b => b.Convert()).ToListAsync();
+			return await _context.Backers.Select(b => b.Convert()).ToListAsync();
 		}
 
 		[HttpPost]
@@ -36,10 +32,11 @@ namespace Crowdfund_API.Services
 		{
 			Backer backer = new Backer()
 			{
-				Id = backerDTO.Id,
+				Id = backerDTO.Id, // ?
 				FirstName = backerDTO.FirstName,
 				LastName = backerDTO.LastName,
 				Email = backerDTO.Email
+				// ...
 			};
 
 			_context.Backers.Add(backer);
@@ -48,17 +45,18 @@ namespace Crowdfund_API.Services
 			return backer.Convert();
 		}
 
-		public async Task<List<BackerDTO>> Search(string firstName, string lastName)
+		public async Task<List<BackerDTO>> Search(string search)
 		{
 			IQueryable<Backer> results = _context.Backers;
 
-			if (firstName != null)
+			if (search != null)
 			{
-				results = results.Where(b => b.FirstName.ToLower().Contains(firstName.ToLower()));
-			}
-			if (lastName != null)
-			{
-				results = results.Where(b => b.LastName.ToLower().Contains(lastName.ToLower()));
+				results = results.Where(b =>
+					b.FirstName.ToLower().Contains(search.ToLower()) ||
+					b.LastName.ToLower().Contains(search.ToLower()) ||
+					b.Email.ToLower().Contains(search.ToLower())
+					// ...
+				);
 			}
 
 			return await results.Select(b => b.Convert()).ToListAsync();
@@ -77,6 +75,7 @@ namespace Crowdfund_API.Services
 				backer.LastName = backerDTO.LastName;
 			if (backerDTO.Email != null)
 				backer.Email = backerDTO.Email;
+			// ...
 
 			await _context.SaveChangesAsync();
 
@@ -93,6 +92,7 @@ namespace Crowdfund_API.Services
 			backer.FirstName = backerDTO.FirstName;
 			backer.LastName = backerDTO.LastName;
 			backer.Email = backerDTO.Email;
+			// ...
 
 			await _context.SaveChangesAsync();
 
@@ -103,7 +103,11 @@ namespace Crowdfund_API.Services
 		{
 			Backer backer = await _context.Backers.SingleOrDefaultAsync(b => b.Id == id);
 
-			if (backer == null) return false;
+			if (backer == null || backer.ProjectsInvested != null) // ?
+			{
+				// Add Message
+				return false;
+			}
 
 			_context.Remove(backer);
 			await _context.SaveChangesAsync();

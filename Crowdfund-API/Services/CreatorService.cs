@@ -18,28 +18,24 @@ namespace Crowdfund_API.Services
 
 		public async Task<CreatorDTO> GetCreator(int id)
 		{
-			var query = _context.Creators.Where(c => c.Id == id);
-			var creator = await query.SingleOrDefaultAsync();
-
+			var creator = await _context.Creators.SingleOrDefaultAsync(c => c.Id == id);
 			return creator.Convert();
 		}
 
 		public async Task<List<CreatorDTO>> GetAllCreators()
 		{
-			IQueryable<Creator> query = _context.Creators;
-
-			return await query.Select(c => c.Convert()).ToListAsync();
+			return await _context.Creators.Select(c => c.Convert()).ToListAsync();
 		}
 
-		[HttpPost]
-		public async Task<CreatorDTO> AddCreator (CreatorDTO creatorDTO)
+		public async Task<CreatorDTO> AddCreator(CreatorDTO creatorDTO)
 		{
 			Creator creator = new Creator()
 			{
-				Id = creatorDTO.Id,
+				Id = creatorDTO.Id, // ?
 				FirstName = creatorDTO.FirstName,
 				LastName = creatorDTO.LastName,
 				Email = creatorDTO.Email
+				// ...
 			};
 
 			_context.Creators.Add(creator);
@@ -48,17 +44,18 @@ namespace Crowdfund_API.Services
 			return creator.Convert();
 		}
 
-		public async Task<List<CreatorDTO>> Search(string firstName, string lastName)
+		public async Task<List<CreatorDTO>> Search(string search)
 		{
 			IQueryable<Creator> results = _context.Creators;
 
-			if (firstName != null)
+			if (search != null)
 			{
-				results = results.Where(c => c.FirstName.ToLower().Contains(firstName.ToLower()));
-			}
-			if (lastName != null)
-			{
-				results = results.Where(c => c.LastName.ToLower().Contains(lastName.ToLower()));
+				results = results.Where(c =>
+					c.FirstName.ToLower().Contains(search.ToLower()) ||
+					c.LastName.ToLower().Contains(search.ToLower()) ||
+					c.Email.ToLower().Contains(search.ToLower())
+					// ...
+				);
 			}
 
 			return await results.Select(c => c.Convert()).ToListAsync();
@@ -77,6 +74,7 @@ namespace Crowdfund_API.Services
 				creator.LastName = creatorDTO.LastName;
 			if (creatorDTO.Email != null)
 				creator.Email = creatorDTO.Email;
+			// ...
 
 			await _context.SaveChangesAsync();
 
@@ -93,6 +91,7 @@ namespace Crowdfund_API.Services
 			creator.FirstName = creatorDTO.FirstName;
 			creator.LastName = creatorDTO.LastName;
 			creator.Email = creatorDTO.Email;
+			// ...
 
 			await _context.SaveChangesAsync();
 
@@ -103,7 +102,11 @@ namespace Crowdfund_API.Services
 		{
 			Creator creator = await _context.Creators.SingleOrDefaultAsync(c => c.Id == id);
 
-			if (creator == null) return false;
+			if (creator == null || creator.projectsCreated != null)
+			{
+				// Add Message
+				return false;
+			}
 
 			_context.Remove(creator);
 			await _context.SaveChangesAsync();
