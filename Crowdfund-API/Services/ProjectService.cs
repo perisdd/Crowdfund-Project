@@ -1,6 +1,7 @@
 ﻿using Crowdfund.DB;
 using Crowdfund.Models;
 using Crowdfund_API.DTOs;
+using Crowdfund_API.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Crowdfund_API.Services
@@ -58,23 +59,29 @@ namespace Crowdfund_API.Services
         
         public async Task<ProjectDTO?> UpdateProject(int projectId, ProjectDTO projectDTO)
         {
-                Project? project = await _context.Projects.Include(creat => creat.Creator).SingleOrDefaultAsync();
+            Project? project = await _context.Projects.Include(creat => creat.Creator).SingleOrDefaultAsync();
 
-                if (project is null) return null;
+            if (project is null)
+                throw new NotFoundException("Invalid ID.");
 
-                if (projectDTO.Title != null) project.Title = projectDTO.Title;
-                if (projectDTO.CreatorId != null) project.Creator = _context.Creators.Find(projectDTO.CreatorId);
-   
-                return new ProjectDTO()
-                {
-                        Id = project.Id,
-                        Title = project.Title,
-                        Description = project.Description,
-                        CreatorId = project.Creator.Id,
-                        CreatorFirstName = project.Creator.FirstName,
-                        CreatorLastName = project.Creator.LastName
+            if (projectDTO.Title != null) 
+                project.Title = projectDTO.Title;
+            if (projectDTO.Description != null)
+                project.Description = projectDTO.Description;
+            if (projectDTO.Goal != 0.0m)
+                project.Goal = projectDTO.Goal;
+            if (projectDTO.Category != null)
+                project.ProjectCategory = projectDTO.Category;
+            if (projectDTO.Creator.FirstName != null)
+                project.Creator.FirstName = projectDTO.Creator.LastName;
+            if (projectDTO.Creator.FirstName != null)
+                project.Creator.LastName = projectDTO.Creator.FirstName;
+            if (projectDTO.Contributions != null)
+                project.Contributions = projectDTO.Contributions;
 
-                 };
+            await _context.SaveChangesAsync();
+
+            return project.Convert();
         }
 
         // needs thought
@@ -121,10 +128,8 @@ namespace Crowdfund_API.Services
                     Id = project.Id,
                     Title = project.Title,
                     Description = project.Description,
-                    CreatorId = project.Creator.Id,
-                    CreatorFirstName = project.Creator.FirstName,
-                    CreatorLastName = project.Creator.LastName
-
+                    Goal = project.Goal,
+                    Contributions = project.Contributions
                 });                
             }
 
