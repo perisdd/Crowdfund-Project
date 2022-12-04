@@ -32,9 +32,9 @@ namespace Crowdfund_API.Controllers
 		}
 
 		[HttpGet, Route("Search")]
-		public async Task<ActionResult<List<BackerDTO>>> Search(string firstName, string lastName)
+		public async Task<ActionResult<List<BackerDTO>>> Search(string search)
 		{
-			var response = await _service.Search(firstName, lastName);
+			var response = await _service.Search(search);
 			if (response == null) return NotFound("No Match Found.");
 
 			return response;
