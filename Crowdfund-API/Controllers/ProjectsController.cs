@@ -10,7 +10,7 @@ namespace Crowdfund_API.Controllers
     [ApiController]
     public class ProjectsController : ControllerBase
     {
-        public IProjectService _service;
+        private IProjectService _service;
 
         public ProjectsController(IProjectService service)
         {

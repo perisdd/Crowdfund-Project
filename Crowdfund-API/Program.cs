@@ -1,4 +1,4 @@
-using Crowdfund_API.DB;
+using Crowdfund.DB;
 using Crowdfund_API.Services;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +13,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<FundDbContextAPI>
+builder.Services.AddDbContext<FundDbContext>
     (options => options.UseSqlServer("Data Source = (local); Initial Catalog = FundProject; Integrated Security = true;"));
 
 builder.Services.Configure<JsonOptions>(options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+
 builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<ICreatorService, CreatorService>();
+builder.Services.AddScoped<IBackerService, BackerService>();
 
 var app = builder.Build();
 

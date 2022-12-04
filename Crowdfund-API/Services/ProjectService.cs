@@ -1,16 +1,15 @@
-﻿using Crowdfund.Models;
-using Crowdfund_API.DB;
+﻿using Crowdfund.DB;
+using Crowdfund.Models;
 using Crowdfund_API.DTOs;
 using Microsoft.EntityFrameworkCore;
-using System.Xml.Linq;
 
 namespace Crowdfund_API.Services
 {
-    public class ProjectService : IProjectService
+	public class ProjectService : IProjectService
     {
-        private readonly FundDbContextAPI _context;
+        private readonly FundDbContext _context;
 
-        public ProjectService(FundDbContextAPI context)
+        public ProjectService(FundDbContext context)
         {
             _context = context;
         }
@@ -108,7 +107,7 @@ namespace Crowdfund_API.Services
         {
             IQueryable<Project> result = _context.Projects.Include(creat => creat.Creator);
             
-            if (title is not null) result = result.Where(proj => proj.Title!.ToLower() == title.ToLower());
+            if (title is not null) result = result.Where(proj => proj.Title!.Contains(title.ToLower()));
             if (creatorFirst is not null) result = result.Where(cre => cre.Creator.FirstName!.ToLower() == creatorFirst.ToLower());
             if (creatorLast is not null) result = result.Where(crea => crea.Creator.LastName!.ToLower() == creatorLast.ToLower());
 

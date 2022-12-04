@@ -24,5 +24,27 @@ namespace Crowdfund_API.DTOs
                 CreationDate = project.CreationDate
             };
         }
-    }
+
+		public static CreatorDTO Convert(this Creator creator)
+		{
+			return new CreatorDTO()
+			{
+				Id = creator.Id,
+				FirstName = creator.FirstName,
+				LastName = creator.LastName,
+				Email = creator.Email,
+			};
+		}
+
+		public static BackerDTO Convert(this Backer backer)
+		{
+			return new BackerDTO()
+			{
+				Id = backer.Id,
+				FirstName = backer.FirstName,
+				LastName = backer.LastName,
+				Email = backer.Email,
+			};
+		}
+	}
 }
