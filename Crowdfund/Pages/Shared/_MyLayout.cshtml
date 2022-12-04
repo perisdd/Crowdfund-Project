@@ -91,12 +91,13 @@
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Projects/Create">Create Project</a> </li>
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Projects/Index">Project Index</a> </li>
 
+
                            @* <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Movies/Create">Create Movie</a> </li>*@
 @*
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/About">About</a> </li>*@
                        @*     <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a> </li>*@
 
-                                <li><a href="profile.html">Profile <img src=@Url.Content("~/Content/assets/images/profile-header.jpg") alt=""></a></li>
+                            <li><a asp-page="/Profile">Profile<img src=@Url.Content("~/Content/assets/images/bill.png") alt=""></a></li> @*profile-header.jpg*@
                             </ul>
                             <a class='menu-trigger'>
                                 <span>Menu</span>
