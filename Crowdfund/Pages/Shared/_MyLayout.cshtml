@@ -63,7 +63,7 @@
                             <!-- ***** Search End ***** -->
                             <div class="search-input">
                                 <form id="search" action="#">
-                                    <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
+                                    <input type="text" placeholder="Search Projects" id='searchText' name="searchKeyword" onkeypress="handle" />
                                     <i class="fa fa-search"></i>
                                 </form>
                             </div>
@@ -72,7 +72,7 @@
                             <ul class="nav">
 
 
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Index">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="~/Index">Home</a></li>
 @*                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Backers/Index">Backers Index</a> </li>
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Backers/Create">Backers/Create</a> </li>
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Backers/Details">Backers/Details</a> </li>*@
@@ -84,12 +84,12 @@
                             @* <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Movies/Create">Create Movie</a> </li>*@
 
                             
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Creators/Index">Creators Index</a> </li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Creators/Create">Creators Create</a> </li>
+                            <li class="nav-item"><a class="nav-link" href="~/Creators/Index">Creators Index</a> </li>
+							<li class="nav-item"><a class="nav-link" href="~/Creators/Create">Creators Create</a> </li>
 @*                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Creators/Details">Creators Details</a> </li>*@
-                            
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Projects/Create">Create Project</a> </li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Projects/Index">Project Index</a> </li>
+
+							<li class="nav-item"><a class="nav-link" href="~/Projects/Create">Create Project</a> </li>
+                            <li class="nav-item"><a class="nav-link" href="~/Projects/Index">Project Index</a> </li>
 
 
                            @* <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Movies/Create">Create Movie</a> </li>*@
@@ -97,7 +97,7 @@
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/About">About</a> </li>*@
                        @*     <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a> </li>*@
 
-                            <li><a asp-page="/Profile">Profile<img src=@Url.Content("~/Content/assets/images/bill.png") alt=""></a></li> @*profile-header.jpg*@
+							<li><a href="~/Profile">Profile<img src=@Url.Content("~/Content/assets/images/bill.png") alt=""></a></li> @*profile-header.jpg*@
                             </ul>
                             <a class='menu-trigger'>
                                 <span>Menu</span>
