@@ -12,16 +12,28 @@ namespace Crowdfund.Pages.Projects
     {
         [BindProperty] public Project Project { get; set; }
         [BindProperty] public List<int> BackerIds { get; set; }
+        [BindProperty] public List<int> CreatorIds { get; set; }
         public List<SelectListItem> BackerSelectList { get; set; }
+        public List<SelectListItem> CreatorSelectList { get; set; }
         private FundDbContext Context { get; }
         public CreateModel(FundDbContext context)
         {
             Context = context;
         }
 
+        //public async Task OnGet()
+        //{
+        //    BackerSelectList = await Context.Backers.Select
+        //        (a => new SelectListItem
+        //        {
+        //            Value = a.Id.ToString(),
+        //            Text = a.ToString()
+        //        }).ToListAsync();
+        //}
+
         public async Task OnGet()
         {
-            BackerSelectList = await Context.Backers.Select
+            CreatorSelectList = await Context.Creators.Select
                 (a => new SelectListItem
                 {
                     Value = a.Id.ToString(),
@@ -29,9 +41,18 @@ namespace Crowdfund.Pages.Projects
                 }).ToListAsync();
         }
 
+        //public async Task<IActionResult> OnPost()
+        //{
+        //    Project.Backers = await Context.Backers.Where(a => BackerIds.Contains(a.Id)).ToListAsync();
+
+        //    Context.Projects.Add(Project);
+        //    await Context.SaveChangesAsync();
+        //    return RedirectToPage("/Index");
+        //}
+
         public async Task<IActionResult> OnPost()
         {
-            Project.Backers = await Context.Backers.Where(a => BackerIds.Contains(a.Id)).ToListAsync();
+            Project.Creator = await Context.Creators.Where(a => CreatorIds.Contains(a.Id)).FirstAsync();
 
             Context.Projects.Add(Project);
             await Context.SaveChangesAsync();
