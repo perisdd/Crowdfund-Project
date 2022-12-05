@@ -14,11 +14,11 @@
                             <div class="header-text">
                                 <h6>Create a Project Here</h6>
                                 <h4>if you have done <em>migration</em> for the SQL database</h4>
-                                
+                                <h4>@TempData["creator"]</h4>
                               @********************************************FORM START HERE***************************@
                                 <div class="row">
                                     <div class="col-md-4">
-                                        
+                                       
                                         <form method="post">
                                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -26,6 +26,7 @@
                                             
                                             <div class="form-group">
                                                 <p class="text-white">
+                                                
                                                 <label asp-for="Project.Title" class="control-label"></label>
                                                 <input asp-for="Project.Title" class="form-control" />
                                                 <span asp-validation-for="Project.Title" class="text-danger"></span>

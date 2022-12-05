@@ -15,16 +15,18 @@
                     <a class="nav-link" asp-area="" asp-page="/Creators/Create">Create new</a>
                 </div>
                 <label for="cars">Choose a creator:</label>
-
-<select name="cars" id="cars">
-  <option value="1">Creator1</option>
-  <option value="2">Creator2</option>
-  <option value="3">Creator3</option>
-  <option value="4">Creator4</option>
-</select>
+                <form method="post">
+                     <select name="creators" id="creators">
+                         <option value="1">Creator1</option>
+                         <option value="2">Creator2</option>
+                         <option value="3">Creator3</option>
+                         <option value="4">Creator4</option>
+                     </select>
                 <div class="main-button">
                     <a class="nav-link" asp-area="" asp-page="/Index">Next</a>
+                   <input type="submit"  value="Create" class="btn btn-primary" />
                 </div>
+                </form>
             </div>
         </div>
     </div>
