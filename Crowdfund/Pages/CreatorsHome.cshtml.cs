@@ -5,10 +5,11 @@ namespace Crowdfund.Pages
 {
     public class CreatorsHomeModel : PageModel
     {
+		public static int test { get; set; }
 
         public IActionResult OnPost(int creators)
         {
-            TempData["creator"] = creators;
+            test = creators;
             return RedirectToPage("Projects/Create");
         }
 
