@@ -19,6 +19,7 @@ namespace Crowdfund_API.Services
 		public async Task<CreatorDTO> GetCreator(int id)
 		{
 			var creator = await _context.Creators.SingleOrDefaultAsync(c => c.Id == id);
+
 			return creator.Convert();
 		}
 
@@ -94,7 +95,6 @@ namespace Crowdfund_API.Services
 			// ...
 
 			await _context.SaveChangesAsync();
-
 			return creator.Convert();
 		}
 

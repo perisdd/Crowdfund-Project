@@ -1,83 +1,98 @@
-﻿using Crowdfund.Models;
-using Crowdfund_API.DTOs;
+﻿using Crowdfund_API.DTOs;
+using Crowdfund_API.Exceptions;
 using Crowdfund_API.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Crowdfund_API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProjectsController : ControllerBase
-    {
-        private IProjectService _service;
+	[Route("api/[controller]")]
+	[ApiController]
+	public class ProjectsController : ControllerBase
+	{
+		private IProjectService _service;
 
-        public ProjectsController(IProjectService service)
-        {
-            _service = service;
-        }
+		public ProjectsController(IProjectService service)
+		{
+			_service = service;
+		}
 
-        [HttpGet]
-        public async Task<List<ProjectDTO>> Get()
-        {
-            return await _service.GetAllProjects();
-        }
+		[HttpGet]
+		public async Task<ActionResult<List<ProjectDTO>>> Get()
+		{
+			return await _service.GetAllProjects();
+		}
 
-        [HttpGet, Route("{id}")]
-        public async Task<ActionResult<ProjectDTO>> Get(int id)
-        {
-            var projectDTO = await _service.GetProject(id);
-            if (projectDTO == null) { return NotFound("Invalid ID."); }
-            
-            return Ok(projectDTO);
-        }
+		[HttpGet, Route("{id}")]
+		public async Task<ActionResult<ProjectDTO>> Get(int id)
+		{
+			var projectDTO = await _service.GetProject(id);
+			if (projectDTO == null) { return NotFound("Invalid ID."); }
+			
+			return Ok(projectDTO);
+		}
 
-        [HttpPost]
-        public async Task<ActionResult<ProjectDTO?>> Post(ProjectDTO? projectDTO)
-        {
-            if (projectDTO is null) return BadRequest("Please provide a valid project");
-            
-            ProjectDTO result = await _service.AddProject(projectDTO);
-  
-            if (result is null) return NotFound("Invalid Creator ID.");
+		[HttpGet, Route("Search")]
+		public async Task<ActionResult<List<ProjectDTO>>> Search(string search)
+		{
+			var response = await _service.Search(search);
+			if (response == null) return NotFound("No Match Found.");
 
-            return Ok(result);
-        }
+			return response;
+		}
 
+		[HttpPost]
+		public async Task<ActionResult<ProjectDTO>> Post(ProjectDTO projectDTO)
+		{
+			ProjectDTO result = await _service.AddProject(projectDTO);
+			// ...
+			return Ok(result);
+		}
 
-        [HttpGet, Route("search")]
-        public async Task<ActionResult<List<ProjectDTO?>>> Search(string? title, string? creatorFirst, string? creatorLast)
-        {
-            var result = await _service.SearchByName(title, creatorFirst, creatorLast);
-            if (result is null || !result.Any()) return BadRequest("No projects that match the specified criteria were found.");
+		[HttpPatch, Route("{id}")]
+		public async Task<ActionResult<ProjectDTO>> Patch([FromRoute] int id, [FromBody] ProjectDTO projectDTO)
+		{
+			try
+			{
+				var response = await _service.Update(id, projectDTO);
+				return Ok(response);
+			}
+			catch (AggregateException e)
+			{
+				foreach (var exception in e.InnerExceptions)
+				{
+					if (exception is NotFoundException)
+						return BadRequest(e.Message);
+					// ...
+				}
+			}
 
-            return Ok(result);
-        }
+			return StatusCode(500);
+		}
 
+		[HttpPut, Route("{id}")]
+		public async Task<ActionResult<ProjectDTO>> Put([FromRoute] int id, [FromBody] ProjectDTO projectDTO)
+		{
+			try
+			{
+				var response = await _service.Replace(id, projectDTO);
+				return Ok(response);
+			}
+			catch (AggregateException e)
+			{
+				foreach (var exception in e.InnerExceptions)
+				{
+					if (exception is NotFoundException)
+						return BadRequest(e.Message);
+				}
+			}
 
-        [HttpPatch, Route("update")]
-        public async Task<ActionResult<ProjectDTO?>> Update(int id, ProjectDTO projectDTO)
-        {
+			return StatusCode(500);
+		}
 
-            var result = await _service.UpdateProject(id,projectDTO);
-
-            if (result is null) return BadRequest("No previous project was found to update.");
-
-            return Ok("Project updated successfully!");
-        }
-
-
-        [HttpDelete, Route("delete")]
-        public async Task<ActionResult<bool>> Delete(int id)
-        {
-
-            var result = await _service.DeleteProject(id);
-
-            if (result) return Ok("Project deleted successfully!");
-
-            return BadRequest("No project was found to delete.");
-         
-        }
-
-    }
+		[HttpDelete, Route("{id}")]
+		public async Task<ActionResult<bool>> Delete(int id)
+		{
+			return await _service.Delete(id);
+		}
+	}
 }

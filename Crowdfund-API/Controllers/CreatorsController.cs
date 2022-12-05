@@ -20,15 +20,16 @@ namespace Crowdfund_API.Controllers
 		[HttpGet]
 		public async Task<ActionResult<List<CreatorDTO>>> Get()
 		{
-			var response = await _service.GetAllCreators();
-			return response;
+			return await _service.GetAllCreators();
 		}
 
 		[HttpGet, Route("{id}")]
 		public async Task<ActionResult<CreatorDTO>> Get(int id)
 		{
-			var response = await _service.GetCreator(id);
-			return response;
+			var creatorDTO = await _service.GetCreator(id);
+			if (creatorDTO == null) { return NotFound("Invalid ID."); }
+			
+			return Ok(creatorDTO);
 		}
 
 		[HttpGet, Route("Search")]
@@ -44,6 +45,7 @@ namespace Crowdfund_API.Controllers
 		public async Task<ActionResult<CreatorDTO>> Post(CreatorDTO creatorDTO)
 		{
 			CreatorDTO result = await _service.AddCreator(creatorDTO);
+			// ...
 			return Ok(result);
 		}
 
@@ -61,6 +63,7 @@ namespace Crowdfund_API.Controllers
 				{
 					if (exception is NotFoundException)
 						return BadRequest(e.Message);
+					// ...
 				}
 			}
 
