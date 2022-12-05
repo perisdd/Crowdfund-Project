@@ -63,25 +63,17 @@
                                                 
 
                                             </div>
-                                            @*****file input****@
-                                            <div class="input-group mb-3">
-                                                 <p class="text-white">
-                                                    <label for="formFile" class="form-label">Set the money Goal for your Project</label>
+                                            @*****img input****@
+                                            <div class="form-group">
+                                                <p class="text-white">
+                                                    <label for="formFile" class="form-label">Insert Url for an image of your project</label>
+                                                    <label asp-for="Project.ImgUrl" class="control-label"></label>
+                                                    <input asp-for="Project.ImgUrl" class="form-control" />
+                                                    <span asp-validation-for="Project.ImgUrl" class="text-danger"></span>
                                                 </p>
-                                                <span class="input-group-text">€</span>
-
-                                                <input type="text" class="form-control" aria-label="Euro amount (with dot and two decimal places)">
                                             </div>
 
-
-                                           
-                                                <div class="mb-3">
-                                                    <p class="text-white">
-                                                    <label for="formFile" class="form-label">Upload an image for your project</label>
-                                                </p>
-                                                <input class="form-control" type="file" id="formFile">
-                                            </div></p>
-                                            @*end input*@
+                                            @*end img input*@
                                             <div class="form-group">
                                                 <input type="submit" value="Create" class="btn btn-primary" />
                                             </div>

@@ -8,6 +8,8 @@
 
         public string Description { get; set; } = "";
 
+        public string ImgUrl { get; set; } = "";
+
         public Creator? Creator { get; set; }
 
         public Category ProjectCategory { get; set; }

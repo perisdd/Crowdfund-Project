@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Crowdfund.Migrations
 {
     [DbContext(typeof(FundDbContext))]
-    [Migration("20221203134018_initial")]
+    [Migration("20221205133753_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -163,6 +163,10 @@ namespace Crowdfund.Migrations
 
                     b.Property<decimal>("Goal")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ImgUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProjectCategory")
                         .HasColumnType("int");

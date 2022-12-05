@@ -162,6 +162,10 @@ namespace Crowdfund.Migrations
                     b.Property<decimal>("Goal")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("ImgUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ProjectCategory")
                         .HasColumnType("int");
 

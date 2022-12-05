@@ -53,6 +53,7 @@ namespace Crowdfund.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatorId = table.Column<int>(type: "int", nullable: true),
                     ProjectCategory = table.Column<int>(type: "int", nullable: false),
                     Contributions = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
