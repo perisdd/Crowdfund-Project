@@ -10,8 +10,9 @@ namespace Crowdfund.Pages.Projects
 {
     public class DetailsModel : PageModel
     {
-        public void OnGet()
+        public void OnGet(int Id)
         {
+
         }
     }
 }
