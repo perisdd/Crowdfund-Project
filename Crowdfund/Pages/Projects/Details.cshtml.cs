@@ -10,9 +10,13 @@ namespace Crowdfund.Pages.Projects
 {
     public class DetailsModel : PageModel
     {
-        public void OnGet(int Id)
-        {
+		private FundDbContext Context { get; }
 
-        }
+		public Project Project { get; set; }
+
+		public void OnGet(int id)
+        {
+			Project = Context.Projects.SingleOrDefault(p => p.Id == id);
+		}
     }
 }
