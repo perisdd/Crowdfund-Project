@@ -7,150 +7,156 @@ using Microsoft.EntityFrameworkCore;
 namespace Crowdfund_API.Services
 {
 	public class ProjectService : IProjectService
-    {
-        private readonly FundDbContext _context;
+	{
+		private readonly FundDbContext _context;
 
-        public ProjectService(FundDbContext context)
-        {
-            _context = context;
-        }
+		public ProjectService(FundDbContext context)
+		{
+			_context = context;
+		}
 
-        public async Task<ProjectDTO> AddProject(ProjectDTO projectDTO)
-        {
-            Creator? creator = await _context.Creators.SingleOrDefaultAsync(c => c.Id == projectDTO.Creator.Id);
+		public async Task<ProjectDTO> GetProject(int id)
+		{
+			var project = await _context.Projects.Include(c => c.Creator).SingleOrDefaultAsync(p => p.Id == id);
 
-            if (creator == null) return null;
+			if (project == null) return null;
 
-            Project project = new Project()
-            {
-                Id = projectDTO.Id,
-                Title = projectDTO.Title,
-                Description = projectDTO.Description,
-                Creator = creator,
-                ProjectCategory = projectDTO.Category,
-                Contributions = projectDTO.Contributions,
-                Goal = projectDTO.Goal,
-                CreationDate = projectDTO.CreationDate,
-                Rewards = new List<Reward>(),
-                Backers = new List<Backer>()
-            };
+			return project.Convert();
+		}
 
-            _context.Projects.Add(project);
-            await _context.SaveChangesAsync();
+		public async Task<List<ProjectDTO>> GetAllProjects()
+		{
+			return await _context.Projects.Include(c => c.Creator).Select(p => p.Convert()).ToListAsync();
+		}
 
-            return project.Convert();
-        }
+		public async Task<ProjectDTO> AddProject(ProjectDTO projectDTO)
+		{
+			Creator creator = await _context.Creators.SingleOrDefaultAsync(c => c.Id == projectDTO.Creator.Id);
 
+			if (creator == null) return null;
 
-        public async Task<List<ProjectDTO>> GetAllProjects()
-        {
-            return await _context.Projects.Include(c => c.Creator).Select(p => p.Convert()).ToListAsync();
-        }
+			Project project = new Project()
+			{
+				Id = projectDTO.Id,
+				Title = projectDTO.Title,
+				Description = projectDTO.Description,
+				Creator = creator,
+				// ProjectCategory = projectDTO.Category,
+				Contributions = projectDTO.Contributions,
+				Goal = projectDTO.Goal,
+				CreationDate = projectDTO.CreationDate,
+				Rewards = new List<Reward>(),
+				Backers = new List<Backer>()
+			};
 
-        public async Task<ProjectDTO> GetProject(int projectId)
-        {
-            var project = await _context.Projects.Include(c => c.Creator).SingleOrDefaultAsync(p => p.Id == projectId);
+			_context.Projects.Add(project);
+			await _context.SaveChangesAsync();
 
-            if (project == null) return null;
+			return project.Convert();
+		}
 
-            return project.Convert();
-        }
+		public async Task<List<ProjectDTO>> Search(string search)
+		{
+			IQueryable<Project> results = _context.Projects.Include(p => p.Creator);
 
-        
-        public async Task<ProjectDTO?> UpdateProject(int projectId, ProjectDTO projectDTO)
-        {
-            Project? project = await _context.Projects.Include(creat => creat.Creator).SingleOrDefaultAsync();
+			if (search != null)
+			{
+				results = results.Where(p =>
+					p.Title.ToLower().Contains(search.ToLower()) ||
+					p.Description.ToLower().Contains(search.ToLower())
+					// ...
+				);
+			}
 
-            if (project is null)
-                throw new NotFoundException("Invalid ID.");
+			return await results.Select(p => p.Convert()).ToListAsync();
+		}
 
-            if (projectDTO.Title != null) 
-                project.Title = projectDTO.Title;
-            if (projectDTO.Description != null)
-                project.Description = projectDTO.Description;
-            if (projectDTO.Goal != 0.0m)
-                project.Goal = projectDTO.Goal;
-            if (projectDTO.Category != null)
-                project.ProjectCategory = projectDTO.Category;
-            if (projectDTO.Creator.FirstName != null)
-                project.Creator.FirstName = projectDTO.Creator.LastName;
-            if (projectDTO.Creator.FirstName != null)
-                project.Creator.LastName = projectDTO.Creator.FirstName;
-            if (projectDTO.Contributions != null)
-                project.Contributions = projectDTO.Contributions;
+		public async Task<ProjectDTO> Update(int id, ProjectDTO projectDTO)
+		{
+			Project project = await _context.Projects.Include(p => p.Creator).SingleOrDefaultAsync(p => p.Id == id);
 
-            await _context.SaveChangesAsync();
+			if (project is null)
+				throw new NotFoundException("Invalid ID.");
 
-            return project.Convert();
-        }
+			if (projectDTO.Title != null) 
+				project.Title = projectDTO.Title;
+			if (projectDTO.Description != null)
+				project.Description = projectDTO.Description;
+			if (projectDTO.Goal != 0.0m)
+				project.Goal = projectDTO.Goal;
+			if (projectDTO.Category != null)
+				// project.ProjectCategory = projectDTO.Category;
+			if (projectDTO.Creator != null)
+			{
+				var creator = _context.Creators.SingleOrDefault(c => c.Id == projectDTO.Creator.Id);
 
-        // needs thought
-        public Task<ProjectDTO?> AddRewards(int projectId, RewardDTO rewardDTO)
-        {
-            throw new NotImplementedException();
-            /*
-            Project? project = await _context.Projects.Include(creat => creat.Creator).SingleOrDefaultAsync();
+				if (creator != null)
+					project.Creator = creator;
+				else
+					throw new NotFoundException("Invalid Creator");
+			}
+			if (projectDTO.Contributions != 0)
+				project.Contributions = projectDTO.Contributions;
+			// ...
 
-            if (project is null) return null;
+			await _context.SaveChangesAsync();
 
-            ProjectDTO projectDTO. _context.Projects.Where(rewardDTO.ProjectId) == projectId)
+			return project.Convert();
+		}
 
-            if (rewardDTO.Title != null && rewardDTO.Description != null) 
+		public async Task<ProjectDTO> Replace(int id, ProjectDTO projectDTO)
+		{
+			Project project = await _context.Projects.Include(p => p.Creator).SingleOrDefaultAsync(p => p.Id == id);
 
-            return new RewardDTO()
-            {
-                Id = project.Id,
-                Title = project.Title,
-                Description = project.Description,
-                CreatorId = project.Creator.Id,
-                CreatorFirstName = project.Creator.FirstName,
-                CreatorLastName = project.Creator.LastName
+			if (project is null)
+				throw new NotFoundException("Invalid ID.");
 
-            };*/
-        }
-        
+			project.Title = projectDTO.Title;
+			project.Description = projectDTO.Description;
+			// ...
 
-        public async Task<List<ProjectDTO?>> SearchByName(string? title, string? creatorFirst, string? creatorLast)
-        {
-            IQueryable<Project> result = _context.Projects.Include(creat => creat.Creator);
-            
-            if (title is not null) result = result.Where(proj => proj.Title!.Contains(title.ToLower()));
-            if (creatorFirst is not null) result = result.Where(cre => cre.Creator.FirstName!.ToLower() == creatorFirst.ToLower());
-            if (creatorLast is not null) result = result.Where(crea => crea.Creator.LastName!.ToLower() == creatorLast.ToLower());
+			await _context.SaveChangesAsync();
+			return project.Convert();
+		}
 
-            List<Project> projects = await result.ToListAsync();
-            List<ProjectDTO> projectDTOs = new List<ProjectDTO>();
+		public async Task<bool> Delete(int id)
+		{
+			Project project = _context.Projects.SingleOrDefault(p => p.Id == id);
 
-            foreach (var project in projects)
-            {
-                projectDTOs.Add(new ProjectDTO()
-                {
-                    Id = project.Id,
-                    Title = project.Title,
-                    Description = project.Description,
-                    Goal = project.Goal,
-                    Contributions = project.Contributions
-                });                
-            }
+			if (project == null) return false;
 
-            
-            return projectDTOs;
-        }
+			_context.Projects.Remove(project);
 
-        
-        public async Task<bool> DeleteProject(int projectId)
-        {
-            var project = _context.Projects.SingleOrDefault(proj => proj.Id == projectId);
+			await _context.SaveChangesAsync();
 
-            if (project == null) return false;
+			return true;
+		}
 
-            _context.Projects.Remove(project);
+		// needs thought
+		/*
+		public Task<ProjectDTO?> AddRewards(int projectId, RewardDTO rewardDTO)
+		{
+			throw new NotImplementedException();
+			/*
+			Project? project = await _context.Projects.Include(creat => creat.Creator).SingleOrDefaultAsync();
 
-            await _context.SaveChangesAsync();
-            
-            return true;
-        }
+			if (project is null) return null;
 
+			ProjectDTO projectDTO. _context.Projects.Where(rewardDTO.ProjectId) == projectId)
 
-    }
+			if (rewardDTO.Title != null && rewardDTO.Description != null) 
+
+			return new RewardDTO()
+			{
+				Id = project.Id,
+				Title = project.Title,
+				Description = project.Description,
+				CreatorId = project.Creator.Id,
+				CreatorFirstName = project.Creator.FirstName,
+				CreatorLastName = project.Creator.LastName
+
+			};
+		}
+		*/
+	}
 }

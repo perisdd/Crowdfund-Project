@@ -52,7 +52,7 @@ namespace Crowdfund.Pages.Projects
 
         public async Task<IActionResult> OnPost()
         {
-            Project.Creator = await Context.Creators.Where(a => CreatorIds.Contains(a.Id)).FirstAsync();
+			Project.Creator = await Context.Creators.SingleOrDefaultAsync(c => c.Id == 1);
 
             Context.Projects.Add(Project);
             await Context.SaveChangesAsync();
