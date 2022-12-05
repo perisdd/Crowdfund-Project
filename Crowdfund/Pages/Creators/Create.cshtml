@@ -48,26 +48,41 @@
                                                 </p>
                                             </div>
 
-                                            <div class="form-group">
+@*                                            <div class="form-group">
                                                 <p class="text-white">
                                                 <label asp-for="Creator.UserName" class="control=label"></label>
                                                 <input asp-for="Creator.UserName" class="form-control" />
                                                 <span asp-validation-for="Creator.UserName" class="text-danger"></span> </p>
-                                            </div>
-                                
+                                            </div>*@
+                                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                                             <div class="form-group">
                                                 <input type="submit" value="Create" class="btn btn-primary" />
                                             </div>
                                         </form>
                                     </div>
                                 </div>
-                                </p>
-                                <div>
+                                
+@*                                <div>
+                                    <form method="post">
+                                        <select name="creators" id="creators">
+                                            <option value=1>Creator1</option>
+                                            <option value=2>Creator2</option>
+                                            <option value=3>Creator3</option>
+                                            <option value=4>Creator4</option>
+                                        </select>
+
+                                        <input type="submit" value="Create" class="main-button" />
+                                        <div class="main-button">
+                                        </div>
+                                    </form>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                                     <div class="main-border-button">
-                                        <a href="~/Creators/Index">Or see existing ones here</a>
+                                        <a href="~/Creators/Index">Go Back</a>
                                     </div>
-                                </div>
-                        
+                                </div>*@
+
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                <div class="main-border-button"><a asp-page="Index">Go Back</a></div>
                             </div>
                         </div>
                     </div>

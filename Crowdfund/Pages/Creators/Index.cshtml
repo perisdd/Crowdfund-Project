@@ -15,19 +15,28 @@
                         <div class="col-lg-7">
                             <div class="header-text">
                                 <h6></h6>
-                                <h4>you are at <em>Crators/Index</em> here</h4>
+                                <h4>Creator <em>index</em></h4>
+
+                                <div class="main-button">
+                                    <a class="nav-link" asp-area="" asp-page="/Creators/Create">Create Creator</a>
+                                </div>
 
                                 @******layout end**********@
-
-                                <table class="table">
+                                
+                                    <table class="table">
+                                    
                                     <thead>
+                                     
                                         <tr>
+                                           
                                             <th>First Name</th>
                                             <th>Last Name</th>
                                             <th>Email Address</th>
                                             <th>Details</th>
                                         </tr>
+                                         
                                     </thead>
+                                   
                                     <tbody>
                                         @foreach (Creator creator in Model.Creators)
                                         {
