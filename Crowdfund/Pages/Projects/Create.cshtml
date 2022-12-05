@@ -74,6 +74,18 @@
                                             </div>
 
                                             @*end img input*@
+
+                                            @*****goal money input****@
+                                            <div class="form-group">
+                                                <p class="text-white">
+                                                    <label for="formFile" class="form-label">Insert Project money Goal</label>
+                                                    <label asp-for="Project.Goal" class="control-label"></label>
+                                                    <input asp-for="Project.Goal" class="form-control" />
+                                                    <span asp-validation-for="Project.Goal" class="text-danger"></span>
+                                                </p>
+                                            </div>
+
+                                            @*end goal input*@
                                             <div class="form-group">
                                                 <input type="submit" value="Create" class="btn btn-primary" />
                                             </div>
