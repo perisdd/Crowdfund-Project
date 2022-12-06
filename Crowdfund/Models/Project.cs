@@ -12,6 +12,8 @@
 
         public Creator? Creator { get; set; }
 
+        public int CreatorId { get; set; }
+
         public Category ProjectCategory { get; set; }
 
 		public decimal Contributions { get; set; } = 0.00m;
