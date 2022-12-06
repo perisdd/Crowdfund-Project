@@ -1,23 +1,29 @@
-﻿namespace Crowdfund.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Crowdfund.Models
 {
     public class Project
     {
         public int Id { get; set; }
 
-        public string Title { get; set; } = "";
+        [Required]
+        public string? Title { get; set; } 
 
-        public string Description { get; set; } = "";
+        [Required]
+        public string? Description { get; set; }
 
-        public string ImgUrl { get; set; } = "";
+        public string? ImgUrl { get; set; } 
 
         public Creator? Creator { get; set; }
 
         public int CreatorId { get; set; }
 
+        [Required]
         public Category ProjectCategory { get; set; }
 
 		public decimal Contributions { get; set; } = 0.00m;
 
+        [Required]
 		public decimal Goal { get; set; } = 0.00m;
 
         public bool Active { get; set; }
