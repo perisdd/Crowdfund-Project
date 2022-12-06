@@ -9,6 +9,8 @@ namespace Crowdfund_API.Services
 		public Task<ProjectDTO> AddProject(ProjectDTO projectDTO);
 		public Task<List<ProjectDTO>> Search(string? search);
 		public Task<ProjectDTO> Update(int id, ProjectDTO projectDTO);
+		public Task<ProjectDTO> AddReward(int id, RewardDTO rewardDTO);
+		public Task<string> RemoveReward(int id, int rewardId);
 		public Task<string> Delete(int id);
 	}
 }

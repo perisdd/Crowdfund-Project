@@ -16,7 +16,7 @@ namespace Crowdfund_API.Services
 
 		public async Task<ProjectDTO> GetProject(int id)
 		{
-			var project = await _context.Projects.Include(p => p.Creator).SingleOrDefaultAsync(p => p.Id == id);
+			var project = await _context.Projects.Include(p => p.Creator).Include(p => p.Rewards).SingleOrDefaultAsync(p => p.Id == id);
 
 			if (project == null)
 				throw new Exception("Invalid ID.");
@@ -26,12 +26,12 @@ namespace Crowdfund_API.Services
 
 		public async Task<List<ProjectDTO>> GetAllProjects()
 		{
-			return await _context.Projects.Include(p => p.Creator).Select(p => p.Convert()).ToListAsync();
+			return await _context.Projects.Include(p => p.Creator).Include(p => p.Rewards).Select(p => p.Convert()).ToListAsync();
 		}
 
 		public async Task<ProjectDTO> AddProject(ProjectDTO projectDTO)
 		{
-			if (projectDTO.Title == null || projectDTO.Description == null || projectDTO.Goal != 0 || projectDTO.Creator == null || projectDTO.Creator.Id == 0)
+			if (projectDTO.Title == null || projectDTO.Description == null || projectDTO.Goal == 0 || projectDTO.Creator == null || projectDTO.Creator.Id == 0)
 				throw new Exception("Required Attributes not Provided.");
 
 			var creator = await _context.Creators.SingleOrDefaultAsync(c => c.Id == projectDTO.Creator.Id);
@@ -84,7 +84,7 @@ namespace Crowdfund_API.Services
 		{
 			var project = await _context.Projects.Include(p => p.Creator).SingleOrDefaultAsync(p => p.Id == id);
 
-			if (project is null)
+			if (project == null)
 				throw new Exception("Invalid ID.");
 
 			if (projectDTO.Title != null) 
@@ -100,6 +100,50 @@ namespace Crowdfund_API.Services
 			await _context.SaveChangesAsync();
 
 			return project.Convert();
+		}
+
+		public async Task<ProjectDTO> AddReward(int id, RewardDTO rewardDTO)
+		{
+			if (rewardDTO.Title == null || rewardDTO.Description == null)
+				throw new Exception("Required Attributes not Provided.");
+
+			var project = await _context.Projects.Include(p => p.Creator).Include(p => p.Rewards).SingleOrDefaultAsync(p => p.Id == id);
+
+			if (project == null)
+				throw new Exception("Invalid ID.");
+
+			var reward = new Reward()
+			{
+				Id = rewardDTO.Id,
+				Title = rewardDTO.Title,
+				Description = rewardDTO.Description
+			};
+
+			project.Rewards.Add(reward);
+			
+			_context.Rewards.Add(reward);
+			await _context.SaveChangesAsync();
+
+			return project.Convert();
+		}
+
+		public async Task<string> RemoveReward(int id, int rewardId)
+		{
+			var project = _context.Projects.Include(p => p.Rewards).SingleOrDefault(p => p.Id == id);
+
+			if (project == null)
+				throw new Exception("Invalid Project ID");
+
+			var reward = project.Rewards.SingleOrDefault(r => r.Id == rewardId);
+
+			if (reward == null)
+				throw new Exception("Invalid Reward ID");
+
+			project.Rewards.Remove(reward);
+			_context.Rewards.Remove(reward);
+			await _context.SaveChangesAsync();
+
+			return "Successful Deletion";
 		}
 
 		public async Task<string> Delete(int id)

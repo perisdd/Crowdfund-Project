@@ -21,5 +21,7 @@ namespace Crowdfund_API.DTOs
 		public decimal Goal { get; set; }
 
 		public DateTime CreationDate { get; set; }
+
+		public List<Reward>? Rewards { get; set; }
 	}
 }

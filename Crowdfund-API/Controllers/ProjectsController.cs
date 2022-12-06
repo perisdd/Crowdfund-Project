@@ -77,6 +77,34 @@ namespace Crowdfund_API.Controllers
 			}
 		}
 
+		[HttpPatch, Route("{id}/Rewards")]
+		public async Task<ActionResult<ProjectDTO>> Patch([FromRoute] int id, [FromBody] RewardDTO rewardDTO)
+		{
+			try
+			{
+				var response = await _service.AddReward(id, rewardDTO);
+				return Ok(response);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
+		}
+
+		[HttpDelete, Route("{id}/Rewards")]
+		public async Task<ActionResult<string>> Delete([FromRoute] int id, [FromBody] int rewardId)
+		{
+			try
+			{
+				var response = await _service.RemoveReward(id, rewardId);
+				return Ok(response);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
+		}
+
 		[HttpDelete, Route("{id}")]
 		public async Task<ActionResult<string>> Delete(int id)
 		{

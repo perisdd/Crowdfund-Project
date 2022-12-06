@@ -21,7 +21,9 @@ namespace Crowdfund_API.DTOs
                 Category = project.ProjectCategory,
                 Contributions = project.Contributions,
                 Goal = project.Goal,
-                CreationDate = project.CreationDate
+                CreationDate = project.CreationDate,
+
+				Rewards = project.Rewards,
             };
         }
 
