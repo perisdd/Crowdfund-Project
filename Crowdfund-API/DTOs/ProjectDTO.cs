@@ -10,20 +10,16 @@ namespace Crowdfund_API.DTOs
 
 		public string? Description { get; set; }
 
-		public CreatorDTO? Creator { get; set; } = null!;
+		public CreatorDTO? Creator { get; set; }
 
-		public int CreatorId { get; set; }
+		// public int CreatorId { get; set; }
 
-		public Category? Category { get; set; }
+		public Category Category { get; set; }
 
-		public decimal Contributions { get; set; } = 0.00m;
+		public decimal Contributions { get; set; }
 
-		public decimal Goal { get; set; } = 0.00m;
+		public decimal Goal { get; set; }
 
 		public DateTime CreationDate { get; set; }
-
-		public List<RewardDTO>? Rewards { get; set; }
-
-		public List<BackerDTO>? Backers { get; set; }
 	}
 }

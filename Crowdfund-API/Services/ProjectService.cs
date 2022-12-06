@@ -1,7 +1,6 @@
 ﻿using Crowdfund.DB;
 using Crowdfund.Models;
 using Crowdfund_API.DTOs;
-using Crowdfund_API.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Crowdfund_API.Services
@@ -17,34 +16,42 @@ namespace Crowdfund_API.Services
 
 		public async Task<ProjectDTO> GetProject(int id)
 		{
-			var project = await _context.Projects.Include(c => c.Creator).SingleOrDefaultAsync(p => p.Id == id);
+			var project = await _context.Projects.Include(p => p.Creator).SingleOrDefaultAsync(p => p.Id == id);
 
-			if (project == null) return null;
+			if (project == null)
+				throw new Exception("Invalid ID.");
 
 			return project.Convert();
 		}
 
 		public async Task<List<ProjectDTO>> GetAllProjects()
 		{
-			return await _context.Projects.Include(c => c.Creator).Select(p => p.Convert()).ToListAsync();
+			return await _context.Projects.Include(p => p.Creator).Select(p => p.Convert()).ToListAsync();
 		}
 
 		public async Task<ProjectDTO> AddProject(ProjectDTO projectDTO)
 		{
-			Creator creator = await _context.Creators.SingleOrDefaultAsync(c => c.Id == projectDTO.Creator.Id);
+			if (projectDTO.Title == null || projectDTO.Description == null || projectDTO.Goal != 0 || projectDTO.Creator == null || projectDTO.Creator.Id == 0)
+				throw new Exception("Required Attributes not Provided.");
 
-			if (creator == null) return null;
+			var creator = await _context.Creators.SingleOrDefaultAsync(c => c.Id == projectDTO.Creator.Id);
 
-			Project project = new Project()
+			if (creator == null)
+				throw new Exception("Invalid Creator ID.");
+
+			var project = new Project()
 			{
 				Id = projectDTO.Id,
 				Title = projectDTO.Title,
 				Description = projectDTO.Description,
+				ProjectCategory = projectDTO.Category,
+				CreationDate = DateTime.Now,
+
 				Creator = creator,
-				// ProjectCategory = projectDTO.Category,
-				Contributions = projectDTO.Contributions,
+
+				Contributions = 0.0m,
 				Goal = projectDTO.Goal,
-				CreationDate = projectDTO.CreationDate,
+
 				Rewards = new List<Reward>(),
 				Backers = new List<Backer>()
 			};
@@ -55,108 +62,67 @@ namespace Crowdfund_API.Services
 			return project.Convert();
 		}
 
-		public async Task<List<ProjectDTO>> Search(string search)
+		public async Task<List<ProjectDTO>> Search(string? search)
 		{
 			IQueryable<Project> results = _context.Projects.Include(p => p.Creator);
 
-			if (search != null)
-			{
-				results = results.Where(p =>
-					p.Title.ToLower().Contains(search.ToLower()) ||
-					p.Description.ToLower().Contains(search.ToLower())
-					// ...
-				);
-			}
+			if (search == null)
+				throw new Exception("Search Term not Provided.");
+
+			results = results.Where(p =>
+				p.Title.ToLower().Contains(search.ToLower()) ||
+				p.Description.ToLower().Contains(search.ToLower())
+			);
+
+			if (!results.Any())
+				throw new Exception("No Matches Found.");
 
 			return await results.Select(p => p.Convert()).ToListAsync();
 		}
 
 		public async Task<ProjectDTO> Update(int id, ProjectDTO projectDTO)
 		{
-			Project project = await _context.Projects.Include(p => p.Creator).SingleOrDefaultAsync(p => p.Id == id);
+			var project = await _context.Projects.Include(p => p.Creator).SingleOrDefaultAsync(p => p.Id == id);
 
 			if (project is null)
-				throw new NotFoundException("Invalid ID.");
+				throw new Exception("Invalid ID.");
 
 			if (projectDTO.Title != null) 
 				project.Title = projectDTO.Title;
 			if (projectDTO.Description != null)
 				project.Description = projectDTO.Description;
-			if (projectDTO.Goal != 0.0m)
+			if (projectDTO.Goal != 0)
 				project.Goal = projectDTO.Goal;
-			if (projectDTO.Category != null)
-				// project.ProjectCategory = projectDTO.Category;
-			if (projectDTO.Creator != null)
-			{
-				var creator = _context.Creators.SingleOrDefault(c => c.Id == projectDTO.Creator.Id);
 
-				if (creator != null)
-					project.Creator = creator;
-				else
-					throw new NotFoundException("Invalid Creator");
-			}
-			if (projectDTO.Contributions != 0)
-				project.Contributions = projectDTO.Contributions;
-			// ...
-
+			// Must Always Be Set When Making Changes
+			project.ProjectCategory = projectDTO.Category;
+			
 			await _context.SaveChangesAsync();
 
 			return project.Convert();
 		}
 
-		public async Task<ProjectDTO> Replace(int id, ProjectDTO projectDTO)
+		public async Task<string> Delete(int id)
 		{
-			Project project = await _context.Projects.Include(p => p.Creator).SingleOrDefaultAsync(p => p.Id == id);
+			var project = _context.Projects.SingleOrDefault(p => p.Id == id);
 
-			if (project is null)
-				throw new NotFoundException("Invalid ID.");
+			if (project == null)
+				throw new Exception("Invalid ID");
 
-			project.Title = projectDTO.Title;
-			project.Description = projectDTO.Description;
-			// ...
+			// project.Backers.Any() || project.Rewards.Any()
 
-			await _context.SaveChangesAsync();
-			return project.Convert();
-		}
+			// What Happens If Project Has Backers or Rewards?
 
-		public async Task<bool> Delete(int id)
-		{
-			Project project = _context.Projects.SingleOrDefault(p => p.Id == id);
-
-			if (project == null) return false;
+			// For Rewards, Delete With Project
+			// --> Set dbo.Rewards.ProjectId ON DELETE CASCADE
+			
+			// For Backers, Don't Allow Deletion of Project?
+			// --> ...
 
 			_context.Projects.Remove(project);
-
 			await _context.SaveChangesAsync();
 
-			return true;
+			return "Successful Deletion.";
 		}
-
-		// needs thought
-		/*
-		public Task<ProjectDTO?> AddRewards(int projectId, RewardDTO rewardDTO)
-		{
-			throw new NotImplementedException();
-			/*
-			Project? project = await _context.Projects.Include(creat => creat.Creator).SingleOrDefaultAsync();
-
-			if (project is null) return null;
-
-			ProjectDTO projectDTO. _context.Projects.Where(rewardDTO.ProjectId) == projectId)
-
-			if (rewardDTO.Title != null && rewardDTO.Description != null) 
-
-			return new RewardDTO()
-			{
-				Id = project.Id,
-				Title = project.Title,
-				Description = project.Description,
-				CreatorId = project.Creator.Id,
-				CreatorFirstName = project.Creator.FirstName,
-				CreatorLastName = project.Creator.LastName
-
-			};
-		}
-		*/
 	}
 }

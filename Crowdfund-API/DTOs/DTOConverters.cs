@@ -13,7 +13,7 @@ namespace Crowdfund_API.DTOs
                 Description = project.Description,
                 Creator = new CreatorDTO()
                 {
-                    Id = project.Creator.Id,
+                    Id = project.Creator!.Id,
                     FirstName = project.Creator.FirstName,
                     LastName = project.Creator.LastName,
                     Email = project.Creator.Email,

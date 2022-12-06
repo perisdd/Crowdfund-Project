@@ -1,7 +1,5 @@
 ﻿using Crowdfund_API.DTOs;
-using Crowdfund_API.Exceptions;
 using Crowdfund_API.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Crowdfund_API.Controllers
@@ -10,7 +8,7 @@ namespace Crowdfund_API.Controllers
 	[ApiController]
 	public class BackersController : ControllerBase
 	{
-		private IBackerService _service;
+		private readonly IBackerService _service;
 
 		public BackersController(IBackerService service)
 		{
@@ -20,31 +18,49 @@ namespace Crowdfund_API.Controllers
 		[HttpGet]
 		public async Task<ActionResult<List<BackerDTO>>> Get()
 		{
-			var response = await _service.GetAllBackers();
-			return response;
+			return await _service.GetAllBackers();
 		}
 
 		[HttpGet, Route("{id}")]
 		public async Task<ActionResult<BackerDTO>> Get(int id)
 		{
-			var response = await _service.GetBacker(id);
-			return response;
+			try
+			{
+				var response = await _service.GetBacker(id);
+				return Ok(response);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
 		}
 
 		[HttpGet, Route("Search")]
-		public async Task<ActionResult<List<BackerDTO>>> Search(string search)
+		public async Task<ActionResult<List<BackerDTO>>> Search(string? search)
 		{
-			var response = await _service.Search(search);
-			if (response == null) return NotFound("No Match Found.");
-
-			return response;
+			try
+			{
+				var response = await _service.Search(search);
+				return Ok(response);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
 		}
 
 		[HttpPost]
 		public async Task<ActionResult<BackerDTO>> Post(BackerDTO backerDTO)
 		{
-			BackerDTO result = await _service.AddBacker(backerDTO);
-			return Ok(result);
+			try
+			{
+				var result = await _service.AddBacker(backerDTO);
+				return Ok(result);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
 		}
 
 		[HttpPatch, Route("{id}")]
@@ -55,42 +71,24 @@ namespace Crowdfund_API.Controllers
 				var response = await _service.Update(id, backerDTO);
 				return Ok(response);
 			}
-			catch (AggregateException e)
+			catch (Exception ex)
 			{
-				foreach (var exception in e.InnerExceptions)
-				{
-					if (exception is NotFoundException)
-						return BadRequest(e.Message);
-				}
+				return BadRequest(ex.Message);
 			}
-
-			return StatusCode(500);
-		}
-
-		[HttpPut, Route("{id}")]
-		public async Task<ActionResult<BackerDTO>> Put([FromRoute] int id, [FromBody] BackerDTO backerDTO)
-		{
-			try
-			{
-				var response = await _service.Replace(id, backerDTO);
-				return Ok(response);
-			}
-			catch (AggregateException e)
-			{
-				foreach (var exception in e.InnerExceptions)
-				{
-					if (exception is NotFoundException)
-						return BadRequest(e.Message);
-				}
-			}
-
-			return StatusCode(500);
 		}
 
 		[HttpDelete, Route("{id}")]
-		public async Task<ActionResult<bool>> Delete(int id)
+		public async Task<ActionResult<string>> Delete(int id)
 		{
-			return await _service.Delete(id);
+			try
+			{
+				var response = await _service.Delete(id);
+				return Ok(response);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
 		}
 	}
 }

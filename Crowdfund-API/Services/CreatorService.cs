@@ -1,8 +1,6 @@
 ﻿using Crowdfund.DB;
 using Crowdfund.Models;
 using Crowdfund_API.DTOs;
-using Crowdfund_API.Exceptions;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Crowdfund_API.Services
@@ -20,6 +18,9 @@ namespace Crowdfund_API.Services
 		{
 			var creator = await _context.Creators.SingleOrDefaultAsync(c => c.Id == id);
 
+			if (creator == null)
+				throw new Exception("Invalid ID.");
+
 			return creator.Convert();
 		}
 
@@ -30,13 +31,17 @@ namespace Crowdfund_API.Services
 
 		public async Task<CreatorDTO> AddCreator(CreatorDTO creatorDTO)
 		{
-			Creator creator = new Creator()
+			if (creatorDTO.FirstName == null || creatorDTO.LastName == null || creatorDTO.Email == null)
+				throw new Exception("Required Attributes not Provided.");
+
+			var creator = new Creator()
 			{
-				Id = creatorDTO.Id, // ?
+				Id = creatorDTO.Id,
 				FirstName = creatorDTO.FirstName,
 				LastName = creatorDTO.LastName,
-				Email = creatorDTO.Email
-				// ...
+				Email = creatorDTO.Email,
+
+				ProjectsCreated = new List<Project>()
 			};
 
 			_context.Creators.Add(creator);
@@ -45,29 +50,31 @@ namespace Crowdfund_API.Services
 			return creator.Convert();
 		}
 
-		public async Task<List<CreatorDTO>> Search(string search)
+		public async Task<List<CreatorDTO>> Search(string? search)
 		{
 			IQueryable<Creator> results = _context.Creators;
 
-			if (search != null)
-			{
-				results = results.Where(c =>
-					c.FirstName.ToLower().Contains(search.ToLower()) ||
-					c.LastName.ToLower().Contains(search.ToLower()) ||
-					c.Email.ToLower().Contains(search.ToLower())
-					// ...
-				);
-			}
+			if (search == null)
+				throw new Exception("Search Term not Provided.");
+
+			results = results.Where(c =>
+				c.FirstName.ToLower().Contains(search.ToLower()) ||
+				c.LastName.ToLower().Contains(search.ToLower()) ||
+				c.Email.ToLower().Contains(search.ToLower())
+			);
+
+			if (!results.Any())
+				throw new Exception("No Matches Found.");
 
 			return await results.Select(c => c.Convert()).ToListAsync();
 		}
 
 		public async Task<CreatorDTO> Update(int id, CreatorDTO creatorDTO)
 		{
-			Creator creator = await _context.Creators.SingleOrDefaultAsync(c => c.Id == id);
+			var creator = await _context.Creators.SingleOrDefaultAsync(c => c.Id == id);
 
 			if (creator == null)
-				throw new NotFoundException("Invalid ID.");
+				throw new Exception("Invalid ID.");
 
 			if (creatorDTO.FirstName != null)
 				creator.FirstName = creatorDTO.FirstName;
@@ -75,42 +82,23 @@ namespace Crowdfund_API.Services
 				creator.LastName = creatorDTO.LastName;
 			if (creatorDTO.Email != null)
 				creator.Email = creatorDTO.Email;
-			// ...
 
 			await _context.SaveChangesAsync();
 
 			return creator.Convert();
 		}
 
-		public async Task<CreatorDTO> Replace(int id, CreatorDTO creatorDTO)
+		public async Task<string> Delete(int id)
 		{
-			Creator creator = await _context.Creators.SingleOrDefaultAsync(c => c.Id == id);
+			var creator = await _context.Creators.SingleOrDefaultAsync(c => c.Id == id);
 
-			if (creator == null)
-				throw new NotFoundException("Invalid ID.");
-
-			creator.FirstName = creatorDTO.FirstName;
-			creator.LastName = creatorDTO.LastName;
-			creator.Email = creatorDTO.Email;
-			// ...
-
-			await _context.SaveChangesAsync();
-			return creator.Convert();
-		}
-
-		public async Task<bool> Delete(int id)
-		{
-			Creator creator = await _context.Creators.SingleOrDefaultAsync(c => c.Id == id);
-
-			if (creator == null || creator.projectsCreated != null)
-			{
-				// Add Message
-				return false;
-			}
+			if (creator == null || creator.ProjectsCreated.Any())
+				throw new Exception("Invalid ID or Active Projects.");
 
 			_context.Remove(creator);
 			await _context.SaveChangesAsync();
-			return true;
+
+			return "Successful Deletion.";
 		}
 	}
 }

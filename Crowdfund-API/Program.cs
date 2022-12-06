@@ -9,18 +9,18 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<FundDbContext>
     (options => options.UseSqlServer("Data Source = (local); Initial Catalog = FundProject; Integrated Security = true;"));
 
-builder.Services.Configure<JsonOptions>(options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+builder.Services.Configure<JsonOptions>
+	(options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
-builder.Services.AddScoped<IProjectService, ProjectService>();
-builder.Services.AddScoped<ICreatorService, CreatorService>();
 builder.Services.AddScoped<IBackerService, BackerService>();
+builder.Services.AddScoped<ICreatorService, CreatorService>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
 
 var app = builder.Build();
 

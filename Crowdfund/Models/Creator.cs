@@ -2,9 +2,9 @@
 {
     public class Creator : User
     {
-        public List<Project>? projectsCreated { get; set; }
+        public List<Project> ProjectsCreated { get; set; } = new List<Project>();
 
-        public void CreateProject() { }
+		public void CreateProject() { }
         public void AddProjectTitle() { }
         public void AddDescription() { }
         public void AddPhotos() { }

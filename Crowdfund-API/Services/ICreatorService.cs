@@ -7,9 +7,8 @@ namespace Crowdfund_API.Services
 		public Task<CreatorDTO> GetCreator(int id);
 		public Task<List<CreatorDTO>> GetAllCreators();
 		public Task<CreatorDTO> AddCreator(CreatorDTO creatorDTO);
-		public Task<List<CreatorDTO>> Search(string search);
+		public Task<List<CreatorDTO>> Search(string? search);
 		public Task<CreatorDTO> Update(int id, CreatorDTO creatorDTO);
-		public Task<CreatorDTO> Replace(int id, CreatorDTO creatorDTO);
-		public Task<bool> Delete(int id);
+		public Task<string> Delete(int id);
 	}
 }
