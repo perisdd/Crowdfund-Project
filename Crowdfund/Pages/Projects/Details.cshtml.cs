@@ -14,6 +14,11 @@ namespace Crowdfund.Pages.Projects
 
 		public Project Project { get; set; }
 
+		public DetailsModel(FundDbContext context)
+		{
+			Context = context;
+		}
+
 		public void OnGet(int id)
         {
 			Project = Context.Projects.SingleOrDefault(p => p.Id == id);
