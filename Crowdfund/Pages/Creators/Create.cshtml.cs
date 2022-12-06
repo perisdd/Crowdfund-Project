@@ -9,7 +9,7 @@ namespace Crowdfund.Pages.Creators
     {
         private FundDbContext Context { get; }
 
-        [BindProperty] public Creator Creator { get; set; }
+        [BindProperty] public Creator? Creator { get; set; }
 
         public CreateModel(FundDbContext context)
         {
@@ -19,7 +19,7 @@ namespace Crowdfund.Pages.Creators
         public void OnGet()
         { }
 
-        public async Task<ActionResult> OnPost()
+        public async Task<IActionResult> OnPost()
         {
             Context.Creators.Add(Creator);
             await Context.SaveChangesAsync();
