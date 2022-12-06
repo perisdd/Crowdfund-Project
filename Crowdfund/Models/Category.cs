@@ -4,7 +4,7 @@
        public enum Category
         {
             Arts,
-            Environment,
+            Other,
             Film,
             Games,
             Music,

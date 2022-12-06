@@ -47,30 +47,14 @@
                             <ul class="nav">
 
 
-							<li class="nav-item"><a class="nav-link" href="~/Index">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="~/Backers/Index">Backers Index</a> </li>
-                            <li class="nav-item"><a class="nav-link" href="~/Backers/Create">Backers Create</a> </li>
-                            <li class="nav-item"><a class="nav-link" href="~/Backers/Details">Backers Details</a> </li>
 
-@*
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Actors/Index">Actors/Index</a> </li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Actors/Create">Actors/Create</a> </li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Actors/Details">Actors/Details</a> </li>*@
-                            @* <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Movies/Create">Create Movie</a> </li>*@
-
-                            
-                            <li class="nav-item"><a class="nav-link" href="~/Creators/Index">Creators Index</a> </li>
-							<li class="nav-item"><a class="nav-link" href="~/Creators/Create">Creators Create</a> </li>
-                            <li class="nav-item"><a class="nav-link" href="~/Creators/Details">Creators Details</a> </li>
-
-							<li class="nav-item"><a class="nav-link" href="~/Projects/Create">Create Project</a> </li>
-                            <li class="nav-item"><a class="nav-link" href="~/Projects/Index">Project Index</a> </li>
+                            <li class="nav-item"><a class="nav-link" href="~/Projects/Index">All Projects</a> </li>
+                            <li class="nav-item"><a class="nav-link" href="~/Creators/Details/@CreatorsHomeModel.test">My Projects</a> </li>
+                            <li class="nav-item"><a class="nav-link" href="~/CreatorsHome">Create Project</a> </li>
+                            <li class="nav-item"><a class="nav-link" href="~/Creators/Index">Creators</a> </li>
+                            <li class="nav-item"><a class="nav-link" href="~/Backers/Index">Backers</a> </li>
 
 
-                           @* <li class="nav-item"><a class="nav-link" asp-area="" asp-page="Movies/Create">Create Movie</a> </li>*@
-@*
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/About">About</a> </li>*@
-                       @*     <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a> </li>*@
 
 							<li><a href="~/Profile">Profile<img src=@Url.Content("~/Content/assets/images/bill.png") alt=""></a></li> @*profile-header.jpg*@
                             </ul>
@@ -96,9 +80,10 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                            Copyright © 2022 <a href="#">Regeneration Project</a> Site. All rights reserved.
+                        @*   Copyright © 2022 *@ <a href="/About">About </a> <a href="#">Regeneration Project</a> Site.
+                        All rights reserved.
 
-                            <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a>
+@*                            <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a>*@
                         </p>
                     </div>
                 </div>

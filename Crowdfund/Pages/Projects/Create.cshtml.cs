@@ -31,16 +31,26 @@ namespace Crowdfund.Pages.Projects
         //        }).ToListAsync();
         //}
 
-        public async Task OnGet()
-        {
-            CreatorSelectList = await Context.Creators.Select
-                (a => new SelectListItem
-                {
-                    Value = a.Id.ToString(),
-                    Text = a.ToString()
-                }).ToListAsync();
-        }
+        ////*******************COOKIE CREATOR -------------------PROBLEM IF MOVED HERE----------------------
+        //public static int test { get; set; }
 
+        //public IActionResult OnPost(int creators)
+        //{
+        //    test = creators;
+        //    return RedirectToPage("Projects/Create");
+        //}
+        //public async Task OnGet()
+        //{
+        //    CreatorSelectList = await Context.Creators.Select
+        //        (a => new SelectListItem
+        //        {
+        //            Value = a.Id.ToString(),
+        //            Text = a.ToString()
+        //        }).ToListAsync();
+        //}
+        ////*******************COOKIE CREATOR**********************-----------------------
+        
+        
         //public async Task<IActionResult> OnPost()
         //{
         //    Project.Backers = await Context.Backers.Where(a => BackerIds.Contains(a.Id)).ToListAsync();
@@ -52,7 +62,8 @@ namespace Crowdfund.Pages.Projects
 
         public async Task<IActionResult> OnPost()
         {
-            Project.Creator = await Context.Creators.Where(a => CreatorIds.Contains(a.Id)).FirstAsync();
+			int id = CreatorsHomeModel.test;
+			Project.Creator = await Context.Creators.SingleOrDefaultAsync(c => c.Id == id);
 
             Context.Projects.Add(Project);
             await Context.SaveChangesAsync();

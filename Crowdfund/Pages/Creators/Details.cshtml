@@ -12,10 +12,15 @@
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="header-text">
-                                <h2>Projects</h2>
+                                <h4><em>my</em> projects</h4>
+                                  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+                                <div class="main-button">
+                                    <a class="nav-link" asp-area="" asp-page="/Projects/Create">Create New</a>
+                                </div>
                                 <table class="table">
                                     <thead>
-                                        <tr>
+                                        <tr style="color:white;">
                                             <th>Title</th>
                                             <th>Description</th>
                                             <th>Date Created</th>
@@ -23,12 +28,16 @@
                                     </thead>
                                     <tbody>
                                         @foreach (var project in Model.Projects)
-                                        {
-                                            <tr>
+                                        { 
+                                            <tr style="color:white;">
+                                               
+                                               
                                                 <td>@project.Title</td>
                                                 <td>@project.Description</td>
                                                 <td>@project.CreationDate</td>
+
                                             </tr>
+                                            
                                         }
                                     </tbody>
                                 </table>
