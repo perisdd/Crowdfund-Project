@@ -84,9 +84,20 @@
                                                     </div>
 
                                                     @**************end goal input****************@
+                                                    @*****DATE input****@
+                                                    <div class="form-group">
+                                                        <p class="text-white">
+                                                            <label for="formFile" class="form-label">Insert Date</label>
+                                                            <label asp-for="Project.CreationDate" class="control-label"></label>
+                                                            <input asp-for="Project.CreationDate" class="form-control" />
+                                                            <span asp-validation-for="Project.CreationDate" class="text-danger"></span>
+                                                        </p>
+                                                    </div>
 
+                                                    @*end DATE input*@
+                                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                                             <div class="form-group">
-                                                        <input type="submit" value="Create" class="main-border-button" />
+                                                        <input class="btn btn-outline-light" type="submit" value="Create" class="main-border-button" />
                                                         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                                                         <div class="main-border-button"><a asp-page="/CreatorsHome">Go Back</a></div>
                                             </div>
