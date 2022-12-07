@@ -17,19 +17,35 @@
                                     </div>
                                     <div class="col-lg-4 align-self-center">
                                         <div class="main-info header-text">
+										@{
+											if (InitialModel.test2.Equals("Creator"))
+											{
+												<h4>@Model.Creator.FirstName @Model.Creator.LastName</h4>
+											}
+										}
+										@{
+											else if (InitialModel.test2.Equals("Backer"))
+											{
+												<h4>@Model.Backer.FirstName @Model.Backer.LastName</h4>
+											}
+										}
                                             
-                                            <h4>@Model.Creator.FirstName @Model.Creator.LastName</h4>
-										<span>Creator</span>
+										<span>@InitialModel.test2</span>
                                             <p></p>
-                                            @* <div class="main-border-button border-no-active">
-                                                <a href="#">Start Live Stream</a>
-                                            </div>*@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 align-self-center">
                                         <ul>
-                                            <li>Projects Created <span>@Model.Creator.ProjectsCreated.Count()</span></li>
-                                            <li>Total Money Raised <span>@Model.Creator.ProjectsCreated.Select(p => p.Contributions).Sum() &euro;</span></li>
+										@{if (InitialModel.test2.Equals("Creator"))
+										{
+											<li>Projects Created <span>@Model.Creator.ProjectsCreated.Count()</span></li>
+												<li>Total Money Raised <span>@Model.Creator.ProjectsCreated.Select(p => p.Contributions).Sum() &euro;</span></li>
+										}}
+										@{else if (InitialModel.test2.Equals("Backer"))
+										{
+												<li>Projects Funded <span>@Model.Backer.ProjectsInvested.Count()</span></li>
+												<li>Total Money Given <span>@Model.Backer.Contributions.Select(c => c.Amount).Sum() &euro;</span></li>
+										}}
                                         </ul>
                                     </div>
                                 </div>
@@ -44,21 +60,42 @@
                     <div class="gaming-library profile-library">
                         <div class="col-lg-12">
                             <div class="heading-section">
-                                <h4><em>Created</em> Projects</h4>
+							@{if (InitialModel.test2.Equals("Creator"))
+								{
+									<h4><em>Created</em> Projects</h4>
+									@foreach (var project in Model.Creator.ProjectsCreated)
+									{
+										<div class="item">
+											<ul>
+												<li><img src="~/Content/assets/images/avatar-01.jpg class=templatemo-item" /></li>
+												<li><h4>@project.Title</h4><span>@project.ProjectCategory</span></li>
+												<li><h4>Date Created</h4><span>@project.CreationDate</span></li>
+												<li><h4>Total Contributions</h4><span>@project.Contributions</span></li>
+												<li><h4>Goal</h4><span>@project.Goal</span></li>
+												<li><div class="main-border-button"><a href="~/Projects/Details/@project.Id">Details</a></div></li>
+											</ul>
+										</div>
+									}
+								}}
+							@{else if (InitialModel.test2.Equals("Backer"))
+							{
+								<h4><em>Funded</em> Projects</h4>
+									@foreach (var project in Model.Backer.ProjectsInvested)
+									{
+										<div class="item">
+											<ul>
+												<li><img src="~/Content/assets/images/avatar-01.jpg class=templatemo-item" /></li>
+												<li><h4>@project.Title</h4><span>@project.ProjectCategory</span></li>
+												<li><h4>Date Created</h4><span>@project.CreationDate</span></li>
+												<li><h4>My Contributions</h4><span>@Model.Backer.Contributions.Where(c=> c.Project.Id == project.Id).Select(c=> c.Amount).Sum()</span></li>
+												<li><h4>Project Total</h4><span>@project.Contributions / @project.Goal</span></li>
+												<li><div class="main-border-button"><a href="~/Projects/Details/@project.Id">Details</a></div></li>
+											</ul>
+										</div>
+									}
+							}}
                             </div>
-						@foreach(var project in Model.Creator.ProjectsCreated)
-						{
-							<div class="item">
-								<ul>
-									<li><img src="~/Content/assets/images/avatar-01.jpg class=templatemo-item" /></li>
-									<li><h4>@project.Title</h4><span>@project.ProjectCategory</span></li>
-									<li><h4>Date Created</h4><span>@project.CreationDate</span></li>
-									<li><h4>Total Contributions</h4><span>@project.Contributions</span></li>
-									<li><h4>Goal</h4><span>@project.Goal</span></li>
-									<li><div class="main-border-button"><a href="~/Projects/Details/@project.Id">Details</a></div></li>
-								</ul>
-							</div>
-						}
+						
 						
                         </div>
                     </div>

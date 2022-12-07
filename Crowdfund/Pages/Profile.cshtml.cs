@@ -11,6 +11,8 @@ namespace Crowdfund.Pages
 
 		public Creator? Creator { get; set; }
 
+		public Backer? Backer { get; set; }
+
 		public ProfileModel(FundDbContext context)
 		{
 			Context = context;
@@ -20,7 +22,10 @@ namespace Crowdfund.Pages
 		
 		public void OnGet()
 		{
-			Creator = Context.Creators.Include(c => c.ProjectsCreated).SingleOrDefault(c => c.Id == current);
+			if (InitialModel.test2.Equals("Creator"))
+				Creator = Context.Creators.Include(c => c.ProjectsCreated).SingleOrDefault(c => c.Id == current);
+			else if (InitialModel.test2.Equals("Backer"))
+				Backer = Context.Backers.Include(b => b.ProjectsInvested).Include(b => b.Contributions).SingleOrDefault(b => b.Id == current);
 		}
 	}
 }
