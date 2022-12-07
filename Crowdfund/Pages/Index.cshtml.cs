@@ -19,14 +19,6 @@ namespace Crowdfund.Pages
 
         public List<Project> Projects { get; set; }
 
-		//public IndexModel(ILogger<IndexModel> logger)
-		//{
-		//	_logger = logger;
-		//}
-        private FundDbContext Context { get; }
-
-        public Creator? Creator { get; set; }
-
         public Backer? Backer { get; set; }
         public IndexModel(FundDbContext context)
         {
@@ -34,8 +26,7 @@ namespace Crowdfund.Pages
         }
         private readonly int current = InitialModel.CurrentId;
         private int x = 0;
-        public List<Project> Projects { get; set; }
-
+        
         public void OnGet()
 		{
             if (InitialModel.CurrentRole.Equals("Creator"))
