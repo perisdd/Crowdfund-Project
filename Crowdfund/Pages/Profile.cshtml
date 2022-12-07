@@ -47,14 +47,20 @@
 												<li>Total Money Given <span>@Model.Backer.Contributions.Select(c => c.Amount).Sum() &euro;</span></li>
 										}}
                                         </ul>
+									@{if (InitialModel.CurrentRole.Equals("Creator"))
+										{
+											<div class="col-lg-12" style="padding-top: 30px; text-align:right">
+												<div class="main-button">
+													<a href="~/Projects/Create">Create Project</a>
+												</div>
+											</div>
+										}}
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <!-- ***** Banner End ***** -->
                     <!-- ***** Gaming Library Start ***** -->
                     <div class="gaming-library profile-library">
