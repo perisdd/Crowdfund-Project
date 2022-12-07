@@ -56,8 +56,19 @@
                             <li class="nav-item"><a class="nav-link" href="~/Backers/Index">Backers</a> </li>
 							<li class="nav-item"><a class="nav-link" href="~/">Change User</a> </li>
 
-
-							<li><a href="~/Profile">Profile<img src=@Url.Content("~/Content/assets/images/bill.png") alt=""></a></li> @*profile-header.jpg*@
+                            @{
+                                if (InitialModel.CurrentRole.Equals("Creator"))
+                                {
+                                    <li><a href="~/Profile">Profile<img src="@Model.Creator.ImgUrl" alt=""></a></li>
+                                }
+                            }
+                            @{
+                                else if (InitialModel.CurrentRole.Equals("Backer"))
+                                {
+                                    <li><a href="~/Profile">Profile<img src="@Model.Backer.ImgUrl" alt=""></a></li>
+                                }
+                            }
+							@*<li><a href="~/Profile">Profile<img src=@Url.Content("~/Content/assets/images/bill.png") alt=""></a></li>*@ @*profile-header.jpg*@
                             </ul>
                             <a class='menu-trigger'>
                                 <span>Menu</span>

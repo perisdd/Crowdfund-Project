@@ -44,6 +44,14 @@
                                     <span asp-validation-for="Creator.Email" class="text-danger"></span>
                                 </p>
                             </div>
+
+                            <div class="form-group">
+                                <p class="text-white">
+                                    <label asp-for="Creator.ImgUrl" class="control=label"></label>
+                                    <input asp-for="Creator.ImgUrl" class="form-control" />
+                                    <span asp-validation-for="Creator.ImgUrl" class="text-danger"></span>
+                                </p>
+                            </div>
                             <!--
                                 <div class="form-group">
                                 <p class="text-white">
@@ -51,6 +59,8 @@
                                 <input asp-for="Creator.UserName" class="form-control" />
                                 <span asp-validation-for="Creator.UserName" class="text-danger"></span> </p>
                             </div>-->
+
+
                                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                             <div class="form-group">
                                 <input class="btn btn-outline-light" type="submit" value="Create" />
