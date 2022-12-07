@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>@ViewData["CrowdFund"]</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+	<!-- Additional CSS Files -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap">
+
+	<link rel="stylesheet" href=@Url.Content("~/Content/assets/css/fontawesome.css")>
+	<link rel="stylesheet" href=@Url.Content("~/Content/assets/css/templatemo-cyborg-gaming.css")>
+	<link rel="stylesheet" href=@Url.Content("~/Content/assets/css/owl.css")>
+	<link rel="stylesheet" href=@Url.Content("~/Content/assets/css/animate.css")>
+	<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+</head>
+
+<body>
+	<!-- ***** Header Area Start ***** -->
+	<header class="header-area header-sticky">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav class="main-nav">
+						<!-- ***** Logo Start ***** -->
+						<a href="#" class="logo">
+							<!-- Changed the Url in order to bring the logo in html-->
+							<img src="~/Content/assets/images/test.png" style="width:30%" alt="">
+						</a>
+						<!-- ***** Logo End ***** -->
+						<!-- ***** Menu Start ***** -->
+						<ul class="nav">
+							<li class="nav-item"><a class="nav-link" href="#">All Projects</a> </li>
+							<li class="nav-item"><a class="nav-link" href="#">My Projects</a> </li>
+							<li class="nav-item"><a class="nav-link" href="#">Creators</a> </li>
+							<li class="nav-item"><a class="nav-link" href="#">Backers</a> </li>
+							<li class="nav-item"><a class="nav-link" href="#">Change User</a> </li>
+
+
+							<li><a href="#">Profile<img src=@Url.Content("~/Content/assets/images/bill.png") alt=""></a></li> @*profile-header.jpg*@
+						</ul>
+						<a class='menu-trigger'>
+							<span>Menu</span>
+						</a>
+						<!-- ***** Menu End ***** -->
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- ***** Header Area End ***** -->
+
+	<div class="container">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<p>
+						@*   Copyright © 2022 *@ <a href="#">About </a> <a href="#">Regeneration Project</a> Site.
+						All rights reserved.
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Scripts -->
+	<!-- Bootstrap core JavaScript -->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+	<script src="assets/js/isotope.min.js"></script>
+	<script src="assets/js/owl-carousel.js"></script>
+	<script src="assets/js/tabs.js"></script>
+	<script src="assets/js/popup.js"></script>
+	<script src="assets/js/custom.js"></script>
+
+
+	<!-- Validation scripts-->
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+	@await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

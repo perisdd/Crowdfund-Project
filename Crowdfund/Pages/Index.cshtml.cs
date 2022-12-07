@@ -1,8 +1,10 @@
 ﻿using Crowdfund.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Crowdfund.DB
 using Microsoft.EntityFrameworkCore;
+using Crowdfund.DB;
+using System.Linq;
+using System.Diagnostics.Metrics;
 
 namespace Crowdfund.Pages
 {
@@ -17,31 +19,31 @@ namespace Crowdfund.Pages
 
         public List<Project> Projects { get; set; }
 
+		//public IndexModel(ILogger<IndexModel> logger)
+		//{
+		//	_logger = logger;
+		//}
+        private FundDbContext Context { get; }
 
-        /*		public IndexModel(ILogger<IndexModel> logger)
-                {
-                    _logger = logger;
-                }
-        */
+        public Creator? Creator { get; set; }
+
+        public Backer? Backer { get; set; }
         public IndexModel(FundDbContext context)
         {
             Context = context;
         }
+        private readonly int current = InitialModel.CurrentId;
+        private int x = 0;
+        public List<Project> Projects { get; set; }
 
-        public async Task OnGetAsync(string searchbar)
-        {
+        public void OnGet()
+		{
+            if (InitialModel.CurrentRole.Equals("Creator"))
+                Creator = Context.Creators.Include(c => c.ProjectsCreated).SingleOrDefault(c => c.Id == current);
+            else if (InitialModel.CurrentRole.Equals("Backer"))
+                Backer = Context.Backers.Include(b => b.ProjectsInvested).Include(b => b.Contributions).SingleOrDefault(b => b.Id == current);
 
-            var proj = from pro in Context.Projects select pro;
-
-            if (!String.IsNullOrEmpty(searchbar))
-            {
-                proj = proj.Where(proje => proje.Title.ToLower().Contains(searchbar.ToLower()) ||
-                proje.Description.ToLower().Contains(searchbar.ToLower()));
-            }
-
-            Projects = await proj.AsNoTracking().ToListAsync();
+            Projects = Context.Projects.ToList();
         }
-
-
-    }
+	}
 }

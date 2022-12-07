@@ -14,6 +14,8 @@ namespace Crowdfund.Pages.Projects
 
 		public Project Project { get; set; }
 
+		public List<Backer> Backers { get; set; }
+
 		public DetailsModel(FundDbContext context)
 		{
 			Context = context;
@@ -26,6 +28,11 @@ namespace Crowdfund.Pages.Projects
 				Include(p => p.Backers).
 				Include(p => p.Creator).
 				SingleOrDefault(p => p.Id == id);
+
+			Backers = Context.Backers.
+				Include(b => b.ProjectsInvested).
+				Include(b => b.Contributions).
+				ToList();
 		}
     }
 }
