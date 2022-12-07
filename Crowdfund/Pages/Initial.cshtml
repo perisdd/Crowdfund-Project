@@ -32,7 +32,7 @@
                                 </form>
 								<h5>Backers</h5>
 								<form method="post">
-									<select class="btn btn-outline-light" name="creators" id="creators">
+									<select class="btn btn-outline-light" name="backers" id="backers">
 										@foreach (Backer backer in Model.Backers)
 										{
 											<option value=@backer.Id>@backer.FirstName @backer.LastName</option>

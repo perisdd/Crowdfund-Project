@@ -19,9 +19,15 @@ namespace Crowdfund.Pages
 			Context = context;
 		}
 
-		public IActionResult OnPost(int creators)
+		public IActionResult OnPost(int creators, int backers)
         {
-            test = creators;
+			if (creators != 0)
+				test = creators;
+			else if (backers != 0)
+				test = backers;
+			else
+				test = 0;
+
             return RedirectToPage("Projects/Create");
         }
 		public void OnGet()
