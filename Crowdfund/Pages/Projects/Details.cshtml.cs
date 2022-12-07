@@ -21,7 +21,11 @@ namespace Crowdfund.Pages.Projects
 
 		public void OnGet(int id)
         {
-			Project = Context.Projects.SingleOrDefault(p => p.Id == id);
+			Project = Context.Projects.
+				Include(p => p.Rewards).
+				Include(p => p.Backers).
+				Include(p => p.Creator).
+				SingleOrDefault(p => p.Id == id);
 		}
     }
 }

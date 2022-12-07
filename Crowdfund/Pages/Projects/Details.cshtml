@@ -4,101 +4,140 @@
 @{
 }
 
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="page-content">
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="page-content">
-
-                    <!-- ***** Featured Start ***** -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="feature-banner header-text">
-                                <div class="row">
-@*                                    <div class="col-lg-4">
-                                    <img src="#" alt="" style="border-radius: 23px;">
-                                    </div>*@
-                                <center><div class="col-lg-8">
-                                        <div class="thumb">
-                                        <img src="~/Content/assets/images/athtech.png" alt="" style="border-radius: 23px;">
-                                    </div></center>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ***** Featured End ***** -->
-
-                    <!-- ***** Details Start ***** -->
-                    <div class="game-details">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h2>@Model.Project.Title</h2>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="content">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="left-info">
-                                                <div class="left">
-                                            <h4>Project{Id}.Title</h4>
-                                            <span>Project{Id}.Category</span>
-                                                </div>
-
-                                                <ul>
-                                                    <li><i class="fa fa-euro"></i> Project{Id}.Contributions</li>
-                                                    <li><i class="fa fa-euro"></i> Project{Id}.Goal</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="right-info">
-                                                <ul>
-                                            <li><i class="fa fa-person"></i> Project{Id}.Creator</li>
-                                            <li><i class="fa fa-calendar"></i> Project{Id}.Date</li>
-                                            <li><i class="fa fa-server"></i> Project{Id}.Backers</li>
-                                                    <li><i class="fa fa-gamepad"></i> Action</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-@*                                        <div class="col-lg-4">
-                                            <img src="~/Content/assets/images/Tsontarw-Logo.png" alt="" style="border-radius: 23px; margin-bottom: 30px;">
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <img src="~/Content/assets/images/regen.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px;">
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <img src="assets/images/details-03.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px;">
-                                        </div>*@
-                                        <div class="col-lg-12">
-                                            <p>Project{id}.Description</p>
-                                        </div>
-
-                                                                                        <div class="col-lg-20">
-                                    <div class="main-border-button">
-                                                <a href="#">See rewards!</a>
-                                            </div>
-                                                                                        <div class="right-info">
-                                                <ul>
-                                            <li><i class="fa fa-person"></i> Project{Id}.Rewards</li>
-
-                                                                                    <div class="col-lg-20">
-                                            <div class="main-border-button">
-                                                <a href="#">Contribute Now!</a>
-
-                                                </div>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
+				<!-- ***** Featured Games Start ***** -->
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="featured-games header-text">
+							<div class="heading-section">
+								<h4>@Model.Project.Title</h4>
+							</div>
+							<div>
+								<p>@Model.Project.ProjectCategory</p>
+								<p>@Model.Project.Description</p>
+								<p>Creation Date: @Model.Project.CreationDate.ToShortDateString()</p>
+								<p>Contributions: @Model.Project.Contributions</p>
+								<p>Goal: @Model.Project.Goal</p>
+								<p>------</p>
+								<p>Creator: @Model.Project.Creator.FirstName @Model.Project.Creator.LastName</p>
+								<p>------</p>
+								<p>Backers:</p>
+								@{
+									foreach (var backer in Model.Project.Backers)
+									{
+										<p>@backer.FirstName @backer.LastName</p>
+									}
+								}
+							</div>
+							@*<div class="owl-features owl-carousel">
+								<div class="item">
+									<div class="thumb">
+										<img src="assets/images/featured-01.jpg" alt="">
+										<div class="hover-effect">
+											<h6>2.4K Streaming</h6>
+										</div>
+									</div>
+									<h4>CS-GO<br><span>249K Downloads</span></h4>
+									<ul>
+										<li><i class="fa fa-star"></i> 4.8</li>
+										<li><i class="fa fa-download"></i> 2.3M</li>
+									</ul>
+								</div>
+								<div class="item">
+									<div class="thumb">
+										<img src="assets/images/featured-02.jpg" alt="">
+										<div class="hover-effect">
+											<h6>2.4K Streaming</h6>
+										</div>
+									</div>
+									<h4>Gamezer<br><span>249K Downloads</span></h4>
+									<ul>
+										<li><i class="fa fa-star"></i> 4.8</li>
+										<li><i class="fa fa-download"></i> 2.3M</li>
+									</ul>
+								</div>
+								<div class="item">
+									<div class="thumb">
+										<img src="assets/images/featured-03.jpg" alt="">
+										<div class="hover-effect">
+											<h6>2.4K Streaming</h6>
+										</div>
+									</div>
+									<h4>Island Rusty<br><span>249K Downloads</span></h4>
+									<ul>
+										<li><i class="fa fa-star"></i> 4.8</li>
+										<li><i class="fa fa-download"></i> 2.3M</li>
+									</ul>
+								</div>
+								<div class="item">
+									<div class="thumb">
+										<img src="assets/images/featured-01.jpg" alt="">
+										<div class="hover-effect">
+											<h6>2.4K Streaming</h6>
+										</div>
+									</div>
+									<h4>CS-GO<br><span>249K Downloads</span></h4>
+									<ul>
+										<li><i class="fa fa-star"></i> 4.8</li>
+										<li><i class="fa fa-download"></i> 2.3M</li>
+									</ul>
+								</div>
+								<div class="item">
+									<div class="thumb">
+										<img src="assets/images/featured-02.jpg" alt="">
+										<div class="hover-effect">
+											<h6>2.4K Streaming</h6>
+										</div>
+									</div>
+									<h4>Gamezer<br><span>249K Downloads</span></h4>
+									<ul>
+										<li><i class="fa fa-star"></i> 4.8</li>
+										<li><i class="fa fa-download"></i> 2.3M</li>
+									</ul>
+								</div>
+								<div class="item">
+									<div class="thumb">
+										<img src="assets/images/featured-03.jpg" alt="">
+										<div class="hover-effect">
+											<h6>2.4K Streaming</h6>
+										</div>
+									</div>
+									<h4>Island Rusty<br><span>249K Downloads</span></h4>
+									<ul>
+										<li><i class="fa fa-star"></i> 4.8</li>
+										<li><i class="fa fa-download"></i> 2.3M</li>
+									</ul>
+								</div>
+							</div>
+							*@
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="top-downloaded">
+							<div class="heading-section">
+								<h4>Rewards</h4>
+							</div>
+							<ul>
+								@{
+									foreach (var reward in Model.Project.Rewards)
+									{
+										<li>
+											<h4>@reward.Title</h4>
+											<h6>@reward.Description</h6>
+											<span>100 &euro;</span>
+											<div class="text-button"><a href="#">Select</a></div>
+										</li>
+									}
+								}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
