@@ -35,7 +35,72 @@
 						</ul>
 					</nav>
 				</div>
+                 <h4><em>Search Projects By Title</em></h4>
 
+                            <div class="search-input">
+                                <form>
+                                    <p>
+                                    <!-- method="get" id="search" asp-page-handler="SearchByTitle">-->
+                                            <input type="text"  asp-page-handler="SearchByTitle" placeholder="Search Projects" id='search' name="searchbar" onkeypress="handle" />
+                            <!--        <i class="fa fa-search"></i>-->
+                                            <!--                                    <input type="submit" value="Search" />-->
+                                    </p>
+                                </form>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Projects[0].Title)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Projects[0].Description)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Projects[0].Creator.FirstName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Projects[0].Creator.LastName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Projects[0].ProjectCategory)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Projects[0].Goal)
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                            <tbody>
+
+                                @foreach (Project proj in Model.Projects)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(pro => proj.Title)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(pro => proj.Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(pro => proj.Creator.FirstName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(pro => proj.Creator.LastName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(pro => proj.ProjectCategory)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(pro => proj.Goal)
+                                        </td>
+                                        <td>
+                                            <a asp-page="./Details" asp-route-id="@proj.Id">Project Details</a>
+                                        </td>
+                                    </tr>
+                                }
+                                </tbody>
+                                </table>
                 <!-- ***** Most Popular Start ***** -->
                 <div class="most-popular">
                     <div class="row">
