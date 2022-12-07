@@ -3,53 +3,46 @@
 @model Crowdfund.Pages.InitialModel
 @{
 }
+
 <div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="page-content">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="page-content">
+				<div class="main-banner">
+					<div class="row">
+						<div class="col-lg-7">
+							<div class="header-text">
 
-                <!-- ***** Banner Start ***** -->
-                <div class="main-banner">
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="header-text">
-                                <h6></h6>
-                                <h4>Create <em>new</em> project</h4>
+								<h4><em>CHOOSE</em> YOUR ROLE</h4>
 
-                                <h5>Creators</h5>
-                                <form method="post">
-                                    <select class="btn btn-outline-light" name="creators" id="creators">
-										@foreach (Creator creator in Model.Creators)
+								<h5>Creators</h5>
+								<form method="post">
+									<select class="btn btn-outline-light" style="width:250px; margin-bottom:30px" name="creator" id="creator">
+										@foreach (var creator in Model.Creators)
 										{
 											<option value=@creator.Id>@creator.FirstName @creator.LastName</option>
 										}
-                                    </select>
-                                 
-                                    <h5>by pressing</h5>    <input type="submit" value="Continue" class="btn btn-outline-light" />
-                                                                            <div class="main-button">
- 
-                                    </div>
-                                </form>
+									</select>
+									<input type="submit" value="Continue" class="btn btn-outline-light" style="margin-bottom:30px" />
+									<div class="main-button" />
+								</form>
+								
 								<h5>Backers</h5>
 								<form method="post">
-									<select class="btn btn-outline-light" name="backers" id="backers">
-										@foreach (Backer backer in Model.Backers)
+									<select class="btn btn-outline-light" style="width:250px; margin-bottom:30px" name="backer" id="backer">
+										@foreach (var backer in Model.Backers)
 										{
 											<option value=@backer.Id>@backer.FirstName @backer.LastName</option>
 										}
 									</select>
-
-									<h5>by pressing</h5>    <input type="submit" value="Continue" class="btn btn-outline-light" />
-									<div class="main-button">
-									</div>
+									<input type="submit" value="Continue" class="btn btn-outline-light" style="margin-bottom:30px" />
+									<div class="main-button" />
 								</form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ***** Banner End ***** -->
-            </div>
-        </div>
-    </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

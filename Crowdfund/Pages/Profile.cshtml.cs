@@ -18,13 +18,13 @@ namespace Crowdfund.Pages
 			Context = context;
 		}
 
-		private readonly int current = InitialModel.test;
+		private readonly int current = InitialModel.CurrentId;
 		
 		public void OnGet()
 		{
-			if (InitialModel.test2.Equals("Creator"))
+			if (InitialModel.CurrentRole.Equals("Creator"))
 				Creator = Context.Creators.Include(c => c.ProjectsCreated).SingleOrDefault(c => c.Id == current);
-			else if (InitialModel.test2.Equals("Backer"))
+			else if (InitialModel.CurrentRole.Equals("Backer"))
 				Backer = Context.Backers.Include(b => b.ProjectsInvested).Include(b => b.Contributions).SingleOrDefault(b => b.Id == current);
 		}
 	}

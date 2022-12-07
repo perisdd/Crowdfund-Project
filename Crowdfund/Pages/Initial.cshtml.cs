@@ -5,46 +5,42 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Crowdfund.Pages
 {
-    public class InitialModel : PageModel
-    {
-		public static int test { get; set; }
-		public static string test2 { get; set; }
-
+	public class InitialModel : PageModel
+	{
 		private FundDbContext Context { get; }
 
 		public List<Creator> Creators { get; set; }
 		public List<Backer> Backers { get; set; }
+
+		public static int CurrentId { get; set; }
+		public static string CurrentRole { get; set; }
 
 		public InitialModel(FundDbContext context)
 		{
 			Context = context;
 		}
 
-		public IActionResult OnPost(int creators, int backers)
-		{
-			if (creators != 0)
-			{
-				test = creators;
-				test2 = "Creator";
-			}
-			else if (backers != 0)
-			{
-				test = backers;
-				test2 = "Backer";
-			}
-			else
-			{
-				test = 0;
-				test2 = "N/A";
-			}
-
-            return RedirectToPage("Profile");
-        }
 		public void OnGet()
 		{
 			Backers = Context.Backers.ToList();
 			Creators = Context.Creators.ToList();
-
 		}
-    }
+
+		public IActionResult OnPost(int creator, int backer)
+		{
+			if (creator != 0)
+			{
+				CurrentId = creator;
+				CurrentRole = "Creator";
+			}
+
+			if (backer != 0)
+			{
+				CurrentId = backer;
+				CurrentRole = "Backer";
+			}
+
+			return RedirectToPage("Profile");
+		}
+	}
 }
