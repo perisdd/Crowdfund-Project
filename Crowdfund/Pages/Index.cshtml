@@ -6,136 +6,127 @@
 }
 
 
-<div class="container">
+<!-- ***** Banner Start ***** -->
+<div class="main-banner">
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="header-text">
+                <h6>Be part of something cool</h6>
+                <h4><em>Fund</em> Some Promising new Ideas Here</h4>
+                <div class="main-button">
+					<a class="nav-link" asp-area="" asp-page="/Projects/Index">Contribute Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Banner End ***** -->
+<div class="most-popular">
+	<nav class="main-nav">
+		<ul class="nav" style="justify-content: center">
+			@foreach(string category in Model.Categories)
+			{
+				<li class="nav-item"><a class="nav-link" style="color:white" asp-area="" asp-page="/Index">@category</a></li>
+			}
+		</ul>
+	</nav>
+</div>
+
+<!-- ***** Trending Projects Start ***** -->
+<div class="most-popular">
     <div class="row">
         <div class="col-lg-12">
-            <div class="page-content">
-
-                <!-- ***** Banner Start ***** -->
-                <div class="main-banner">
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="header-text">
-                                <h6>Be part of something cool</h6>
-                                <h4><em>Fund</em> Some Promising new Ideas Here</h4>
-                                <div class="main-button">
-									<a class="nav-link" asp-area="" asp-page="/Projects/Index">Contribute Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ***** Banner End ***** -->
-				<div class="most-popular">
-					<nav class="main-nav">
-						<ul class="nav" style="justify-content: center">
-							@foreach(string category in Model.Categories)
-							{
-								<li class="nav-item"><a class="nav-link" style="color:white" asp-area="" asp-page="/Index">@category</a></li>
-							}
-						</ul>
-					</nav>
-				</div>
-
-                <!-- ***** Trending Projects Start ***** -->
-                <div class="most-popular">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="heading-section">
-                                <h4><em>Trending</em> Right Now</h4>
+            <div class="heading-section">
+                <h4><em>Trending</em> Right Now</h4>
                                
-                                <div class="row">
-                                    @{
-                                        int counter = 0;
-                                        foreach (Project project in Model.Projects.OrderByDescending(i => i.Contributions))
+                <div class="row">
+                    @{
+                        int counter = 0;
+                        foreach (Project project in Model.Projects.OrderByDescending(i => i.Contributions))
 
-                                            if (counter >= 4) break;
+                            if (counter >= 4) break;
 
-                                            else
-                                        {
-                                                <div class="col-lg-3 col-sm-6">
-                                                    <div class="item">
-                                                        <a href="~/Projects/Details/@project.Id">  <img src="@project.ImgUrl" /> </a>
-                                                        <h4>@project.Title<span>@project.ProjectCategory</span></h4>
-                                                        <ul>
-                                                            <li><i class="fa">@project.Contributions &euro;</i></li>
-                                                            <li><i class="fa">@project.Goal &euro;</i></li>
+                            else
+                        {
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="item">
+                                        <a href="~/Projects/Details/@project.Id">  <img src="@project.ImgUrl" /> </a>
+                                        <h4>@project.Title<span>@project.ProjectCategory</span></h4>
+                                        <ul>
+                                            <li><i class="fa">@project.Contributions &euro;</i></li>
+                                            <li><i class="fa">@project.Goal &euro;</i></li>
 
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                counter++;
-                                            }
-                                    }
-
-                                
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="main-button">
-                                        <a asp-area="" asp-page="Projects/Index">Browse All</a>
-                                       
+                                        </ul>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                                counter++;
+                            }
+                    }
+
+                                
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="main-button">
+                        <a asp-area="" asp-page="Projects/Index">Browse All</a>
+                                       
                     </div>
                 </div>
-                <!-- ***** Trending Projects End ***** -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Trending Projects End ***** -->
 
-                <div class="gaming-library">
-                    <div class="col-lg-12">
-                        <div class="heading-section">
-                            @{
-                                if (InitialModel.CurrentRole.Equals("Creator"))
-                                {
-                                    <h4><em>Projects</em> You Created</h4>
-                                    @foreach (var project in Model.Creator.ProjectsCreated)
-                                    {
-                                        <div class="item">
-                                            <ul>
-                                                <li><img src="@project.ImgUrl class=templatemo-item" /></li> 
-                                                <li><h4>@project.Title</h4><span>@project.ProjectCategory</span></li>
-                                                <li><h4>Date Created</h4><span>@project.CreationDate</span></li>
-                                                <li><h4>Money Gathered</h4><span>@project.Contributions</span></li>
-                                                <li><h4>Money Goal</h4><span>@project.Goal</span></li>
-                                                <li><div class="main-border-button"><a href="~/Projects/Details/@project.Id">Project Page</a></div></li>
-                                            </ul>
-                                        </div>
-                                    }
-                                }
-                            }
-                            @{
-                                else if (InitialModel.CurrentRole.Equals("Backer"))
-                                {
-                                    <h4><em>Your Contributed</em> Projects</h4>
-                                    @foreach (var project in Model.Backer.ProjectsInvested)
-                                    {
-                                        <div class="item">
-                                            <ul>
-                                                <li><img src="@project.ImgUrl class=templatemo-item" /></li>
-                                                <li><h4>@project.Title</h4><span style="color:antiquewhite">@project.ProjectCategory</span></li>
-                                                <li><h4>Date Created</h4><span>@project.CreationDate</span></li>
-                                                <li><h4>My Contributions</h4><span>@Model.Backer.Contributions.Where(c=> c.Project.Id == project.Id).Select(c=> c.Amount).Sum()</span></li>
-                                                <li><h4>Project Gathered</h4><span>@project.Contributions / @project.Goal</span></li>
-                                                <li><div class="main-border-button"><a href="~/Projects/Details/@project.Id">Project Page</a></div></li>
+<div class="gaming-library">
+    <div class="col-lg-12">
+        <div class="heading-section">
+            @{
+                if (InitialModel.CurrentRole.Equals("Creator"))
+                {
+                    <h4><em>Projects</em> You Created</h4>
+                    @foreach (var project in Model.Creator.ProjectsCreated)
+                    {
+                        <div class="item">
+                            <ul>
+                                <li><img src="@project.ImgUrl class=templatemo-item" /></li> 
+                                <li><h4>@project.Title</h4><span>@project.ProjectCategory</span></li>
+                                <li><h4>Date Created</h4><span>@project.CreationDate</span></li>
+                                <li><h4>Money Gathered</h4><span>@project.Contributions</span></li>
+                                <li><h4>Money Goal</h4><span>@project.Goal</span></li>
+                                <li><div class="main-border-button"><a href="~/Projects/Details/@project.Id">Project Page</a></div></li>
+                            </ul>
+                        </div>
+                    }
+                }
+            }
+            @{
+                else if (InitialModel.CurrentRole.Equals("Backer"))
+                {
+                    <h4><em>Your Contributed</em> Projects</h4>
+                    @foreach (var project in Model.Backer.ProjectsInvested)
+                    {
+                        <div class="item">
+                            <ul>
+                                <li><img src="@project.ImgUrl class=templatemo-item" /></li>
+                                <li><h4>@project.Title</h4><span style="color:antiquewhite">@project.ProjectCategory</span></li>
+                                <li><h4>Date Created</h4><span>@project.CreationDate</span></li>
+                                <li><h4>My Contributions</h4><span>@Model.Backer.Contributions.Where(c=> c.Project.Id == project.Id).Select(c=> c.Amount).Sum()</span></li>
+                                <li><h4>Project Gathered</h4><span>@project.Contributions / @project.Goal</span></li>
+                                <li><div class="main-border-button"><a href="~/Projects/Details/@project.Id">Project Page</a></div></li>
                                                 
-                                            </ul>
-                                        </div>
-                                    }
-                                }
-                            }
+                            </ul>
                         </div>
-                        <div class="col-lg-12">
-                            <div class="main-button">
-                                <a href="~/Backers/Details">Your Dashboard</a>
-                            </div>
-                        </div>
+                    }
+                }
+            }
+        </div>
+        <div class="col-lg-12">
+            <div class="main-button">
+                <a href="~/Backers/Details">Your Dashboard</a>
+            </div>
+        </div>
 
-                    </div>
-                </div>
-			</div>
-		</div>
-	</div>
+    </div>
 </div>
