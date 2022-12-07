@@ -22,7 +22,9 @@
 								<p>Progress: @Model.Project.Contributions / @Model.Project.Goal</p>
 							</div>
 							<div class="fa-section">
-								<p>Backers:</p>
+								<div class="heading-section">
+									<h5>Backers</h5>
+								</div>
 								@{
 									foreach (var backer in Model.Backers.Where(b => b.ProjectsInvested.Contains(Model.Project)))
 									{
@@ -30,6 +32,11 @@
 										@backer.Contributions.Where(c => c.Project.Id == Model.Project.Id).Select(c => c.Amount).Sum()</p>
 									}
 								}
+							</div>
+							<div class="fa-section">
+								<div class="heading-section">
+									<h5>Status Updates</h5>
+								</div>
 							</div>
 						</div>
 					</div>
