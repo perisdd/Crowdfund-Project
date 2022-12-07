@@ -129,7 +129,13 @@
 											<h4>@reward.Title</h4>
 											<h6>@reward.Description</h6>
 											<span>100 &euro;</span>
-											<div class="text-button"><a href="#">Select</a></div>
+											@{
+												if (InitialModel.test2.Equals("Backer"))
+												{
+													<div class="text-button"><a href="#">Select</a></div>
+												}
+											}
+											
 										</li>
 									}
 								}
