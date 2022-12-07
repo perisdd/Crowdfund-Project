@@ -16,7 +16,7 @@
                                 <h6></h6>
                                 <h4>Create <em>new</em> project</h4>
 
-                                <h5>Continue as</h5>
+                                <h5>Creators</h5>
                                 <form method="post">
                                     <select class="btn btn-outline-light" name="creators" id="creators">
 										@foreach (Creator creator in Model.Creators)
@@ -25,11 +25,24 @@
 										}
                                     </select>
                                  
-                                    <h5>by pressing</h5>    <input type="submit" value="here" class="btn btn-outline-light" />
+                                    <h5>by pressing</h5>    <input type="submit" value="Continue" class="btn btn-outline-light" />
                                                                             <div class="main-button">
  
                                     </div>
                                 </form>
+								<h5>Backers</h5>
+								<form method="post">
+									<select class="btn btn-outline-light" name="creators" id="creators">
+										@foreach (Backer backer in Model.Backers)
+										{
+											<option value=@backer.Id>@backer.FirstName @backer.LastName</option>
+										}
+									</select>
+
+									<h5>by pressing</h5>    <input type="submit" value="Continue" class="btn btn-outline-light" />
+									<div class="main-button">
+									</div>
+								</form>
                             </div>
                         </div>
                     </div>
