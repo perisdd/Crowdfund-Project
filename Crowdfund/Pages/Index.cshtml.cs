@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Crowdfund.DB;
 using System.Linq;
+using System.Diagnostics.Metrics;
 
 namespace Crowdfund.Pages
 {
@@ -27,7 +28,7 @@ namespace Crowdfund.Pages
             Context = context;
         }
         private readonly int current = InitialModel.CurrentId;
-
+        private int x = 0;
         public List<Project> Projects { get; set; }
 
         public void OnGet()
