@@ -1,5 +1,6 @@
 ﻿@page "/Index"
 @model IndexModel
+@using Crowdfund.Models;
 @{
     ViewData["Title"] = "Home page";
 }
@@ -36,103 +37,35 @@
 					</nav>
 				</div>
 
-                <!-- ***** Most Popular Start ***** -->
+                <!-- ***** Trending Projects Start ***** -->
                 <div class="most-popular">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="heading-section">
                                 <h4><em>Trending</em> Right Now</h4>
+                               
+                                <div class="row">
+                                    @foreach (Project project in Model.Projects.OrderBy(i => i.Contributions))
+                                    {
+                                        <div class="col-lg-3 col-sm-6">
+                                            <div class="item">
+                                                <a href="~/Projects/Details/@project.Id">  <img src="@project.ImgUrl" /> </a>
+                                                <h4>@project.Title<span>@project.ProjectCategory</span></h4>
+                                                <ul>
+                                                    <li><i class="fa">@project.Contributions &euro;</i></li>
+                                                    <li><i class="fa">@project.Goal &euro;</i></li>
+                                                
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    }
+                                
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="item">
-                                        <img src="assets/images/popular-01.jpg" alt="">
-                                        <h4>Horror 101<br><span>Film</span></h4>
-                                        <ul>
-                                            <li><i class="fa fa-star"></i> 4.8</li>
-                                            <li><i class="fa fa-download"></i> 100$</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="item">
-                                        <img src="assets/images/popular-02.jpg" alt="">
-                                        <h4>Oil Portraits<br><span>Arts</span></h4>
-                                        <ul>
-                                            <li><i class="fa fa-star"></i> 4.8</li>
-                                            <li><i class="fa fa-download"></i> 80$</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="item">
-                                        <img src="assets/images/popular-03.jpg" alt="">
-                                        <h4>Punk 42<br><span>Music</span></h4>
-                                        <ul>
-                                            <li><i class="fa fa-star"></i> 4.8</li>
-                                            <li><i class="fa fa-download"></i> 60$</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="item">
-                                        <img src="assets/images/popular-04.jpg" alt="">
-                                        <h4>smart lighting<br><span>Tech</span></h4>
-                                        <ul>
-                                            <li><i class="fa fa-star"></i> 4.8</li>
-                                            <li><i class="fa fa-download"></i> 30$</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                @*                                        <div class="col-lg-6">
-                                <div class="item">
-                                <div class="row">
-                                <div class="col-lg-6 col-sm-6">
-                                <div class="item inner-item">
-                                <img src="assets/images/popular-05.jpg" alt="">
-                                <h4>Mini Craft<br><span>Legendary</span></h4>
-                                <ul>
-                                <li><i class="fa fa-star"></i> 4.8</li>
-                                <li><i class="fa fa-download"></i> 2.3M</li>
-                                </ul>
-                                </div>
-                                </div>
-                                <div class="col-lg-6 col-sm-6">
-                                <div class="item">
-                                <img src="assets/images/popular-06.jpg" alt="">
-                                <h4>Eagles Fly<br><span>Matrix Games</span></h4>
-                                <ul>
-                                <li><i class="fa fa-star"></i> 4.8</li>
-                                <li><i class="fa fa-download"></i> 2.3M</li>
-                                </ul>
-                                </div>
-                                </div>
-                                </div>
-                                </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6">
-                                <div class="item">
-                                <img src="assets/images/popular-07.jpg" alt="">
-                                <h4>Warface<br><span>Max 3D</span></h4>
-                                <ul>
-                                <li><i class="fa fa-star"></i> 4.8</li>
-                                <li><i class="fa fa-download"></i> 2.3M</li>
-                                </ul>
-                                </div>
-                                </div>*@
-                                @*                                        <div class="col-lg-3 col-sm-6">
-                                <div class="item">
-                                <img src="assets/images/popular-08.jpg" alt="">
-                                <h4>Warcraft<br><span>Legend</span></h4>
-                                <ul>
-                                <li><i class="fa fa-star"></i> 4.8</li>
-                                <li><i class="fa fa-download"></i> 2.3M</li>
-                                </ul>
-                                </div>
-                                </div>*@
                                 <div class="col-lg-12">
                                     <div class="main-button">
-                                        <a asp-area="" asp-page="Projects/Index">Discover Trending Projects</a>
+                                        <a asp-area="" asp-page="Projects/Index">Browse All</a>
                                        
                                     </div>
                                 </div>
@@ -140,49 +73,57 @@
                         </div>
                     </div>
                 </div>
-                <!-- ***** Most Popular End ***** -->
-                <!-- ***** Gaming Library Start ***** -->
+                <!-- ***** Trending Projects End ***** -->
+
                 <div class="gaming-library">
                     <div class="col-lg-12">
                         <div class="heading-section">
-                            <h4><em>Your Contributed</em> Projects</h4>
+                            @{
+                                if (InitialModel.CurrentRole.Equals("Creator"))
+                                {
+                                    <h4><em>Projects</em> You Created</h4>
+                                    @foreach (var project in Model.Creator.ProjectsCreated)
+                                    {
+                                        <div class="item">
+                                            <ul>
+                                                <li><img src="@project.ImgUrl class=templatemo-item" /></li> 
+                                                <li><h4>@project.Title</h4><span>@project.ProjectCategory</span></li>
+                                                <li><h4>Date Created</h4><span>@project.CreationDate</span></li>
+                                                <li><h4>Money Gathered</h4><span>@project.Contributions</span></li>
+                                                <li><h4>Money Goal</h4><span>@project.Goal</span></li>
+                                                <li><div class="main-border-button"><a href="~/Projects/Details/@project.Id">Project Page</a></div></li>
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+                            }
+                            @{
+                                else if (InitialModel.CurrentRole.Equals("Backer"))
+                                {
+                                    <h4><em>Your Contributed</em> Projects</h4>
+                                    @foreach (var project in Model.Backer.ProjectsInvested)
+                                    {
+                                        <div class="item">
+                                            <ul>
+                                                <li><img src="@project.ImgUrl class=templatemo-item" /></li>
+                                                <li><h4>@project.Title</h4><span style="color:antiquewhite">@project.ProjectCategory</span></li>
+                                                <li><h4>Date Created</h4><span>@project.CreationDate</span></li>
+                                                <li><h4>My Contributions</h4><span>@Model.Backer.Contributions.Where(c=> c.Project.Id == project.Id).Select(c=> c.Amount).Sum()</span></li>
+                                                <li><h4>Project Gathered</h4><span>@project.Contributions / @project.Goal</span></li>
+                                                <li><div class="main-border-button"><a href="~/Projects/Details/@project.Id">Project Page</a></div></li>
+                                                
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+                            }
                         </div>
-                        <div class="item">
-                            <ul>
-                                <li><img src="/Content/assets/images/codehub.png" alt="" class="templatemo-item"></li>
-                                <li><h4>Code.Hub</h4><span>Other</span></li>
-                                <li><h4>Date Backed</h4><span>21/04/2022</span></li>
-                                <li><h4>Money Given</h4><span>1.000.000</span></li>
-                                <li><h4>Money Goal</h4><span>6.000.000</span></li>
-                                <li><div class="main-border-button"><a href="~/Projects/Details">Project Page</a></div></li>
-                            </ul>
+                        <div class="col-lg-12">
+                            <div class="main-button">
+                                <a href="~/Backers/Details">Your Dashboard</a>
+                            </div>
                         </div>
-                        <div class="item">
-                            <ul>
-                                    <li><img src="/Content/assets/images/cloud.jpg" alt="" class="templatemo-item"></li>
-                                    <li><h4>Cloud Tools</h4><span>Other</span></li>
-                                    <li><h4>Date Backed</h4><span>21/04/2022</span></li>
-                                    <li><h4>Money Given</h4><span>2.000.000</span></li>
-                                    <li><h4>Money Goal</h4><span>6.000.000</span></li>
-                                <li><div class="main-border-button"><a href="~/Projects/Details">Project Page</a></div></li>
-                            </ul>
-                        </div>
-                        <div class="item last-item">
-                            <ul>
-                                    <li><img src="/Content/assets/images/regen.jpg" alt="" class="templatemo-item"></li>
-                                    <li><h4>ReGeneration</h4><span>Other</span></li>
-                                    <li><h4>Date Backed</h4><span>21/04/2022</span></li>
-                                    <li><h4>Money Given</h4><span>1.000.000</span></li>
-                                    <li><h4>Money Goal</h4><span>3.000.000</span></li>
-                                <li><div class="main-border-button"><a href="~/Projects/Details/1">Project Page</a></div></li>
 
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="main-button">
-                            <a href="~/Backers/Details">View Your Contributions</a>
-                        </div>
                     </div>
                 </div>
 			</div>

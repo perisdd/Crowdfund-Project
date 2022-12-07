@@ -1,6 +1,9 @@
 ﻿using Crowdfund.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Crowdfund.DB;
+using System.Linq;
 
 namespace Crowdfund.Pages
 {
@@ -10,14 +13,31 @@ namespace Crowdfund.Pages
 
 		public List<string> Categories = Enum.GetNames(typeof(Category)).ToList();
 
-		public IndexModel(ILogger<IndexModel> logger)
-		{
-			_logger = logger;
-		}
+		//public IndexModel(ILogger<IndexModel> logger)
+		//{
+		//	_logger = logger;
+		//}
+        private FundDbContext Context { get; }
 
-		public void OnGet()
-		{
+        public Creator? Creator { get; set; }
 
-		}
+        public Backer? Backer { get; set; }
+        public IndexModel(FundDbContext context)
+        {
+            Context = context;
+        }
+        private readonly int current = InitialModel.CurrentId;
+
+        public List<Project> Projects { get; set; }
+
+        public void OnGet()
+		{
+            if (InitialModel.CurrentRole.Equals("Creator"))
+                Creator = Context.Creators.Include(c => c.ProjectsCreated).SingleOrDefault(c => c.Id == current);
+            else if (InitialModel.CurrentRole.Equals("Backer"))
+                Backer = Context.Backers.Include(b => b.ProjectsInvested).Include(b => b.Contributions).SingleOrDefault(b => b.Id == current);
+
+            Projects = Context.Projects.ToList();
+        }
 	}
 }
