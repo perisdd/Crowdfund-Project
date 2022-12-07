@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using Crowdfund.Models;
 @model Crowdfund.Pages.InitialModel
 @{
 }
@@ -18,10 +19,10 @@
                                 <h5>Continue as</h5>
                                 <form method="post">
                                     <select class="btn btn-outline-light" name="creators" id="creators">
-                                        <option value=1>Creator 1</option>
-                                        <option value=2>Creator 2</option>
-                                        <option value=3>Creator 3</option>
-                                        <option value=4>Creator 4</option>
+										@foreach (Creator creator in Model.Creators)
+										{
+											<option value=@creator.Id>@creator.FirstName @creator.LastName</option>
+										}
                                     </select>
                                  
                                     <h5>by pressing</h5>    <input type="submit" value="here" class="btn btn-outline-light" />
