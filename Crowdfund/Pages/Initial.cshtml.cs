@@ -28,7 +28,7 @@ namespace Crowdfund.Pages
 			else
 				test = 0;
 
-            return RedirectToPage("Projects/Create");
+            return RedirectToPage("Profile");
         }
 		public void OnGet()
 		{

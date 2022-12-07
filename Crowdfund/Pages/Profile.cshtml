@@ -17,8 +17,9 @@
                                     </div>
                                     <div class="col-lg-4 align-self-center">
                                         <div class="main-info header-text">
-                                            <span>Backer</span>
-                                            <h4>Bill Gates</h4>
+                                            
+                                            <h4>@Model.Creator.FirstName @Model.Creator.LastName</h4>
+										<span>Creator</span>
                                             <p></p>
                                             @* <div class="main-border-button border-no-active">
                                                 <a href="#">Start Live Stream</a>
@@ -27,9 +28,8 @@
                                     </div>
                                     <div class="col-lg-4 align-self-center">
                                         <ul>
-                                            <li>Projects Backed <span>3</span></li>
-                                            <li>Projects Created <span>0</span></li>
-                                            <li>Total Money Given <span>4.400.000€</span></li>
+                                            <li>Projects Created <span>@Model.Creator.ProjectsCreated.Count()</span></li>
+                                            <li>Total Money Raised <span>@Model.Creator.ProjectsCreated.Select(p => p.Contributions).Sum() &euro;</span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -44,38 +44,22 @@
                     <div class="gaming-library profile-library">
                         <div class="col-lg-12">
                             <div class="heading-section">
-                                <h4><em>Your Backed</em> Projects</h4>
+                                <h4><em>Created</em> Projects</h4>
                             </div>
-                            <div class="item">
-                                <ul>
-                                    <li><img src="/Content/assets/images/codehub.png" alt="" class="templatemo-item"></li>
-                                    <li><h4>Code.Hub</h4><span>Other</span></li>
-                                    <li><h4>Date Backed</h4><span>21/04/2022</span></li>
-                                    <li><h4>Money Given</h4><span>1.000.000</span></li>
-                                    <li><h4>Money Goal</h4><span>6.000.000</span></li>
-                                    <li><div class="main-border-button"><a href="~/Projects/Details">Project Page</a></div></li>
-                                </ul>
-                            </div>
-                            <div class="item">
-                                <ul>
-                                    <li><img src="/Content/assets/images/cloud.jpg" alt="" class="templatemo-item"></li>
-                                    <li><h4>Cloud Tools</h4><span>Other</span></li>
-                                    <li><h4>Date Backed</h4><span>21/04/2022</span></li>
-                                    <li><h4>Money Given</h4><span>2.000.000</span></li>
-                                    <li><h4>Money Goal</h4><span>6.000.000</span></li>
-                                    <li><div class="main-border-button"><a href="~/Projects/Details">Project Page</a></div></li>
-                                </ul>
-                            </div>
-                            <div class="item last-item">
-                                <ul>
-                                    <li><img src="/Content/assets/images/regen.jpg" alt="" class="templatemo-item"></li>
-                                    <li><h4>ReGeneration</h4><span>Other</span></li>
-                                    <li><h4>Date Backed</h4><span>21/04/2022</span></li>
-                                    <li><h4>Money Given</h4><span>1.000.000</span></li>
-                                    <li><h4>Money Goal</h4><span>3.000.000</span></li>
-                                    <li><div class="main-border-button"><a href="~/Projects/Details">Project Page</a></div></li>
-                                </ul>
-                            </div>
+						@foreach(var project in Model.Creator.ProjectsCreated)
+						{
+							<div class="item">
+								<ul>
+									<li><img src="~/Content/assets/images/avatar-01.jpg class=templatemo-item" /></li>
+									<li><h4>@project.Title</h4><span>@project.ProjectCategory</span></li>
+									<li><h4>Date Created</h4><span>@project.CreationDate</span></li>
+									<li><h4>Total Contributions</h4><span>@project.Contributions</span></li>
+									<li><h4>Goal</h4><span>@project.Goal</span></li>
+									<li><div class="main-border-button"><a href="~/Projects/Details/@project.Id">Details</a></div></li>
+								</ul>
+							</div>
+						}
+						
                         </div>
                     </div>
                     <!-- ***** Gaming Library End ***** -->
