@@ -51,13 +51,16 @@
 
 
                             <li class="nav-item"><a class="nav-link" href="~/Projects/Index">All Projects</a> </li>
-                            <li class="nav-item"><a class="nav-link" href="~/Creators/Details/@InitialModel.CurrentId">My Projects</a> </li>
+                            @{
+                                if (InitialModel.CurrentRole.Equals("Creator"))
+                                {
+                                    <li class="nav-item"><a class="nav-link" href="~/Creators/Details/@InitialModel.CurrentId">My Projects</a> </li>
+                                }
+                            }
                             <li class="nav-item"><a class="nav-link" href="~/Creators/Index">Creators</a> </li>
                             <li class="nav-item"><a class="nav-link" href="~/Backers/Index">Backers</a> </li>
 							<li class="nav-item"><a class="nav-link" href="~/">Change User</a> </li>
-
-
-							<li><a href="~/Profile">Profile<img src="#") alt=""></a></li> @*profile-header.jpg*@
+							<li><a href="~/Profile">Profile<img src="#") alt=""></a></li>
                             </ul>
                             <a class='menu-trigger'>
                                 <span>Menu</span>
