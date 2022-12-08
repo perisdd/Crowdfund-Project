@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<FundDbContext>
-	(options => options.UseSqlServer("Data Source = (local); Initial Catalog = FundProject; Integrated Security = true;"));
+	(options => options.UseSqlServer("Server=tcp:crowd-fund.database.windows.net,1433;Initial Catalog=crowd-fund;Persist Security Info=False;User ID=marjus001;Password=Crowd@2022;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
 
 var app = builder.Build();
 
