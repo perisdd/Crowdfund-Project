@@ -8,7 +8,13 @@
     <div class="row">
         <div class="col-lg-7">
             <div class="header-text">
-                <h4><em>my</em> projects</h4>
+                @{
+                    if (InitialModel.CurrentRole.Equals("Creator"))
+                    {
+                        <h4><em>@(Model.Creator.FirstName)s</em> projects</h4>
+                    }
+                }
+               @* <h4><em>@Creator.FirstName</em> projects</h4>*@
                     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
                 <div class="main-button">
