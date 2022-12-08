@@ -12,9 +12,11 @@ namespace Crowdfund.Models
         [Required]
         public string? Description { get; set; }
 
-        public string? ImgUrl { get; set; } 
+        public string? ImgUrl { get; set; }
 
-        public Creator? Creator { get; set; }
+		public string? VideoUrl { get; set; }
+
+		public Creator? Creator { get; set; }
 
         public int CreatorId { get; set; }
 
@@ -37,5 +39,6 @@ namespace Crowdfund.Models
         // public List<string> StatusUpdates { get; set; } = new List<string>();
         }
 
-    
+
 }
+

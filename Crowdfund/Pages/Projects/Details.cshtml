@@ -9,7 +9,11 @@
 		<div class="featured-games header-text">
 			<div class="heading-section">
 				<h4>@Model.Project.Title</h4>
-				<h4><img src="@(Model.Project.ImgUrl)object-fit width= "100%" /></h4>
+
+					@*	you would not be able to navigate off project page if no image was inserted	*@
+					@{if (Model.Project.ImgUrl != null)
+				{<h4><img src="@(Model.Project.ImgUrl)object-fit width= " 100%" /></h4>}}
+				
 				<h5><font color="#ec6090">Creator: </font>@Model.Project.Creator.FirstName @Model.Project.Creator.LastName</h5>
 			</div>
 			<div class="fa-section">
@@ -18,6 +22,17 @@
 				<p style=" color:white"><font color="#ec6090">Created: </font> @Model.Project.CreationDate.ToShortDateString()</p>
 				<p style=" color:white"><font color="#ec6090">Progress: </font> @(Model.Project.Contributions)/ <font color="#ec6090">@(Model.Project.Goal)</font></p>
 			</div>
+
+
+				<div class="heading-section">
+				<h5>More Media</h5>
+
+			@{if (Model.Project.VideoUrl != null)
+		
+					{<iframe width="560" height="315" src="@Model.Project.VideoUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				}}
+				</div>
+
 			<div class="fa-section">
 				<div class="heading-section">
 					<h5>Backers</h5>

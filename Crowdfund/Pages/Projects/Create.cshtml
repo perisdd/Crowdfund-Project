@@ -27,31 +27,14 @@
                                 <span asp-validation-for="Project.Title" class="text-danger"></span>
                             </p>
                         </div>
-@*                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>*@
+
                             <div class="form-group">
                                 <p class="text-white">
                                 <label asp-for="Project.Description" class="control-label"></label>
                                 <input asp-for="Project.Description" class="form-control" />
                                 <span asp-validation-for="Project.Description" class="text-danger"></span></p>
                             </div>
-							@*
-                            <div class="form-group">
-                                <p class="text-white">
-                                    <label asp-for="Project.Creator" class="control-label"></label>
-                                    <select asp-for="CreatorIds" asp-items="Model.CreatorSelectList" class="form-control" />
-                                    <span asp-validation-for="Project.Creator" class="text-danger"></span>
-                                </p>
-                            </div>
-							*@
-<!--                                            <div class="form-group">
-                                <p class="text-white">
-                                <label asp-for="Project.Backers" class="control-label"></label>
-                                <select asp-for="BackerIds" asp-items="Model.BackerSelectList" class="form-control"></select>
-                                    <span asp-validation-for="Project.Backers" class="text-danger"></span>
-                                </p>
-                            </div>
-                            -->
-@*                                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>*@
+
                             <div class="form-group">
                                 <p class="text-white">
                                     <label asp-for="Project.ProjectCategory" class="control-label"></label>
@@ -69,6 +52,17 @@
                                     <input asp-for="Project.ImgUrl" class="form-control" />
                                     <span asp-validation-for="Project.ImgUrl" class="text-danger"></span>
                                     @*****img input****@
+
+                                                                @*****video input****@
+                            <div class="form-group">
+                                <p class="text-white">
+                                    <label for="formFile" class="form-label"></label>
+                                    <label asp-for="Project.VideoUrl" class="control-label"></label>
+                                    <input asp-for="Project.VideoUrl" class="form-control" />
+                                    <span asp-validation-for="Project.VideoUrl" class="text-danger"></span>
+                                    @*****video input****@
+
+
 
                                     @*****goal money input****@
                                     <div class="form-group">
