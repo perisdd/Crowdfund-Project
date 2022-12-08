@@ -10,7 +10,7 @@ namespace Crowdfund.Pages.Creators
     {
         private FundDbContext Context { get; }
 
-        public Creator Creator { get; set; }
+        public Creator? Creator { get; set; }
 
         public List<Project> Projects { get; set; }
 
@@ -19,7 +19,7 @@ namespace Crowdfund.Pages.Creators
             Context = context;
         }
 
-        public async Task<ActionResult> OnGet(int id)
+        public async Task<IActionResult> OnGet(int id)
         {
             Creator = await Context.Creators.SingleOrDefaultAsync(c => c.Id == id);
             if (Creator == null) { return BadRequest(); }

@@ -14,6 +14,8 @@ namespace Crowdfund.Pages.Projects
 
 		public Project Project { get; set; }
 
+		public Contribution Contribution { get; set; }
+
 		public List<Backer> Backers { get; set; }
 
 		public DetailsModel(FundDbContext context)
@@ -34,5 +36,21 @@ namespace Crowdfund.Pages.Projects
 				Include(b => b.Contributions).
 				ToList();
 		}
+
+        public async Task<IActionResult> OnPost()
+        {
+            int id = InitialModel.CurrentId;
+            var Back = await Context.Backers.SingleOrDefaultAsync(c => c.Id == id);
+
+            if (Back == null) return NotFound("Invalid backer Id");
+
+            var proje = await Context.Projects.SingleOrDefaultAsync(p => p)
+            
+			Context.Contributions.Add(contribution);
+
+            Context.Projects.Add(Project);
+            await Context.SaveChangesAsync();
+            return RedirectToPage("/Index");
+        }
     }
 }
