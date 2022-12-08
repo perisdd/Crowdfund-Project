@@ -112,6 +112,7 @@ namespace Crowdfund.Pages.Projects
                 }
             }
 
+            TempData["AlertMessage"] = "Project Updated Successfully!";
             return RedirectToPage("./Index");
         }
 

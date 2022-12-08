@@ -5,6 +5,15 @@
 	ViewData["Title"] = "Creators";
 }
 
+@if (TempData["AlertMessage"] != null)
+{
+	<div class="alert alert-success">
+		<strong>Success !</strong> @TempData["AlertMessage"]
+		<button type="button" class="close" data-dismiss="alert">
+			<span>&times;</span>
+		</button>
+	</div>
+}
 @******layout start**********@
 
 <div class="main-banner">
@@ -44,3 +53,4 @@
         </div>
     </div>
 </div>
+<script src="~/js/popupalert.js"></script>

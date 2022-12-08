@@ -67,7 +67,8 @@ namespace Crowdfund.Pages.Projects
 
             Context.Projects.Add(Project);
             await Context.SaveChangesAsync();
-            return RedirectToPage("/Index");
+            TempData["AlertMessage"] = "Project Created Successfully!";
+            return RedirectToPage("Index");
         }
     }
 }

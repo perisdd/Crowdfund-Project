@@ -62,6 +62,7 @@ namespace Crowdfund.Pages.Projects
                 await _context.SaveChangesAsync();
             }
 
+            TempData["AlertMessage"] = "Project Deleted Successfully!";
             return RedirectToPage("./Index");
         }
     }

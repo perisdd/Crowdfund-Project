@@ -37,20 +37,57 @@ namespace Crowdfund.Pages.Projects
 				ToList();
 		}
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPostAsync(int id, Project project)
         {
-            int id = InitialModel.CurrentId;
-            var Back = await Context.Backers.SingleOrDefaultAsync(c => c.Id == id);
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
-            if (Back == null) return NotFound("Invalid backer Id");
+            Context.Attach(Project).State = EntityState.Modified;
 
-            var proje = await Context.Projects.SingleOrDefaultAsync(p => p)
-            
-			Context.Contributions.Add(contribution);
+            if (id != project.Id)
+            {
+                return NotFound();
+            }
 
-            Context.Projects.Add(Project);
-            await Context.SaveChangesAsync();
-            return RedirectToPage("/Index");
+            var backer = await Context.Backers
+                .FirstAsync(b => b.Id == InitialModel.CurrentId);
+
+            if (backer == null) { return NotFound(); }
+          
+            var proje = await Context.Projects.FindAsync(id);
+
+            if(proje == null) { return NotFound(); }
+
+            proje.Contributions = project.Contributions;
+            proje.Backers.Add(backer);
+
+
+            try
+            {
+                Context.Update(proje);
+                await Context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProjectExists(project.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            TempData["AlertMessage"] = "Project Updated Successfully!";
+            return RedirectToPage("./Index");
+        }
+
+        private bool ProjectExists(int id)
+        {
+            return Context.Projects.Any(e => e.Id == id);
         }
     }
 }

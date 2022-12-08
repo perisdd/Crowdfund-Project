@@ -32,6 +32,7 @@ namespace Crowdfund.Pages.Backers
             Context.Backers.Add(Backer);
             await Context.SaveChangesAsync();
 
+            TempData["AlertMessage"] = "Backer Created Successfully!";
             return RedirectToPage("./Index");
         }
     }

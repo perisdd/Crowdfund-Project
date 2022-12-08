@@ -23,6 +23,7 @@ namespace Crowdfund.Pages.Creators
         {
             Context.Creators.Add(Creator);
             await Context.SaveChangesAsync();
+            TempData["AlertMessage"] = "Creator Added Successfully!";
             return RedirectToPage("Index");
         }
     }
