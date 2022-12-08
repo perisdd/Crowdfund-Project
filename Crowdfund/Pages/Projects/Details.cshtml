@@ -28,8 +28,11 @@
 				<h5>More Media</h5>
 
 			@{if (Model.Project.VideoUrl != null)
-		
-					{<iframe width="560" height="315" src="@Model.Project.VideoUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+					{
+						string newurl = Model.Project.VideoUrl.Replace("/watch?v=", "/embed/");
+						<iframe width="560" height="315" src="@newurl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 				}}
 				</div>
 
