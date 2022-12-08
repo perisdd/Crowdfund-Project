@@ -66,12 +66,12 @@
 				{
 					<div class="item">
 						<ul>
-							<li><img src="~/Content/assets/images/avatar-01.jpg class=templatemo-item" /></li>
-							<li><h4>@project.Title</h4><span>@project.ProjectCategory</span></li>
-							<li><h4>Date Created</h4><span>@project.CreationDate</span></li>
-							<li><h4>Total Contributions</h4><span>@project.Contributions</span></li>
-							<li><h4>Goal</h4><span>@project.Goal</span></li>
-							<li><div class="main-border-button"><a href="~/Projects/Details/@project.Id">Details</a></div></li>
+								<li><img src="@(project.ImgUrl) class=templatemo-item" /></li>
+								<li><h4>@project.Title</h4><span>@project.ProjectCategory</span></li>
+								<li><h4> Date Created</h4><span>@project.CreationDate</span></li>
+								<li><h4>Total Contributions</h4><span>@project.Contributions</span></li>
+								<li><h4>Goal</h4><span>@project.Goal</span></li>
+								<li><div class="main-border-button"><a href="~/Projects/Details/@project.Id">Project Page</a></div></li>
 						</ul>
 					</div>
 				}
@@ -83,12 +83,12 @@
 				{
 					<div class="item">
 						<ul>
-							<li><img src="~/Content/assets/images/avatar-01.jpg class=templatemo-item" /></li>
+							<li><img src="@(project.ImgUrl)" /></li>
 							<li><h4>@project.Title</h4><span>@project.ProjectCategory</span></li>
 							<li><h4>Date Created</h4><span>@project.CreationDate</span></li>
 							<li><h4>My Contributions</h4><span>@Model.Backer.Contributions.Where(c=> c.Project.Id == project.Id).Select(c=> c.Amount).Sum()</span></li>
 							<li><h4>Project Total</h4><span>@project.Contributions / @project.Goal</span></li>
-							<li><div class="main-border-button"><a href="~/Projects/Details/@project.Id">Details</a></div></li>
+							<li><div class="main-border-button"><a href="~/Projects/Details/@project.Id">Project Page</a></div></li>
 						</ul>
 					</div>
 				}

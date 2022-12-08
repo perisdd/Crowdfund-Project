@@ -9,13 +9,14 @@
 		<div class="featured-games header-text">
 			<div class="heading-section">
 				<h4>@Model.Project.Title</h4>
-				<h5>@Model.Project.Creator.FirstName @Model.Project.Creator.LastName</h5>
+				<h4><img src="@(Model.Project.ImgUrl)object-fit width= "100%" /></h4>
+				<h5><font color="#ec6090">Creator: </font>@Model.Project.Creator.FirstName @Model.Project.Creator.LastName</h5>
 			</div>
 			<div class="fa-section">
-				<p>@Model.Project.ProjectCategory</p>
-				<p>@Model.Project.Description</p>
-				<p>Created: @Model.Project.CreationDate.ToShortDateString()</p>
-				<p>Progress: @Model.Project.Contributions / @Model.Project.Goal</p>
+				<p style=" color:white"><font color="#ec6090">Category: </font>@Model.Project.ProjectCategory</p>
+				<p style=" color:white"><font color="#ec6090">Description: </font> @Model.Project.Description</p>
+				<p style=" color:white"><font color="#ec6090">Created: </font> @Model.Project.CreationDate.ToShortDateString()</p>
+				<p style=" color:white"><font color="#ec6090">Progress: </font> @(Model.Project.Contributions)/ <font color="#ec6090">@(Model.Project.Goal)</font></p>
 			</div>
 			<div class="fa-section">
 				<div class="heading-section">
