@@ -8,13 +8,10 @@ namespace Crowdfund.Pages.Backers
     public class CreateModel : PageModel
     {
         private FundDbContext Context { get; }
- 
-        public int BackerCount { get; set; }
 
         [BindProperty]
         public Backer Backer { get; set; }
 
-        
         public CreateModel(FundDbContext context)
         {
             Context = context;
@@ -22,17 +19,14 @@ namespace Crowdfund.Pages.Backers
 
 
         public void OnGet()
-        {
-            BackerCount = Context.Backers.Count();
-        }
-
+        { }
 
         public async Task<ActionResult> OnPostAsync()
         {
             Context.Backers.Add(Backer);
             await Context.SaveChangesAsync();
 
-            TempData["AlertMessage"] = "Backer Created Successfully!";
+            TempData["AlertMessage"] = "Backer Added Successfully!";
             return RedirectToPage("./Index");
         }
     }

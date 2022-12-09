@@ -15,35 +15,31 @@
 	</div>
 }
 
-@******layout start**********@
-
 <div class="main-banner">
 	<div class="row">
 		<div class="col-lg-7">
 			<div class="header-text">
 				<h4>Backers</h4>
-				@******layout end**********@
-				<div class="main-button">
-					<a class="nav-link" asp-area="" asp-page="/Backers/Create">Create a Backer</a>
+
+				<div class="main-button" style="margin-bottom:15px">
+					<a class="nav-link" asp-area="" asp-page="/Backers/Create">Add Backer</a>
 				</div>
 
 				<table class="table">
 					<thead style="color: #ec6090">
 						<tr>
-							<th>Title</th>
-							<th>Description</th>
-							<th>Creation Date</th>
-							<th>Details</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Email Address</th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach (Project project in Model.Projects)
+						@foreach (Backer backer in Model.Backers)
 						{
 							<tr style="color: white">
-								<td>@project.Title</td>
-								<td>@project.Description</td>
-								<td>@project.CreationDate</td>
-								<td><a asp-page="Details" asp-route-Id="@project.Id">Details?</a></td>
+								<td>@backer.FirstName</td>
+								<td>@backer.LastName</td>
+								<td>@backer.Email</td>
 							</tr>
 						}
 					</tbody>

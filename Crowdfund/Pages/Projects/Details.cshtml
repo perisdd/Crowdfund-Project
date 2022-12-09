@@ -12,7 +12,7 @@
 
 					@*	you would not be able to navigate off project page if no image was inserted	*@
 					@{if (Model.Project.ImgUrl != null)
-				{<h4><img src="@(Model.Project.ImgUrl)object-fit width= " 100%" /></h4>}}
+				{<h4><img src="@(Model.Project.ImgUrl)" style="width:50%" /></h4>}}
 				
 				<h5><font color="#ec6090">Creator: </font>@Model.Project.Creator.FirstName @Model.Project.Creator.LastName</h5>
 			</div>

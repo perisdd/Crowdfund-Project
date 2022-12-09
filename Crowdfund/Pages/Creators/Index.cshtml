@@ -14,27 +14,24 @@
 		</button>
 	</div>
 }
-@******layout start**********@
 
 <div class="main-banner">
-    <div class="row">
-        <div class="col-lg-7">
-            <div class="header-text">
-                <h4>Creators</h4>
+	<div class="row">
+		<div class="col-lg-7">
+			<div class="header-text">
+				<h4>Creators</h4>
 
-                <div class="main-button">
-                    <a class="nav-link" asp-area="" asp-page="/Creators/Create">Create a Creator</a>
-                </div>
+				<div class="main-button" style="margin-bottom:15px">
+					<a class="nav-link" asp-area="" asp-page="/Creators/Create">Add Creator</a>
+				</div>
 
-                @******layout end**********@
-
-                <table class="table">
+				<table class="table">
 					<thead style="color: #ec6090">
 						<tr>
 							<th>First Name</th>
 							<th>Last Name</th>
 							<th>Email Address</th>
-							<th>Details</th>
+							@*<th>Details</th>*@
 						</tr>
 					</thead>
 					<tbody>
@@ -44,13 +41,13 @@
 								<td>@creator.FirstName</td>
 								<td>@creator.LastName</td>
 								<td>@creator.Email</td>
-								<td><a asp-page="Details" asp-route-Id="@creator.Id">Projects</a></td>
+								@*<td><a asp-page="Details" asp-route-Id="@creator.Id">Projects</a></td>*@
 							</tr>
 						}
 					</tbody>
 				</table>
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 </div>
 <script src="~/js/popupalert.js"></script>

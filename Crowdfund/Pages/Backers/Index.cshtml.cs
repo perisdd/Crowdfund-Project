@@ -9,7 +9,8 @@ namespace Crowdfund.Pages.Backers
     public class IndexModel : PageModel
     {
         private FundDbContext Context { get; }
-        public List<Project> Projects { get; set; }
+
+        public List<Backer> Backers { get; set; }
 
         public IndexModel(FundDbContext context)
         {
@@ -18,7 +19,7 @@ namespace Crowdfund.Pages.Backers
 
         public async Task OnGet()
         {
-            Projects = await Context.Projects.ToListAsync();
+            Backers = await Context.Backers.ToListAsync();
         }
     }
 }

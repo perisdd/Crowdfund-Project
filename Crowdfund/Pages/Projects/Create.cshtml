@@ -5,100 +5,106 @@
     ViewData["Title"] = "Create Project";
 }
 
-<div class="main-banner">
-    <div class="row">
-        <div class="col-lg-7">
-            <div class="header-text">
-                <h6></h6>
-                <h4>CREATE A NEW <em>PROJECT</em></h4>
-                <h6>You are creator nummero : @InitialModel.CurrentId</h6>
-                @********************************************FORM START HERE***************************@
-                <div class="row">
-                    <div class="col-md-4">
-                                       
-                        <form method="post">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                            
-                            <div class="form-group">
-                                <p class="text-white">
-                                                
-                                <label asp-for="Project.Title" class="control-label"></label>
-                                <input asp-for="Project.Title" class="form-control" />
-                                <span asp-validation-for="Project.Title" class="text-danger"></span>
-                            </p>
-                        </div>
+<div class="row">
+	<div class="col-lg-8">
+		<div class="featured-games header-text">
+			<div class="heading-section">
+				<h4>CREATE A NEW <em>PROJECT</em></h4>
+			</div>
+			<div class="col-md-4">
+				<form method="post">
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                            <div class="form-group">
-                                <p class="text-white">
-                                <label asp-for="Project.Description" class="control-label"></label>
-                                <input asp-for="Project.Description" class="form-control" />
-                                <span asp-validation-for="Project.Description" class="text-danger"></span></p>
-                            </div>
+					<div class="form-group">
+						<p class="text-white">
 
-                            <div class="form-group">
-                                <p class="text-white">
-                                    <label asp-for="Project.ProjectCategory" class="control-label"></label>
-                                    <select asp-for="Project.ProjectCategory" asp-items="Html.GetEnumSelectList<Category>()"></select>
-                                    <span asp-validation-for="Project.ProjectCategory" class="text-danger"></span>
-                                </p>
-                            </div>
+							<label asp-for="Project.Title" class="control-label"></label>
+							<input asp-for="Project.Title" class="form-control" />
+							<span asp-validation-for="Project.Title" class="text-danger"></span>
+						</p>
+					</div>
+
+					<div class="form-group">
+						<p class="text-white">
+							<label asp-for="Project.Description" class="control-label"></label>
+							<input asp-for="Project.Description" class="form-control" />
+							<span asp-validation-for="Project.Description" class="text-danger"></span>
+						</p>
+					</div>
+
+					<div class="form-group">
+						<p class="text-white">
+							<label asp-for="Project.ProjectCategory" class="control-label"></label>
+							<select asp-for="Project.ProjectCategory" asp-items="Html.GetEnumSelectList<Category>()"></select>
+							<span asp-validation-for="Project.ProjectCategory" class="text-danger"></span>
+						</p>
+					</div>
 
 
-                            @*****img input****@
-                            <div class="form-group">
-                                <p class="text-white">
-                                    <label for="formFile" class="form-label"></label>
-                                    <label asp-for="Project.ImgUrl" class="control-label"></label>
-                                    <input asp-for="Project.ImgUrl" class="form-control" />
-                                    <span asp-validation-for="Project.ImgUrl" class="text-danger"></span>
-                                    @*****img input****@
+					@*****img input****@
+					<div class="form-group">
+						<p class="text-white">
+							<label for="formFile" class="form-label"></label>
+							<label asp-for="Project.ImgUrl" class="control-label"></label>
+							<input asp-for="Project.ImgUrl" class="form-control" />
+							<span asp-validation-for="Project.ImgUrl" class="text-danger"></span>
+						</p>
+					</div>
 
-                                                                @*****video input****@
-                            <div class="form-group">
-                                <p class="text-white">
-                                    <label for="formFile" class="form-label"></label>
-                                    <label asp-for="Project.VideoUrl" class="control-label"></label>
-                                    <input asp-for="Project.VideoUrl" class="form-control" />
-                                    <span asp-validation-for="Project.VideoUrl" class="text-danger"></span>
-                                    @*****video input****@
+					@*****img input****@
+
+					@*****video input****@
+					<div class="form-group">
+						<p class="text-white">
+							<label for="formFile" class="form-label"></label>
+							<label asp-for="Project.VideoUrl" class="control-label"></label>
+							<input asp-for="Project.VideoUrl" class="form-control" />
+							<span asp-validation-for="Project.VideoUrl" class="text-danger"></span>
+							@*****video input****@
+						</p>
+					</div>
 
 
+					@*****goal money input****@
+					<div class="form-group">
+						<p class="text-white">
+							<label for="formFile" class="form-label"></label>
+							<label asp-for="Project.Goal" class="control-label"></label>
+							<input asp-for="Project.Goal" class="form-control" />
+							<span asp-validation-for="Project.Goal" class="text-danger"></span>
+						</p>
+					</div>
 
-                                    @*****goal money input****@
-                                    <div class="form-group">
-                                        <p class="text-white">
-                                            <label for="formFile" class="form-label"></label>
-                                            <label asp-for="Project.Goal" class="control-label"></label>
-                                            <input asp-for="Project.Goal" class="form-control" />
-                                            <span asp-validation-for="Project.Goal" class="text-danger"></span>
-                                        </p>
-                                    </div>
+					@**************end goal input****************@
+					@*****DATE input****@
+					<div class="form-group">
+						<p class="text-white">
+							<label for="formFile" class="form-label">Insert Date</label>
+							<label asp-for="Project.CreationDate" class="control-label"></label>
+							<input asp-for="Project.CreationDate" class="form-control" />
+							<span asp-validation-for="Project.CreationDate" class="text-danger"></span>
+						</p>
+					</div>
 
-                                    @**************end goal input****************@
-                                    @*****DATE input****@
-                                    <div class="form-group">
-                                        <p class="text-white">
-                                            <label for="formFile" class="form-label">Insert Date</label>
-                                            <label asp-for="Project.CreationDate" class="control-label"></label>
-                                            <input asp-for="Project.CreationDate" class="form-control" />
-                                            <span asp-validation-for="Project.CreationDate" class="text-danger"></span>
-                                        </p>
-                                    </div>
-
-                                    @*end DATE input*@
-                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                            <div class="form-group">
-                                        <input class="btn btn-outline-light" type="submit" value="Create" class="main-border-button" />
-                                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                                        <div class="main-border-button"><a asp-page="/Initial">Choose Creator</a></div>
-                            </div>
-                        </form>
-                    </div>
-                    @********************************************FORM END HERE***************************@
-                </div>
-        </div>
-    </div>
-  </div>
+					@*end DATE input*@
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+					<div class="form-group">
+						<input class="btn btn-outline-light" type="submit" value="Create" class="main-border-button" />
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+						<div class="main-border-button"><a asp-page="/Initial">Choose Creator</a></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-4">
+		<div class="top-downloaded">
+			<div class="heading-section">
+				<h4>Add Rewards</h4>
+			</div>
+			<p>will add rewards later</p>
+		</div>
+	</div>
 </div>
 
 @section Scripts {
