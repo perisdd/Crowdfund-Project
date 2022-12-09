@@ -64,8 +64,9 @@ namespace Crowdfund.Pages.Projects
         {
 			int id = InitialModel.CurrentId;
 			Project.Creator = await Context.Creators.SingleOrDefaultAsync(c => c.Id == id);
-
-            Context.Projects.Add(Project);
+			Project.CreationDate = DateTime.Now;
+            
+			Context.Projects.Add(Project);
             await Context.SaveChangesAsync();
             TempData["AlertMessage"] = "Project Created Successfully!";
             return RedirectToPage("Index");

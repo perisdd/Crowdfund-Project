@@ -93,5 +93,15 @@
 				}
 		}}
 		</div>
+		@{
+			if (InitialModel.CurrentRole.Equals("Creator"))
+			{
+				<div class="col-lg-12" style="padding-top: 30px; text-align:center">
+					<div class="main-button">
+						<a href="~/Projects/Create">Create New Project</a>
+					</div>
+				</div>
+			}
+		}
 	</div>
 </div>
