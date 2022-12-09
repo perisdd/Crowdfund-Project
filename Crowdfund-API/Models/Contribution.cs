@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Crowdfund.Models
+namespace Crowdfund_API.Models
 {
     public class Contribution
     {

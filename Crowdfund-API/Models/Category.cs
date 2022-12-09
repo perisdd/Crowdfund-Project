@@ -1,4 +1,4 @@
-﻿namespace Crowdfund.Models
+﻿namespace Crowdfund_API.Models
 {
 
        public enum Category

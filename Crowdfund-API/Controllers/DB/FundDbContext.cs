@@ -1,7 +1,7 @@
-﻿using Crowdfund.Models;
+﻿using Crowdfund_API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Crowdfund.DB
+namespace Crowdfund_API.DB
 {
     public class FundDbContext : DbContext
     {
