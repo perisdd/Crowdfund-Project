@@ -8,47 +8,59 @@
 	<div class="col-lg-8">
 		<div class="featured-games header-text">
 			<div class="heading-section">
-				<h4>@Model.Project.Title</h4>
+				<h4 style="margin-bottom:1px">@Model.Project.Title</h4>
+				<p style="color:white; margin-bottom:20px"><font color="#ec6090"></font> @Model.Project.Description</p>
 
-					@*	you would not be able to navigate off project page if no image was inserted	*@
-					@{if (Model.Project.ImgUrl != null)
-				{<h4><img src="@(Model.Project.ImgUrl)" style="width:50%" /></h4>}}
+				@*	you would not be able to navigate off project page if no image was inserted	*@
+				@{if (Model.Project.ImgUrl != null)
+					{<h4><img src="@(Model.Project.ImgUrl)" style="width:50%" /></h4>}}
 				
 				<h5><font color="#ec6090">Creator: </font>@Model.Project.Creator.FirstName @Model.Project.Creator.LastName</h5>
+				<h5 style="margin-top:20px"><font color="#ec6090">Progress: </font>@Model.Project.Contributions / @Model.Project.Goal</h5>
 			</div>
-			<div class="fa-section">
+			<div class="fa-section" style="margin-bottom:25px">
 				<p style=" color:white"><font color="#ec6090">Category: </font>@Model.Project.ProjectCategory</p>
-				<p style=" color:white"><font color="#ec6090">Description: </font> @Model.Project.Description</p>
-				<p style=" color:white"><font color="#ec6090">Created: </font> @Model.Project.CreationDate.ToShortDateString()</p>
-				<p style=" color:white"><font color="#ec6090">Progress: </font> @(Model.Project.Contributions)/ <font color="#ec6090">@(Model.Project.Goal)</font></p>
+				<p style=" color:white"><font color="#ec6090">Created On: </font> @Model.Project.CreationDate.ToShortDateString()</p>
 			</div>
 
 
-				<div class="heading-section">
-				<h5>More Media</h5>
+			<div class="heading-section" style="margin-bottom:25px">
+				<h5 style="margin-bottom:10px">More Media</h5>
 
 			@{if (Model.Project.VideoUrl != null)
 
 				{
 						string newurl = Model.Project.VideoUrl.Replace("/watch?v=", "/embed/");
-						<iframe width="560" height="315" src="@newurl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						<iframe width="680" height="315" src="@newurl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 				}}
 				</div>
 
-			<div class="fa-section">
+			<div class="fa-section" style="margin-bottom:25px">
 				<div class="heading-section">
 					<h5>Backers</h5>
 				</div>
-				@{
-					foreach (var backer in Model.Backers.Where(b => b.ProjectsInvested.Contains(Model.Project)))
-					{
-						<p>@backer.FirstName @backer.LastName
-						@backer.Contributions.Where(c => c.Project.Id == Model.Project.Id).Select(c => c.Amount).Sum()</p>
-					}
-				}
+				<table class="table">
+					<thead style="color: #ec6090">
+						<tr>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Contribution</th>
+						</tr>
+					</thead>
+					<tbody>
+						@{foreach (var backer in Model.Backers.Where(b => b.ProjectsInvested.Contains(Model.Project)))
+						{
+							<tr style="color: white">
+								<td>@backer.FirstName</td>
+								<td>@backer.LastName</td>
+								<td>@backer.Contributions.Where(c => c.Project.Id == Model.Project.Id).Select(c => c.Amount).Sum()</td>
+							</tr>
+						}}
+					</tbody>
+				</table>
 			</div>
 			<div class="fa-section">
-				<div class="heading-section">
+				<div class="heading-section" style="margin-bottom:25px">
 					<h5>Status Updates</h5>
 				</div>
 			</div>

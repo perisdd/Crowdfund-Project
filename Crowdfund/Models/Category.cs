@@ -4,11 +4,11 @@
        public enum Category
         {
             Arts,
-            Other,
             Film,
             Games,
             Music,
-            Technology
-        }
+            Technology,
+			Other,
+		}
     
 }

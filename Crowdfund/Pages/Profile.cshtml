@@ -86,7 +86,7 @@
 							<li><h4 style="color:white">@project.Title</h4><span>@project.ProjectCategory</span></li>
 							<li><h4> Created On</h4><span>@project.CreationDate.ToShortDateString()</span></li>
 							<li><h4>My Contribution</h4><span>@Model.Backer.Contributions.Where(c=> c.Project!.Id == project.Id).Select(c=> c.Amount).Sum()</span></li>
-							<li><h4>Raised - Target</h4><span>@project.Contributions - @project.Goal</span></li>
+							<li><h4>Progress</h4><span>@project.Contributions / @project.Goal</span></li>
 							<li><div class="main-border-button"><a href="~/Projects/Details/@project.Id">Details</a></div></li>
 						</ul>
 					</div>
