@@ -10,6 +10,7 @@ namespace Crowdfund.Pages
 		private FundDbContext Context { get; }
 
 		public List<Creator> Creators { get; set; }
+
 		public List<Backer> Backers { get; set; }
 
 		public static int CurrentId { get; set; }

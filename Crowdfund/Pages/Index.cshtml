@@ -41,26 +41,20 @@
                                
                 <div class="row">
                     @{
-                        int counter = 0;
-                        foreach (Project project in Model.Projects.OrderByDescending(i => i.Contributions))
+                        foreach (Project project in Model.Projects.OrderByDescending(i => i.Contributions).Take(4))
+						{
+							<div class="col-lg-3 col-sm-6">
+								<div class="item">
+									<a href="~/Projects/Details/@project.Id">  <img src="@project.ImgUrl" /> </a>
+									<h4>@project.Title<span>@project.ProjectCategory</span></h4>
+									<ul>
+										<li><i class="fa">@project.Contributions &euro;</i></li>
+										<li><i class="fa">@project.Goal &euro;</i></li>
 
-                            if (counter >= 4) break;
-
-                            else
-                        {
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="item">
-                                        <a href="~/Projects/Details/@project.Id">  <img src="@project.ImgUrl" /> </a>
-                                        <h4>@project.Title<span>@project.ProjectCategory</span></h4>
-                                        <ul>
-                                            <li><i class="fa">@project.Contributions &euro;</i></li>
-                                            <li><i class="fa">@project.Goal &euro;</i></li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                                counter++;
-                            }
+									</ul>
+								</div>
+							</div>
+						}
                     }
 
                                 
