@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Crowdfund.Models;
 using Crowdfund.DB;
+using NToastNotify;
 
 namespace Crowdfund.Pages.Projects
 {
@@ -16,9 +17,11 @@ namespace Crowdfund.Pages.Projects
         public List<SelectListItem> BackerSelectList { get; set; }
         public List<SelectListItem> CreatorSelectList { get; set; }
         private FundDbContext Context { get; }
-        public CreateModel(FundDbContext context)
+        private readonly IToastNotification _toastNotification;
+        public CreateModel(FundDbContext context, IToastNotification toastNotification)
         {
             Context = context;
+            _toastNotification = toastNotification;
         }
 
         //public async Task OnGet()
@@ -68,6 +71,7 @@ namespace Crowdfund.Pages.Projects
             
 			Context.Projects.Add(Project);
             await Context.SaveChangesAsync();
+            _toastNotification.AddSuccessToastMessage("Project Created Successfully");
             TempData["AlertMessage"] = "Project Created Successfully!";
             return RedirectToPage("Index");
         }
