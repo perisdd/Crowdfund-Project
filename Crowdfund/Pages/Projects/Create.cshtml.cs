@@ -16,7 +16,12 @@ namespace Crowdfund.Pages.Projects
         [BindProperty] public List<int> CreatorIds { get; set; }
         public List<SelectListItem> BackerSelectList { get; set; }
         public List<SelectListItem> CreatorSelectList { get; set; }
-        private FundDbContext Context { get; }
+
+		[BindProperty] public Reward Reward1 { get; set; }
+		[BindProperty] public Reward Reward2 { get; set; }
+		[BindProperty] public Reward Reward3 { get; set; }
+
+		private FundDbContext Context { get; }
         private readonly IToastNotification _toastNotification;
         public CreateModel(FundDbContext context, IToastNotification toastNotification)
         {
@@ -68,7 +73,19 @@ namespace Crowdfund.Pages.Projects
 			int id = InitialModel.CurrentId;
 			Project.Creator = await Context.Creators.SingleOrDefaultAsync(c => c.Id == id);
 			Project.CreationDate = DateTime.Now;
-            
+
+			Reward1.Title = "Tier 1";
+			Reward2.Title = "Tier 2";
+			Reward3.Title = "Tier 3";
+
+			Project.Rewards.Add(Reward1);
+			Project.Rewards.Add(Reward2);
+			Project.Rewards.Add(Reward3);
+
+			Context.Rewards.Add(Reward1);
+			Context.Rewards.Add(Reward2);
+			Context.Rewards.Add(Reward3);
+
 			Context.Projects.Add(Project);
             await Context.SaveChangesAsync();
             _toastNotification.AddSuccessToastMessage("Project Created Successfully");
