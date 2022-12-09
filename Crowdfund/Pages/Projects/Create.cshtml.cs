@@ -16,12 +16,7 @@ namespace Crowdfund.Pages.Projects
         [BindProperty] public List<int> CreatorIds { get; set; }
         public List<SelectListItem> BackerSelectList { get; set; }
         public List<SelectListItem> CreatorSelectList { get; set; }
-
-		[BindProperty] public Reward Reward1 { get; set; }
-		[BindProperty] public Reward Reward2 { get; set; }
-		[BindProperty] public Reward Reward3 { get; set; }
-
-		private FundDbContext Context { get; }
+        private FundDbContext Context { get; }
         private readonly IToastNotification _toastNotification;
         public CreateModel(FundDbContext context, IToastNotification toastNotification)
         {

@@ -5,23 +5,25 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Crowdfund.Models;
 using Crowdfund.DB;
+using NToastNotify;
 
 namespace Crowdfund.Pages.Projects
 {
     public class DetailsModel : PageModel
     {
 		private FundDbContext Context { get; }
-
-		[BindProperty] public Project Project { get; set; }
+        private readonly IToastNotification _toastNotification;
+        [BindProperty] public Project Project { get; set; }
 
 		[BindProperty] public Contribution Contribution { get; set; }
 
 		[BindProperty] public List<Backer> Backers { get; set; }
 
-		public DetailsModel(FundDbContext context)
+		public DetailsModel(FundDbContext context, IToastNotification toastNotification)
 		{
 			Context = context;
-		}
+            _toastNotification = toastNotification;
+        }
 
 		public void OnGet(int id)
         {
@@ -36,6 +38,7 @@ namespace Crowdfund.Pages.Projects
 				Include(b => b.Contributions).
 				ToList();
 		}
+
 
 		public void OnPost(int id)
 		{
@@ -56,8 +59,8 @@ namespace Crowdfund.Pages.Projects
 			Context.Backers.SingleOrDefault(b => b.Id == InitialModel.CurrentId).Contributions.Add(Contribution);
 			Context.Backers.SingleOrDefault(b => b.Id == InitialModel.CurrentId).ProjectsInvested.Add(Project);
 			Project.Contributions += Contribution.Amount;
-			
-			Context.Contributions.Add(Contribution);
+            _toastNotification.AddSuccessToastMessage("Thank you for your contribution your will receive the reward");
+            Context.Contributions.Add(Contribution);
 			Context.SaveChanges();
 
 		}
