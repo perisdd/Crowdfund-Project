@@ -28,7 +28,7 @@ namespace Crowdfund.Pages
 			Backers = Context.Backers.ToList();
 			Creators = Context.Creators.ToList();
             // Success Toast
-            _toastNotification.AddSuccessToastMessage("Welcome to our amazing razor page");
+            _toastNotification.AddSuccessToastMessage("Welcome to our Amazing Razor Page.");
         }
 
 		public IActionResult OnPost(int creator, int backer)

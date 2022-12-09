@@ -59,7 +59,7 @@ namespace Crowdfund.Pages.Projects
 			Context.Backers.SingleOrDefault(b => b.Id == InitialModel.CurrentId).Contributions.Add(Contribution);
 			Context.Backers.SingleOrDefault(b => b.Id == InitialModel.CurrentId).ProjectsInvested.Add(Project);
 			Project.Contributions += Contribution.Amount;
-            _toastNotification.AddSuccessToastMessage("Thank you for your contribution your will receive the reward");
+            _toastNotification.AddSuccessToastMessage("Thank you for your contribution!");
             Context.Contributions.Add(Contribution);
 			Context.SaveChanges();
 
