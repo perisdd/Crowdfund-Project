@@ -75,20 +75,33 @@
 				@{
 					foreach(var reward in Model.Project.Rewards)
 					{
-						<li>
+						<li style="margin-bottom:5px">
 							<h4>@reward.Title</h4>
 							<h6>@reward.Description</h6>
 							<span>100 &euro;</span>
-							@{
-								if (InitialModel.CurrentRole.Equals("Backer"))
-								{
-									<div class="text-button"><a href="#">Select</a></div>
-								}
-							}
 						</li>
 					}
 				}
 			</ul>
+			@{
+				if (InitialModel.CurrentRole.Equals("Backer"))
+				{
+					<form method="post">
+						<div class="form-group">
+							<p class="text-white">
+								<label asp-for="Contribution.Amount" class="control-label">Contribute</label>
+								<input asp-for="Contribution.Amount" class="form-control" />
+							</p>
+						</div>
+
+						<div class="form-group" style="margin-top:10px">
+							<p class="text-white">
+								<input class="btn btn-outline-light" type="submit" value="Sumbit" />
+							</p>
+						</div>
+					</form>
+				}
+			}
 		</div>
 	</div>
 </div>

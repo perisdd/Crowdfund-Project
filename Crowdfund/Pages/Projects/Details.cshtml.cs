@@ -12,11 +12,11 @@ namespace Crowdfund.Pages.Projects
     {
 		private FundDbContext Context { get; }
 
-		public Project Project { get; set; }
+		[BindProperty] public Project Project { get; set; }
 
-		public Contribution Contribution { get; set; }
+		[BindProperty] public Contribution Contribution { get; set; }
 
-		public List<Backer> Backers { get; set; }
+		[BindProperty] public List<Backer> Backers { get; set; }
 
 		public DetailsModel(FundDbContext context)
 		{
@@ -37,6 +37,31 @@ namespace Crowdfund.Pages.Projects
 				ToList();
 		}
 
+		public void OnPost(int id)
+		{
+			Project = Context.Projects.
+				Include(p => p.Rewards).
+				Include(p => p.Backers).
+				Include(p => p.Creator).
+				SingleOrDefault(p => p.Id == id);
+
+			Backers = Context.Backers.
+				Include(b => b.ProjectsInvested).
+				Include(b => b.Contributions).
+				ToList();
+
+			Contribution.Project = Project;
+			Contribution.Backer = Context.Backers.SingleOrDefault(b => b.Id == InitialModel.CurrentId);
+
+			Context.Backers.SingleOrDefault(b => b.Id == InitialModel.CurrentId).Contributions.Add(Contribution);
+			Context.Backers.SingleOrDefault(b => b.Id == InitialModel.CurrentId).ProjectsInvested.Add(Project);
+			Project.Contributions += Contribution.Amount;
+			
+			Context.Contributions.Add(Contribution);
+			Context.SaveChanges();
+
+		}
+		/*
         public async Task<IActionResult> OnPostAsync(int id, Project project)
         {
             if (!ModelState.IsValid)
@@ -89,5 +114,6 @@ namespace Crowdfund.Pages.Projects
         {
             return Context.Projects.Any(e => e.Id == id);
         }
+		*/
     }
 }

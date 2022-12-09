@@ -7,7 +7,7 @@ namespace Crowdfund.Models
         public int Id { get; set; }
 
         [Required]
-        public decimal? Amount { get; set; }
+        public decimal Amount { get; set; }
 
         public Backer? Backer { get; set; }
  
