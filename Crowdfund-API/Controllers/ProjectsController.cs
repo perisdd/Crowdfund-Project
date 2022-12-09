@@ -77,6 +77,7 @@ namespace Crowdfund_API.Controllers
 			}
 		}
 
+		/*
 		[HttpPatch, Route("{id}/Rewards")]
 		public async Task<ActionResult<ProjectDTO>> Patch([FromRoute] int id, [FromBody] RewardDTO rewardDTO)
 		{
@@ -104,6 +105,7 @@ namespace Crowdfund_API.Controllers
 				return BadRequest(ex.Message);
 			}
 		}
+		*/
 
 		[HttpDelete, Route("{id}")]
 		public async Task<ActionResult<string>> Delete(int id)
