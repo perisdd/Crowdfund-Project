@@ -78,16 +78,20 @@ namespace Crowdfund.Pages.Projects
 			Reward2.Title = "Tier 2";
 			Reward3.Title = "Tier 3";
 
-			Project.Rewards.Add(Reward1);
-			Project.Rewards.Add(Reward2);
-			Project.Rewards.Add(Reward3);
+			Project.Rewards = new List<Reward>
+			{
+				Reward1,
+				Reward2,
+				Reward3
+			};
 
 			Context.Rewards.Add(Reward1);
 			Context.Rewards.Add(Reward2);
 			Context.Rewards.Add(Reward3);
-
+			
 			Context.Projects.Add(Project);
             await Context.SaveChangesAsync();
+
             _toastNotification.AddSuccessToastMessage("Project Created Successfully");
             TempData["AlertMessage"] = "Project Created Successfully!";
             return RedirectToPage("Index");
