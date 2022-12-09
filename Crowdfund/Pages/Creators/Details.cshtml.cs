@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Crowdfund.DB;
 using Microsoft.EntityFrameworkCore;
 using Crowdfund.Models;
+using NToastNotify;
 
 namespace Crowdfund.Pages.Creators
 {
     public class DetailsModel : PageModel
     {
         private FundDbContext Context { get; }
+        
 
         public Creator? Creator { get; set; }
 
@@ -17,6 +19,7 @@ namespace Crowdfund.Pages.Creators
         public DetailsModel(FundDbContext context)
         {
             Context = context;
+            
         }
 
         public async Task<IActionResult> OnGet(int id)
@@ -25,6 +28,7 @@ namespace Crowdfund.Pages.Creators
             if (Creator == null) { return BadRequest(); }
 
             Projects = await Context.Projects.Where(p => p.Creator.Id == id).ToListAsync();
+            
             return Page();
         }
     }
