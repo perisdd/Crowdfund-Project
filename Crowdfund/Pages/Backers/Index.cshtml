@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id}"
 @using Crowdfund.Models;
 @model Crowdfund.Pages.Backers.IndexModel
 @{
@@ -40,6 +40,7 @@
 								<td>@backer.FirstName</td>
 								<td>@backer.LastName</td>
 								<td>@backer.Email</td>
+								<td><a href="~/Backers/Delete/@backer.Id">Backer Delete</a></td>
 							</tr>
 						}
 					</tbody>

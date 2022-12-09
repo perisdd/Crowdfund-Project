@@ -37,7 +37,11 @@
                                 <td>@project.Title</td>
                                 <td>@project.Description</td>
                                 <td>@project.CreationDate</td>
-
+                                <td>
+                                    <a href="~/Pages/Projects/Edit/@project.Id">Edit project</a> |
+                                    <a href="~/Pages/Projects/Details/@project.Id">Project Details</a> |
+                                    <a href="~/Pages/Projects/Delete/@project.Id">Delete project</a>
+                                </td>
                             </tr>
                                             
                         }

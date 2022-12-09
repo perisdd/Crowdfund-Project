@@ -41,8 +41,8 @@
 								<td>@creator.FirstName</td>
 								<td>@creator.LastName</td>
 								<td>@creator.Email</td>
-								@*<td><a asp-page="Details" asp-route-Id="@creator.Id">Projects</a></td>*@
-							</tr>
+								<td><a href="~/Creators/Delete/@creator.Id">Creator Delete</a></td>
+						</tr>
 						}
 					</tbody>
 				</table>
