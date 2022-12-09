@@ -1,4 +1,4 @@
-﻿using Crowdfund.Models;
+﻿using Crowdfund_API.Models;
 
 namespace Crowdfund_API.DTOs
 {

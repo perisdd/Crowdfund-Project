@@ -1,5 +1,5 @@
-﻿using Crowdfund.DB;
-using Crowdfund.Models;
+﻿using Crowdfund_API.DB;
+using Crowdfund_API.Models;
 using Crowdfund_API.DTOs;
 using Microsoft.EntityFrameworkCore;
 
