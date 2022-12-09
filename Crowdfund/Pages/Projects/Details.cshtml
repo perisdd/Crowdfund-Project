@@ -72,16 +72,21 @@
 				<h4>Rewards</h4>
 			</div>
 			<ul>
-				@{
-					foreach(var reward in Model.Project.Rewards)
-					{
-						<li style="margin-bottom:5px">
-							<h4>@reward.Title</h4>
-							<h6>@reward.Description</h6>
-							<span>100 &euro;</span>
-						</li>
-					}
-				}
+				<li style="margin-bottom:5px">
+					<h4>@Model.Project.Rewards[0].Title</h4>
+					<h6>@Model.Project.Rewards[0].Description</h6>
+					<span>50 &euro;</span>
+				</li>
+				<li style="margin-bottom:5px">
+					<h4>@Model.Project.Rewards[1].Title</h4>
+					<h6>@Model.Project.Rewards[1].Description</h6>
+					<span>150 &euro;</span>
+				</li>
+				<li style="margin-bottom:5px">
+					<h4>@Model.Project.Rewards[2].Title</h4>
+					<h6>@Model.Project.Rewards[2].Description</h6>
+					<span>500 &euro;</span>
+				</li>
 			</ul>
 			@{
 				if (InitialModel.CurrentRole.Equals("Backer"))
